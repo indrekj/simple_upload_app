@@ -2,8 +2,10 @@
  
 # Specify a specific version of a dependency
 # dependency "RedCloth", "> 3.0"
+dependency 'merb-assets'
+dependency 'merb-helpers'
 
-#  use_orm :none
+use_orm :activerecord
 use_test :rspec
 use_template_engine :erb
  
@@ -21,5 +23,5 @@ Merb::BootLoader.before_app_loads do
 end
  
 Merb::BootLoader.after_app_loads do
-  # This will get executed after your app's classes have been loaded.
+
 end

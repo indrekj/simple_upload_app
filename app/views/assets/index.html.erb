@@ -1,0 +1,63 @@
+<h1>WebCT failid</h1>
+<br/>
+
+<% unless message.blank? -%>
+  <div class="message">
+    <span style="font-weight: bold;"><%= message %></span>
+  
+    <%= error_messages_for @asset %>
+  </div>
+<% end -%>
+
+<%= form_for(@asset, :action => resource(:assets), :class => 'new_asset') do %>
+  <table>
+    <tr>
+      <td><%= label 'Fail (html)', :for => 'asset_file' %></td>
+      <td><%= file_field :file %></td>
+    </tr>
+    
+    <tr>
+      <td><%= label 'Tiitel', :for => 'asset_title' %></td>
+      <td><%= text_field :title %></td>
+    </tr>
+
+    <tr>
+      <td><%= label 'Tüüp (arvutiriistvara jms)', :for => 'asset_category' %></td>
+      <td><%= text_field :category %></td>
+    </tr>
+
+    <tr>
+      <td><%= label 'Töö aasta', :for => 'asset_year' %></td>
+      <td><%= text_field :year, :size => 4 %></td>
+    </tr>
+
+    <tr>
+      <td><%= label 'Autor, kes tahab respecti', :for => 'asset_author' %></td>
+      <td><%= text_field :author %></td>
+    </tr>
+
+    <tr><td colspan="2"><%= submit "Lisa" %></td></tr>
+  </table>
+<% end =%>
+
+<br/><br/>
+
+<table id="assets">
+  <thead class="odd">
+    <td>Tiitel</td>
+    <td>Tüüp</td>
+    <td>Aasta</td>
+    <td>Autor</td>
+    <td>Fail</td>
+  </thead>
+
+  <% @assets.each do |asset| -%>
+    <tr class="<%= cycle('even', 'odd') %>">
+      <td><%= asset.title %></td>
+      <td><%= asset.category %></td>
+      <td><%= asset.year %></td>
+      <td><%= asset.author %></td>
+      <td><%= link_to "Tiri alla", resource(@article) %></td>
+    </tr>
+  <% end -%>
+</div>
