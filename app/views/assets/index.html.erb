@@ -9,11 +9,12 @@
   </div>
 <% end -%>
 
+<p>Paar õpetussõna: Kui salvestate html faili siis olge kindlad, et te õige frame salvestasite. Kui hakkama ei saa siis lihtsalt tehke .txt fail ja kasutage vana copy-paste viisi :)</p>
 <%= form_for(@asset, :action => resource(:assets), :class => 'new_asset') do %>
   <table>
     <tr>
       <td><%= label 'Fail (html)', :for => 'asset_file' %></td>
-      <td><%= file_field :file %></td>
+      <td><%= file_field :name => 'file' %></td>
     </tr>
     
     <tr>
@@ -22,7 +23,7 @@
     </tr>
 
     <tr>
-      <td><%= label 'Tüüp (arvutiriistvara jms)', :for => 'asset_category' %></td>
+      <td><%= label 'Tüüp (arvutiriistvara vms)', :for => 'asset_category' %></td>
       <td><%= text_field :category %></td>
     </tr>
 
@@ -57,7 +58,7 @@
       <td><%= asset.category %></td>
       <td><%= asset.year %></td>
       <td><%= asset.author %></td>
-      <td><%= link_to "Tiri alla", resource(@article) %></td>
+      <td><%= link_to "Vaata", resource(asset) %></td>
     </tr>
   <% end -%>
 </div>

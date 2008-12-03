@@ -12,32 +12,9 @@ html {
   height: 100%;
   margin-bottom: 1px;
 }
-#container {
-  width: 80%;
-  text-align: left;
-  background-color: #fff;
-  margin-right: auto;
-  margin-left: auto;
-}
-#header-container {
-  width: 100%;
-  padding-top: 15px;
-}
-#header-container h1, #header-container h2 {
-  margin-left: 6px;
-  margin-bottom: 6px;
-}
 .spacer {
   width: 100%;
   height: 15px;
-}
-hr {
-  border: 0px;
-  color: #ccc;
-  background-color: #cdcdcd;
-  height: 1px;
-  width: 100%;
-  text-align: left;
 }
 h1 {
   font-size: 28px;
@@ -69,12 +46,11 @@ p {
 }
 a {
   color: #4d9b12;
-  background-color: #fff;
   text-decoration: none;
 }
 a:hover {
   color: #4d9b12;
-  background-color: #fff;
+  background-color: #FFE8E8;
   text-decoration: underline;
 }
 

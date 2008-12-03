@@ -1,6 +1,7 @@
 module Merb
   module GlobalHelpers
     def error_messages_for(asset)
+      return if asset.errors.blank?
       str = '<div class="error">'
       str += "<h2>Tekkisid järgnevad vead:</h2>"
       str += "<ul>"

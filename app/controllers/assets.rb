@@ -2,22 +2,29 @@ class Assets < Application
   # GET /assets
   def index
     @asset ||= Asset.new
-    @assets = Asset.find(:all, :order => 'category, created_at DESC')
+    @assets = Asset.find(:all, :order => 'category, title ASC')
     render :template => 'assets/index'
   end
 
   # GET /assets/:id
   def show
     @asset = Asset.find(params[:id])
-    render
+    render @asset.body
   end
 
   # POST /assets
   def create
     @asset = Asset.new(params[:asset])
     @asset.year = Time.now.strftime("%Y").to_i if params[:asset][:year].blank?
-    @asset.file = params[:asset][:file][:path] rescue nil
+    if file = params[:file]
+      @asset.tempfile = file[:tempfile]
+      @asset.filesize = file[:size]
+      @asset.filename = file[:filename]
+      @asset.content_type = file[:content_type]
+    end
+    @asset.creator_ip = request.remote_ip
     if @asset.save
+      @asset = nil
       @_message = "Edukalt fail lisatud"
     else
       @_message = "Shit happened"

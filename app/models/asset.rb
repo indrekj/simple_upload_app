@@ -3,13 +3,26 @@ class Asset < ActiveRecord::Base
   validates_presence_of :category, :message => 'Tüüp peab olema lisatud'
   validates_length_of :year, :is => 4, :message => 'Aasta peab olema neljakohaline number'
 
+  attr_accessor :filename, :tempfile, :filesize
+
+  before_create :upload_file
+
+
+  protected
+
+  def upload_file
+    unless tempfile.blank?
+      self.body = File.read(tempfile.path)
+    end
+  end
+
   def validate
-    if file.blank? || !File.exists?(file)
+    if tempfile.blank? || !File.exists?(tempfile.path)
       errors.add_to_base "Fail peab olema lisatud"
-    elsif !['.html', '.htm', '.txt'].include?(File.extname(file))
+    elsif !['.html', '.htm', '.txt'].include?(File.extname(filename))
       errors.add_to_base "Html ja txt failid ainult"
-    elsif File.size(file) > 500 * 1024
-      errors.add_to_base "Faili suurus peab olema alla 500KB"
+    elsif filesize > 200 * 1024
+      errors.add_to_base "Faili suurus peab olema alla 200KB"
     end
   end
 end
