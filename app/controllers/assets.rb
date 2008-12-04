@@ -9,7 +9,7 @@ class Assets < Application
   # GET /assets/:id
   def show
     @asset = Asset.find(params[:id])
-    render @asset.body
+    render @asset.body, :layout => false
   end
 
   # POST /assets
