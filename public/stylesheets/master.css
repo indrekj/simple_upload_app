@@ -84,3 +84,16 @@ a:hover {
 .message .error li {
   margin-left: 30px;
 }
+
+.howto {
+/*  position: absolute;*/
+  float: right;
+  margin-right: 20px;
+  margin-top: 50px;
+  padding: 10px;
+  border: 1px solid black;
+  background-color: #DCE4F2;
+}
+.howto li {
+  margin-left: 20px;
+}
