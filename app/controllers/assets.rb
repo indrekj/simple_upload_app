@@ -9,7 +9,11 @@ class Assets < Application
   # GET /assets/:id
   def show
     @asset = Asset.find(params[:id])
-    render @asset.body, :layout => false
+    body = @asset.body.to_s
+    unless body.match(/html/)
+      body = body.gsub("\n", '<br/>')
+    end
+    render body, :layout => false
   end
 
   # POST /assets
