@@ -57,11 +57,13 @@
 
 <table id="assets">
   <thead class="odd">
-    <td>Tiitel</td>
-    <td>Tüüp</td>
-    <td>Aasta</td>
-    <td>Autor</td>
-    <td>Fail</td>
+    <tr>
+      <td>Tiitel</td>
+      <td>Tüüp</td>
+      <td>Aasta</td>
+      <td>Autor</td>
+      <td>Fail</td>
+    </tr>
   </thead>
 
   <% @assets.each do |asset| -%>
@@ -73,4 +75,4 @@
       <td><%= link_to "Vaata", resource(asset) %></td>
     </tr>
   <% end -%>
-</div>
+</table>
