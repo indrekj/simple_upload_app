@@ -1,6 +1,8 @@
 <h1>WebCT failid</h1>
 <br/>
 
+<p>Paar õpetussõna: Kui salvestate html faili siis olge kindlad, et te õige frame salvestasite. Kui hakkama ei saa siis lihtsalt tehke .txt fail ja kasutage vana copy-paste viisi :)</p>
+
 <% unless message.blank? -%>
   <div class="message">
     <span style="font-weight: bold;"><%= message %></span>
@@ -20,7 +22,6 @@
   </ol>
 </div>
 
-<p>Paar õpetussõna: Kui salvestate html faili siis olge kindlad, et te õige frame salvestasite. Kui hakkama ei saa siis lihtsalt tehke .txt fail ja kasutage vana copy-paste viisi :)</p>
 <%= form_for(@asset, :action => resource(:assets), :class => 'new_asset') do %>
   <table>
     <tr>
