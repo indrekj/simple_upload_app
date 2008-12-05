@@ -24,12 +24,13 @@ class Assets < Application
     end
     @asset.creator_ip = request.remote_ip
     if @asset.save
-      @asset = nil
       @_message = "Edukalt fail lisatud"
+      @asset = nil
+      redirect '/'
     else
       @_message = "Shit happened"
+      index
     end
-    index
   end
 
   # GET /assets/:id/delete
