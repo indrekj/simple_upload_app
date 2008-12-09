@@ -30,7 +30,7 @@ class Assets < Application
     if @asset.save
       @_message = "Edukalt fail lisatud"
       @asset = nil
-      redirect '/'
+      redirect '/', :message => @_message
     else
       @_message = "Shit happened"
       index
