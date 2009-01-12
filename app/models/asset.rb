@@ -6,9 +6,19 @@ class Asset < ActiveRecord::Base
   attr_accessor :filename, :tempfile, :filesize
 
   before_create :upload_file
+  before_save :check_year
 
+  def year
+    self[:year] || Time.now.year
+  end
 
   protected
+
+  def check_year
+    unless self[:year] < 2030 && self[:year] > 2000
+      self[:year] = Time.now.year
+    end
+  end
 
   def upload_file
     unless tempfile.blank?
