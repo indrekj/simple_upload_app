@@ -4,7 +4,7 @@ class AddAssetsTableMigration < ActiveRecord::Migration
       t.string  :title, :length => 30
       t.string  :category, :length => 30
       t.string  :author, :default => 'itimees', :length => 30
-      t.integer :year, :default => Time.now.strftime("%Y").to_i, :length => 4
+      t.integer :year, :default => "YEAR(NOW())", :length => 4
       t.text    :body
       t.string  :content_type
       t.string  :creator_ip, :length => 20
