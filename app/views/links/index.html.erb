@@ -1,0 +1,38 @@
+<%- set_title 'Kasulikud lingid' -%>
+<%- catch_errors_for @link -%>
+
+<%= form_for(@link, :action => resource(:links), :class => 'new_link') do %>
+  <table>
+    <tr>
+      <td><%= label 'Link (http)', :for => 'link_url' %></td>
+      <td><%= text_field :url %></td>
+    </tr>
+    
+    <tr>
+      <td><%= label 'Lühike kirjeldus', :for => 'link_description' %></td>
+      <td><%= text_field :description %></td>
+    </tr>
+
+    <tr><td colspan="2"><%= submit "Lisa" %></td></tr>
+  </table>
+<% end =%>
+
+<br/><br/>
+
+<table id="links">
+  <thead class="odd">
+    <tr>
+      <td>Link</td>
+      <td>Kirjeldus</td>
+      <td>Lisatud</td>
+    </tr>
+  </thead>
+
+  <% @links.each do |link| -%>
+    <tr class="<%= cycle('even', 'odd') %>">
+      <td><%= link_to truncate(link.url, 30), link.url, :target => '_none' %></td>
+      <td><%= link.description %></td>
+      <td><%= link.created_at.to_date %></td>
+    </tr>
+  <% end -%>
+</table>

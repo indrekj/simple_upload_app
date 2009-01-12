@@ -54,21 +54,21 @@ a:hover {
   text-decoration: underline;
 }
 
-.new_asset {
+form.new_asset, form.new_link {
   width: 500px;
   margin-left: auto;
   margin-right: auto;
 }
 
-#assets {
+#assets, #links {
   width: 60%;
   margin-left: auto;
   margin-right: auto;
 }
-#assets .odd {
+#assets .odd, #links .odd {
   background-color: #DEDEDE;
 }
-#assets thead td {
+#assets thead td, #links thead td {
   font-weight: bold;
   text-align: center;
 }
@@ -96,4 +96,15 @@ a:hover {
 }
 .howto li {
   margin-left: 20px;
+}
+
+#menu {
+  position: absolute;
+  margin-top: 50px;
+  margin-left: 20px;
+  font-size: 14px;
+  list-style-type: none;
+}
+#menu .selected {
+  font-weight: bold;
 }

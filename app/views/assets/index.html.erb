@@ -1,15 +1,5 @@
-<h1>WebCT failid</h1>
-<br/>
-
-<p>Paar õpetussõna: Kui salvestate html faili siis olge kindlad, et te õige frame salvestasite. Kui hakkama ei saa siis lihtsalt tehke .txt fail ja kasutage vana copy-paste viisi :)</p>
-
-<% unless message.blank? -%>
-  <div class="message">
-    <span style="font-weight: bold;"><%= message %></span>
-  
-    <%= error_messages_for @asset %>
-  </div>
-<% end -%>
+<%- set_title 'WebCT failid' -%>
+<%- catch_errors_for @asset -%>
 
 <div class="howto">
   <h2>HowTo</h2>
