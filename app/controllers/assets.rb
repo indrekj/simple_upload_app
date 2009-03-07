@@ -2,7 +2,7 @@ class Assets < Application
   # GET /assets
   def index
     @asset ||= Asset.new
-    @assets = Asset.find(:all, :order => 'category ASC, year DESC, title ASC')
+    @assets = Asset.find(:all, :order => 'category ASC, year DESC, title ASC COLLATE NOCASE')
     render :template => 'assets/index'
   end
 
