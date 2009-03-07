@@ -8,6 +8,14 @@ class Asset < ActiveRecord::Base
   before_create :upload_file
   before_save :check_year
 
+  def title=(t)
+    self[:title] = t.to_s.strip
+  end
+
+  def category=(c)
+    self[:category] = c.to_s.strip
+  end
+
   def year
     self[:year] || Time.now.year
   end
