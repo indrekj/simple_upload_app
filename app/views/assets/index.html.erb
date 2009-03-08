@@ -58,10 +58,10 @@
 
   <% @assets.each do |asset| -%>
     <tr class="<%= cycle('even', 'odd') %>">
-      <td><%= asset.title %></td>
-      <td><%= asset.category %></td>
+      <td><%=h asset.title %></td>
+      <td><%=h asset.category %></td>
       <td><%= asset.year %></td>
-      <td><%= asset.author %></td>
+      <td><%=h asset.author %></td>
       <td><%= link_to "Vaata", resource(asset) %></td>
     </tr>
   <% end -%>

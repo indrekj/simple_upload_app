@@ -30,8 +30,8 @@
 
   <% @links.each do |link| -%>
     <tr class="<%= cycle('even', 'odd') %>">
-      <td><%= link_to truncate(link.url, 30), link.url, :target => '_none' %></td>
-      <td><%= link.description %></td>
+      <td><%= link_to truncate(h(link.url), 30), link.url, :target => '_none' %></td>
+      <td><%=h link.description %></td>
       <td><%= link.created_at.to_date %></td>
     </tr>
   <% end -%>
