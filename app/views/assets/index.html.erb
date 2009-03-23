@@ -58,8 +58,8 @@
 
   <% @assets.each do |asset| -%>
     <tr class="<%= cycle('even', 'odd') %>">
-      <td><%=h asset.title %></td>
-      <td><%=h asset.category %></td>
+      <td><%=h asset.title.capitalize %></td>
+      <td><%=h asset.category.capitalize %></td>
       <td><%= asset.year %></td>
       <td><%=h asset.author %></td>
       <td><%= link_to "Vaata", resource(asset) %></td>
