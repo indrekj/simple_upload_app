@@ -7,7 +7,12 @@
   </head>
   <body>
     <h1><%= catch_content(:title) %></h1>
- 
+
+    <ul id="menu">
+      <li><%= menu_link 'WebCT failid', '/' %></li>
+      <li><%= menu_link 'Kasulikud lingid', '/links' %></li>
+    </ul>
+
     <% unless message.blank? -%>
       <div class="message">
         <span style="font-weight: bold;"><%= message %></span>

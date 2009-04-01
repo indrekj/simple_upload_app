@@ -3,12 +3,7 @@ class Assets < Application
   def index
     @asset ||= Asset.new
     @assets = Asset.find(:all, :order => 'LOWER(category) ASC, year DESC, LOWER(title) ASC')
-    time = Time.now
-    if time.day == 1 && time.month == 4
-      render :template => 'assets/aprill'
-    else
-      render :template => 'assets/index'
-    end
+    render :template => 'assets/index'
   end
 
   # GET /assets/:id
