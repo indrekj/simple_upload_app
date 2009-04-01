@@ -5,6 +5,7 @@ class Assets < Application
     @assets = Asset.find(:all, :order => 'LOWER(category) ASC, year DESC, LOWER(title) ASC')
     time = Time.now
     if time.day == 1 && time.month == 4
+      @ip = request.remote_ip
       render :template => 'assets/aprill'
     else
       render :template => 'assets/index'
