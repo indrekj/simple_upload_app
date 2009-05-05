@@ -1,7 +1,7 @@
 <%- set_title 'WebCT failid' -%>
 <%- catch_errors_for @asset -%>
 
-<div class="howto">
+<div id="howto">
   <h2>HowTo</h2>
   <ol>
     <li>WebCT</li>
@@ -10,6 +10,18 @@
     <li>Nüüd ava <strong>uues</strong> aknas vastav Attempt</li>
     <li>Right click ja Save Page As... (html only)</li>
   </ol>
+</div>
+
+<div id="shoutbox">
+  <h2>ShoutBox 
+    <span><%= link_to '(näita / peida)', '#', :onclick => "$('shouts').toggle();" %></span>
+  </h2>
+  <div id="shouts" style="display: none;">
+    <p class="<%= cycle('even', 'odd') %>">
+      Loogilise programeerimise test 6 ja 7 paluks.
+    </p>
+    <p class="odd">Uute shoutide lisamine valmib veel :)</p>
+  </div>
 </div>
 
 <%= form_for(@asset, :action => resource(:assets), :class => 'new_asset') do %>
