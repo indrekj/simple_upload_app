@@ -14,13 +14,24 @@
 
 <div id="shoutbox">
   <h2>ShoutBox 
-    <span><%= link_to '(näita / peida)', '#', :onclick => "$('shouts').toggle();" %></span>
+    <span><%= link_to '(näita / peida)', '#', :onclick => 'display_shouts();' %></span>
   </h2>
+  <%= link_to 'Lisa shout', '#', :onclick => 'display_new_message();', :style => 'display: none;', :id => 'new_message_link' %>
+
+  <div id="new_message" style="display: none;">
+    <%= form_for(Message.new, :action => '#', :onsubmit => "submit_message(); return false;") do %>
+      <p><%= text_field :author, :label => 'Nimi: ' %></p>
+
+      <p><%= text_field :body, :label => 'Sisu: ' %></p>
+
+      <p>
+        <%= submit "Lisa", :id => 'message_submit' %>
+        <img src="/images/spinner.gif" alt="spinner" id="message_spinner" style="display: none;"/>
+      </p>
+    <% end =%>
+  </div>
+
   <div id="shouts" style="display: none;">
-    <p class="<%= cycle('odd', 'even') %>">
-      Tegelt ootab rails 3.0 ära vast.
-    </p>
-    <p class="even">Uute shoutide lisamine valmib veel :)</p>
   </div>
 </div>
 

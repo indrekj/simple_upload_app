@@ -116,6 +116,11 @@ form.new_asset, form.new_link {
 #shoutbox p.even {
   background-color: #BDD1F2;
 }
+#shouts span {
+  float: left;
+  font-size: 8px;
+  text-decoration: underline;
+}
 
 #menu {
   position: absolute;
