@@ -70,7 +70,7 @@ function submit_message() {
   var submit = $('message_submit');
   var spinner = $('message_spinner');
 
-  if(author.value.length > 20 || author.value.length < 5) {
+  if(author.value.length > 20 || author.value.length < 3) {
     alert('Nimi peab olema vahemikus 5 kuni 20 tähemärki');
     return false;
   }
