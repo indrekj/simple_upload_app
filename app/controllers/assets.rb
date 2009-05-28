@@ -7,7 +7,7 @@ class Assets < Application
   def index
     @asset ||= Asset.new
     @assets = Asset.find(:all, :order => 'LOWER(category) ASC, year DESC, LOWER(title) ASC')
-    display @assets
+    render :template => 'assets/index'
   end
 
   # GET /assets/:id

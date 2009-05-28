@@ -1,7 +1,7 @@
 class Asset < ActiveRecord::Base
   validates_presence_of :title, :message => 'Tiitel peab olema lisatud'
   validates_presence_of :category, :message => 'Tüüp peab olema lisatud'
-  validates_length_of :year, :is => 4, :on => :create, :message => 'Aasta peab olema neljakohaline number'
+  validates_numericality_of :year, :greater_than => 2008, :less_than => 2020, :message => 'Aasta paeb olema neljakohaline ning reaalne'
 
   attr_accessor :filename, :tempfile, :filesize
 

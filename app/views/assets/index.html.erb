@@ -38,7 +38,7 @@
 <%= form_for(@asset, :action => resource(:assets), :class => 'new_asset') do %>
   <table>
     <tr>
-      <td><%= label 'Fail (html)', :for => 'asset_file' %></td>
+      <td><%= label 'Fail (html)', :for => 'file' %></td>
       <td><%= file_field :name => 'file' %></td>
     </tr>
     
@@ -90,14 +90,18 @@
         <% if admin? -%>
           | <%= link_to "Kustuta", '#', :onclick => 'destroy_asset(' + asset.id.to_s + ');' %>
         <% end -%>
-      </td>
-      
-      <% if admin? -%>
-        <script type="text/javascript">
-          in_place_editor($('<%= dom_id(asset) %>'), 'title', '<%= resource(asset, :format => "json") %>');
-          in_place_editor($('<%= dom_id(asset) %>'), 'category', '<%= resource(asset, :format => "json") %>');
-        </script>
-      <% end -%>
+      </td>     
     </tr>
   <% end -%>
 </table>
+
+<%# In place text editors for title and category columns %>
+<% if admin? -%>
+  <script type="text/javascript">
+    <% @assets.each do |asset| -%>
+      in_place_editor($('<%= dom_id(asset) %>'), 'title', '<%= resource(asset, :format => "json") %>');
+      in_place_editor($('<%= dom_id(asset) %>'), 'category', '<%= resource(asset, :format => "json") %>');
+    <% end -%>
+  </script>
+<% end -%>
+
