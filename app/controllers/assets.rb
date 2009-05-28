@@ -1,9 +1,13 @@
 class Assets < Application
+  before :admin?, :only => [:update, :destroy]
+  
+  provides :html, :json
+
   # GET /assets
   def index
     @asset ||= Asset.new
     @assets = Asset.find(:all, :order => 'LOWER(category) ASC, year DESC, LOWER(title) ASC')
-    render :template => 'assets/index'
+    display @assets
   end
 
   # GET /assets/:id
@@ -37,8 +41,25 @@ class Assets < Application
     end
   end
 
-  # GET /assets/:id/delete
-  def delete
-    render
+  # PUT /assets/:id
+  def update
+    @asset = Asset.find_by_id(params[:id])
+
+    if @asset.update_attributes(params[:asset])
+      display @asset, :status => 200
+    else
+      display @asset, :status => 409
+    end
+  end
+
+  # DELETE /assets/:id
+  def destroy
+    @asset = Asset.find_by_id(params[:id])
+    raise NotFound unless @asset
+    if @asset.destroy
+      display({:success => true})
+    else
+      display({:success => false})
+    end
   end
 end

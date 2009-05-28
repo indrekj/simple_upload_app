@@ -1,7 +1,7 @@
 class Asset < ActiveRecord::Base
   validates_presence_of :title, :message => 'Tiitel peab olema lisatud'
   validates_presence_of :category, :message => 'Tüüp peab olema lisatud'
-  validates_length_of :year, :is => 4, :message => 'Aasta peab olema neljakohaline number'
+  validates_length_of :year, :is => 4, :on => :create, :message => 'Aasta peab olema neljakohaline number'
 
   attr_accessor :filename, :tempfile, :filesize
 
@@ -20,6 +20,10 @@ class Asset < ActiveRecord::Base
     self[:year] || Time.now.year
   end
 
+  def to_json(options = {:except => 'body'})
+    super(options)
+  end
+
   protected
 
   def check_year
@@ -35,12 +39,14 @@ class Asset < ActiveRecord::Base
   end
 
   def validate
-    if tempfile.blank? || !File.exists?(tempfile.path)
-      errors.add_to_base "Fail peab olema lisatud"
-    elsif !['.html', '.htm', '.txt'].include?(File.extname(filename))
-      errors.add_to_base "Html ja txt failid ainult"
-    elsif filesize > 200 * 1024
-      errors.add_to_base "Faili suurus peab olema alla 200KB"
+    if body.blank?
+      if tempfile.blank? || !File.exists?(tempfile.path)
+        errors.add_to_base "Fail peab olema lisatud"
+      elsif !['.html', '.htm', '.txt'].include?(File.extname(filename))
+        errors.add_to_base "Html ja txt failid ainult"
+      elsif filesize > 200 * 1024
+        errors.add_to_base "Faili suurus peab olema alla 200KB"
+      end
     end
   end
 end

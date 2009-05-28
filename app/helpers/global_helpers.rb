@@ -36,5 +36,13 @@ module Merb
         text
       end
     end
+
+    def admin?
+      session[:logged_in]
+    end
+
+    def dom_id(model) 
+      model.class.to_s.downcase + '_' + model.id.to_s
+    end
   end
 end

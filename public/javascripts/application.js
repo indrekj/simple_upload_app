@@ -86,13 +86,13 @@ function submit_message() {
 
   new Ajax.Request('/messages', {
     method: 'post', parameters: 'message[author]=' + escape(author.value) + '&message[body]=' + escape(body.value),
-    onSuccess: function(transport) {
+    onComplete: function(transport) {
       author.disabled = false;
       body.disabled = false;
       submit.disabled = false;
       spinner.style.display = 'none';
 
-      shout = transport.responseJSON;
+      var shout = transport.responseJSON;
       if(shout['id'] != undefined) {
         $('new_message').style.display = 'none';
         author.value = '';
@@ -113,4 +113,36 @@ function add_shout(shout) {
   shouts.push(shout);
   shouts.reverse();
   render_shouts();
+}
+
+/*****************
+ * InPlaceEditor *
+ *****************/
+function in_place_editor(element, column, url) {
+  var obj = element.select('.' + column)[0];
+  new Ajax.InPlaceEditor(obj, url, {
+    callback: function(form, value) { return 'asset[' + column + ']=' + escape(value) },
+    ajaxOptions: { method: 'put' },
+    onComplete: function(transport, element) {
+      response = transport.responseJSON;
+      element.innerHTML = response[column];
+    }
+  });
+}
+
+/**********
+ * ASSETS *
+ **********/
+function destroy_asset(id) {
+  new Ajax.Request('/assets/' + id + '.json', {
+    method: 'delete',
+    onComplete: function(transport) {
+      var response = transport.responseJSON;
+      if(response['success'] == true) {
+        $('asset_' + id).fade();
+      } else {
+        alert('Kustutamine ebaõnnestus');
+      }
+    }
+  });
 }

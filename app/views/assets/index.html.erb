@@ -80,12 +80,24 @@
   </thead>
 
   <% @assets.each do |asset| -%>
-    <tr class="<%= cycle('even', 'odd') %>">
-      <td><%=h asset.title %></td>
-      <td><%=h asset.category %></td>
-      <td><%= asset.year %></td>
+    <tr id="<%= dom_id(asset) %>" class="<%= cycle('even', 'odd') %>">
+      <td><span class="title"><%=h asset.title %></span></td>
+      <td><span class="category"><%=h asset.category %></span></td>
+      <td><%=h asset.year %></td>
       <td><%=h asset.author %></td>
-      <td><%= link_to "Vaata", resource(asset) %></td>
+      <td>
+        <%= link_to "Vaata", resource(asset) %>
+        <% if admin? -%>
+          | <%= link_to "Kustuta", '#', :onclick => 'destroy_asset(' + asset.id.to_s + ');' %>
+        <% end -%>
+      </td>
+      
+      <% if admin? -%>
+        <script type="text/javascript">
+          in_place_editor($('<%= dom_id(asset) %>'), 'title', '<%= resource(asset, :format => "json") %>');
+          in_place_editor($('<%= dom_id(asset) %>'), 'category', '<%= resource(asset, :format => "json") %>');
+        </script>
+      <% end -%>
     </tr>
   <% end -%>
 </table>
