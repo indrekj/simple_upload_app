@@ -85,7 +85,7 @@ function submit_message() {
   spinner.style.display = '';
 
   new Ajax.Request('/messages', {
-    method: 'post', parameters: 'message[author]=' + escape(author.value) + '&message[body]=' + escape(body.value),
+    method: 'post', parameters: $('new_message_form').serialize(true),
     onComplete: function(transport) {
       author.disabled = false;
       body.disabled = false;

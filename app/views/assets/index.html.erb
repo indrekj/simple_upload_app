@@ -19,7 +19,7 @@
   <%= link_to 'Lisa shout', '#', :onclick => 'display_new_message();', :style => 'display: none;', :id => 'new_message_link' %>
 
   <div id="new_message" style="display: none;">
-    <%= form_for(Message.new, :action => '#', :onsubmit => "submit_message(); return false;") do %>
+    <%= form_for(Message.new, :action => '#', :onsubmit => "submit_message(); return false;", :id => 'new_message_form') do %>
       <p><%= text_field :author, :label => 'Nimi: ' %></p>
 
       <p><%= text_field :body, :label => 'Sisu: ' %></p>
