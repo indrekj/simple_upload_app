@@ -79,13 +79,14 @@ function submit_message() {
     return false;
   }
 
+  var params = $('new_message_form').serialize(true);
   author.disabled = true;
   body.disabled = true;
   submit.disabled = true;
   spinner.style.display = '';
 
   new Ajax.Request('/messages', {
-    method: 'post', parameters: $('new_message_form').serialize(),
+    method: 'post', parameters: params,
     onComplete: function(transport) {
       author.disabled = false;
       body.disabled = false;
