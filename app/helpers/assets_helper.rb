@@ -2,7 +2,10 @@ module Merb
   module AssetsHelper
     def title(t)
       title = t.dup # can't modify frozen string
-      title[0..0] = title[0..0].upcase
+      title = title.split(' ').each do |w| 
+        w.upcase! if w =~ /\A[ivx]+\z/i
+        w[0..0] = w[0..0].upcase
+      end.join(' ')
       title
     end
 
