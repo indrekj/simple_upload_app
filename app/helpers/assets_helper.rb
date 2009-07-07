@@ -15,7 +15,7 @@ module Merb
 
       divisor = ((max - min) / classes.size) + 1
 
-      cat_hash.each do |category, size|
+      cat_hash.sort.each do |category, size|
         yield category, classes[(size - min) / divisor]
       end
     end
