@@ -75,7 +75,7 @@
 
   <ul id="categories_cloud" style="display: none;">
     <% category_cloud(@categories, %w(c1 c2 c3 c4 c5)) do |name, css_class| -%>
-      <li><%= link_to name, '#', :onclick => "Assets.showByCategory('#{name}');", :class => css_class %></li>
+      <li><%= link_to title(name), '#', :onclick => "Assets.showByCategory('#{name}');", :class => css_class %></li>
     <% end -%>
   </ul>
   <br style="clear: both;"/>
@@ -96,8 +96,8 @@
 
   <% @assets.each do |asset| -%>
     <tr id="<%= dom_id(asset) %>" class="asset <%= cycle('even', 'odd') %>">
-      <td><span class="title"><%=h asset.title %></span></td>
-      <td><span class="category"><%=h asset.category %></span></td>
+      <td><span class="title"><%=h title(asset.title) %></span></td>
+      <td><span class="category"><%=h title(asset.category) %></span></td>
       <td><%=h asset.year %></td>
       <td><%=h asset.author %></td>
       <td>

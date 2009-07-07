@@ -206,7 +206,7 @@ Object.extend(Assets, {
   showByCategory: function(category) {
     Assets.assetsToShow = new Array();
     Assets.assets.each(function(asset) {
-      if(asset.category == category) {
+      if(asset.category.toLowerCase() == category.toLowerCase()) {
         Assets.assetsToShow.push(asset);
       }
     });
