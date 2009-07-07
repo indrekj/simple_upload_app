@@ -152,8 +152,8 @@ form.new_asset, form.new_link {
   margin-left: 12px;
   padding: 3px;
 }
-#categories ul li a.c1 { font-size: 09px; }
-#categories ul li a.c2 { font-size: 11px; }
-#categories ul li a.c3 { font-size: 13px; }
-#categories ul li a.c4 { font-size: 15px; }
-#categories ul li a.c5 { font-size: 17px; }
+#categories ul li a.c1 { font-size: 11px; }
+#categories ul li a.c2 { font-size: 14px; }
+#categories ul li a.c3 { font-size: 17px; }
+#categories ul li a.c4 { font-size: 19px; }
+#categories ul li a.c5 { font-size: 21px; }
