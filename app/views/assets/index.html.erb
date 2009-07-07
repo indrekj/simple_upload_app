@@ -74,7 +74,7 @@
   </h2>
 
   <ul id="categories_cloud" style="display: none;">
-    <% category_cloud(@categories, %w(c1 c2 c3 c4 c5 c6 c7 c8)) do |name, css_class| -%>
+    <% category_cloud(@categories, %w(c1 c2 c3 c4 c5)) do |name, css_class| -%>
       <li><%= link_to name, '#', :onclick => "Assets.showByCategory('#{name}');", :class => css_class %></li>
     <% end -%>
   </ul>

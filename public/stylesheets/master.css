@@ -149,15 +149,11 @@ form.new_asset, form.new_link {
 }
 #categories ul li {
   float: left;
-  margin-left: 20px;
-  padding: 5px;
+  margin-left: 12px;
+  padding: 3px;
 }
 #categories ul li a.c1 { font-size: 09px; }
-#categories ul li a.c2 { font-size: 10px; }
-#categories ul li a.c3 { font-size: 11px; }
-#categories ul li a.c4 { font-size: 12px; }
-#categories ul li a.c5 { font-size: 13px; }
-#categories ul li a.c6 { font-size: 14px; }
-#categories ul li a.c7 { font-size: 15px; }
-#categories ul li a.c8 { font-size: 16px; }
-
+#categories ul li a.c2 { font-size: 11px; }
+#categories ul li a.c3 { font-size: 13px; }
+#categories ul li a.c4 { font-size: 15px; }
+#categories ul li a.c5 { font-size: 17px; }
