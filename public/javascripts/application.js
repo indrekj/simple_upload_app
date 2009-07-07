@@ -1,19 +1,24 @@
-// Common JavaScript code across your application goes here.
+/*************
+ * OBSERVERS *
+ *************/
+Event.observe(window, 'load', function() {
+  Assets.loadAssets();
+});
 
 /**********
  * SHOUTS *
  **********/
 var shouts = null;
 
-function display_shouts() {
+function displayShouts() {
   if($('shouts').style.display == 'none') {
     $('shouts').innerHTML = '<img src="/images/spinner.gif" alt="spinner" />';
     $('shouts').style.display = '';
     $('new_message_link').style.display = '';
     if(!shouts) {
-      fetch_and_render_shouts();
+      fetchAndRenderShouts();
     } else {
-      render_shouts();
+      renderShouts();
     }
   } else {
     $('shouts').style.display = 'none';
@@ -21,7 +26,7 @@ function display_shouts() {
   }
 }
 
-function display_new_message() {
+function displayNewMessage() {
   if($('new_message').style.display == 'none') {
     $('new_message').style.display = '';
   } else {
@@ -29,17 +34,17 @@ function display_new_message() {
   }
 }
 
-function fetch_and_render_shouts() {
+function fetchAndRenderShouts() {
   new Ajax.Request('/messages', {
     method: 'get',
     onSuccess: function(transport) {
       shouts = transport.responseJSON;
-      render_shouts();
+      renderShouts();
     }
   });
 }
 
-function render_shouts() {
+function renderShouts() {
   if(!shouts) {
     $('shouts').innerHTML = 'Miski error';
     return;
@@ -64,7 +69,7 @@ function render_shouts() {
   new Effect.Shake($('shouts'), {duration: 0.8});
 }
 
-function submit_message() {
+function submitMessage() {
   var author = $('message_author');
   var body = $('message_body');
   var submit = $('message_submit');
@@ -98,7 +103,7 @@ function submit_message() {
         $('new_message').style.display = 'none';
         author.value = '';
         body.value = '';
-        add_shout(shout);
+        addShout(shout);
       } else {
         alert('Miskit juhtus ja shouti ei õnnestunud ära salvestada');
       }
@@ -106,14 +111,14 @@ function submit_message() {
   });
 }
 
-function add_shout(shout) {
+function addShout(shout) {
   if(shouts.length > 9) {
     shouts.pop();
   }
   shouts.reverse();
   shouts.push(shout);
   shouts.reverse();
-  render_shouts();
+  renderShouts();
 }
 
 /*****************
@@ -131,19 +136,120 @@ function in_place_editor(element, column, url) {
   });
 }
 
+/********************
+ * CATEGORIES CLOUD *
+ ********************/
+function displayCategoriesCloud() {
+  if($('categories_cloud').style.display == 'none') {
+    $('categories_cloud').style.display = '';
+  } else {
+    $('categories_cloud').style.display = 'none'
+  }
+}
+
 /**********
  * ASSETS *
  **********/
-function destroy_asset(id) {
-  new Ajax.Request('/assets/' + id + '.json', {
-    method: 'delete',
-    onComplete: function(transport) {
-      var response = transport.responseJSON;
-      if(response['success'] == true) {
-        $('asset_' + id).fade();
-      } else {
-        alert('Kustutamine ebaõnnestus');
+var Assets = Class.create({
+});
+Object.extend(Assets, {
+  assets: new Array(),
+  assetsToShow: new Array(),
+
+  loadAssets: function() {
+    $$('.asset').each(function(asset) {
+      var cat = asset.getElementsByClassName('category')[0].innerHTML;
+      var a = new Asset({id: asset.id, category: cat});
+      Assets.assets.push(a);
+    });
+  },
+
+  find: function(id) {
+    assets.each(function(asset) {
+      if(asset.id == 'asset_' + id || asset.id == id) {
+        return asset;
       }
-    }
-  });
-}
+    });
+  },
+
+  add: function(asset) {
+    Assets.assets.push(asset);
+  },
+
+  // NOTE: Usual id, not dom_id.
+  destroy: function(id) {
+    new Ajax.Request('/assets/' + id + '.json', {
+      method: 'delete',
+      onComplete: function(transport) {
+        var response = transport.responseJSON;
+        if(response['success'] == true) {
+          var asset = Assets.find(id);
+          asset.fade();
+          
+          // remove asset from list
+          var index = Assets.assets.indexOf(asset);
+          Assets.assets.splice(index, index);
+          index = Assets.assetsToShow.indexOf(asset);
+          Assets.assetsToShow.splice(index, index);
+        } else {
+          alert('Kustutamine ebaõnnestus');
+        }
+      }
+    });
+  },
+
+  showAll: function() {
+    Assets.assetsToShow = Assets.assets;
+    Assets.show();
+  },
+
+  showByCategory: function(category) {
+    Assets.assetsToShow = new Array();
+    Assets.assets.each(function(asset) {
+      if(asset.category == category) {
+        Assets.assetsToShow.push(asset);
+      }
+    });
+    Assets.show();
+  },
+
+  show: function() {
+    var odd = 0;
+    Assets.assets.each(function(asset) {
+      if(Assets.assetsToShow.indexOf(asset) != -1) {
+        asset.setOdd(odd % 2);
+        asset.show();
+        odd++;
+      } else {
+        asset.hide();
+      }
+    });
+  }
+});
+
+var Asset = Class.create({
+  id: null,
+  category: null,
+  element: null,
+
+  initialize: function(hash) {
+    this.id       = hash['id'];
+    this.category = hash['category'];
+    this.element  = $(this.id);
+  },
+
+  setOdd: function(bool) {
+    this.element.removeClassName('odd');
+    this.element.removeClassName('even');
+    var parity = bool ? 'odd' : 'even';
+    this.element.addClassName(parity);
+  },
+
+  show: function() {
+    this.element.show();
+  },
+
+  hide: function() {
+    this.element.hide();
+  }
+});

@@ -14,12 +14,12 @@
 
 <div id="shoutbox">
   <h2>ShoutBox 
-    <span><%= link_to '(näita / peida)', '#', :onclick => 'display_shouts();' %></span>
+    <span><%= link_to '(näita / peida)', '#', :onclick => 'displayShouts();' %></span>
   </h2>
-  <%= link_to 'Lisa shout', '#', :onclick => 'display_new_message();', :style => 'display: none;', :id => 'new_message_link' %>
+  <%= link_to 'Lisa shout', '#', :onclick => 'displayNewMessage();', :style => 'display: none;', :id => 'new_message_link' %>
 
   <div id="new_message" style="display: none;">
-    <%= form_for(Message.new, :action => '#', :onsubmit => "submit_message(); return false;", :id => 'new_message_form') do %>
+    <%= form_for(Message.new, :action => '#', :onsubmit => "submitMessage(); return false;", :id => 'new_message_form') do %>
       <p><%= text_field :author, :label => 'Nimi: ' %></p>
 
       <p><%= text_field :body, :label => 'Sisu: ' %></p>
@@ -66,7 +66,22 @@
   </table>
 <% end =%>
 
-<br/><br/>
+<br/>
+
+<div id="categories">
+  <h2>Kategooriate pilv  
+    <span><a onclick="displayCategoriesCloud();" href="#">(näita / peida)</a></span>
+  </h2>
+
+  <ul id="categories_cloud" style="display: none;">
+    <% category_cloud(@categories, %w(c1 c2 c3 c4 c5 c6 c7 c8)) do |name, css_class| -%>
+      <li><%= link_to name, '#', :onclick => "Assets.showByCategory('#{name}');", :class => css_class %></li>
+    <% end -%>
+  </ul>
+  <br style="clear: both;"/>
+</div>
+
+<br style="clear: both;"/>
 
 <table id="assets">
   <thead class="odd">
@@ -80,7 +95,7 @@
   </thead>
 
   <% @assets.each do |asset| -%>
-    <tr id="<%= dom_id(asset) %>" class="<%= cycle('even', 'odd') %>">
+    <tr id="<%= dom_id(asset) %>" class="asset <%= cycle('even', 'odd') %>">
       <td><span class="title"><%=h asset.title %></span></td>
       <td><span class="category"><%=h asset.category %></span></td>
       <td><%=h asset.year %></td>
@@ -88,7 +103,7 @@
       <td>
         <%= link_to "Vaata", resource(asset) %>
         <% if admin? -%>
-          | <%= link_to "Kustuta", '#', :onclick => 'destroy_asset(' + asset.id.to_s + ');' %>
+          | <%= link_to "Kustuta", '#', :onclick => 'destroyAsset(' + asset.id.to_s + ');' %>
         <% end -%>
       </td>     
     </tr>

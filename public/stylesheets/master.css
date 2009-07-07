@@ -88,7 +88,7 @@ form.new_asset, form.new_link {
 #howto {
   float: right;
   margin-right: 20px;
-  margin-top: 50px;
+  margin-top: 30px;
   padding: 10px;
   border: 1px solid black;
   background-color: #DCE4F2;
@@ -132,3 +132,32 @@ form.new_asset, form.new_link {
 #menu .selected {
   font-weight: bold;
 }
+
+/********************
+ * CATEGORIES CLOUD *
+ ********************/
+#categories {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px;
+  border: 1px solid black;
+  background-color: #DCE4F2;
+}
+#categories ul {
+  list-style: none;
+}
+#categories ul li {
+  float: left;
+  margin-left: 20px;
+  padding: 5px;
+}
+#categories ul li a.c1 { font-size: 09px; }
+#categories ul li a.c2 { font-size: 10px; }
+#categories ul li a.c3 { font-size: 11px; }
+#categories ul li a.c4 { font-size: 12px; }
+#categories ul li a.c5 { font-size: 13px; }
+#categories ul li a.c6 { font-size: 14px; }
+#categories ul li a.c7 { font-size: 15px; }
+#categories ul li a.c8 { font-size: 16px; }
+
