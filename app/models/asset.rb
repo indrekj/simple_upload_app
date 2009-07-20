@@ -4,6 +4,9 @@ class Asset < ActiveRecord::Base
   validates_numericality_of :year, :greater_than => 2008, :less_than => 2020, :message => 'Aasta paeb olema neljakohaline ning reaalne'
 
   before_save :check_year
+  before_save Proc.new {|a| a.file.delete if a.file}
+
+  default_value_for :year, Time.now.year
 
   def title=(t)
     self[:title] = t.to_s.strip
@@ -13,16 +16,12 @@ class Asset < ActiveRecord::Base
     self[:category] = c.to_s.strip
   end
 
-  def year
-    self[:year] || Time.now.year
-  end
-
   def file
     @file
   end
 
   def file=(f)
-    @file = f.clone
+    @file = f
     write_attribute(:body, f.read)
     write_attribute(:content_type, f.content_type)
   end
@@ -40,8 +39,7 @@ class Asset < ActiveRecord::Base
   end
 
   def validate
-    puts "asdfasd"
-    puts file.inspect
+    return unless new_record?
     if file.blank?
       errors.add_to_base "Fail peab olema lisatud"
     else
