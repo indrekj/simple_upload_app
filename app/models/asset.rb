@@ -3,9 +3,6 @@ class Asset < ActiveRecord::Base
   validates_presence_of :category, :message => 'Tüüp peab olema lisatud'
   validates_numericality_of :year, :greater_than => 2008, :less_than => 2020, :message => 'Aasta paeb olema neljakohaline ning reaalne'
 
-  attr_accessor :filename, :tempfile, :filesize
-
-  before_create :upload_file
   before_save :check_year
 
   def title=(t)
@@ -20,6 +17,16 @@ class Asset < ActiveRecord::Base
     self[:year] || Time.now.year
   end
 
+  def file
+    @file
+  end
+
+  def file=(f)
+    @file = f.clone
+    write_attribute(:body, f.read)
+    write_attribute(:content_type, f.content_type)
+  end
+
   def to_json(options = {:except => 'body'})
     super(options)
   end
@@ -32,19 +39,15 @@ class Asset < ActiveRecord::Base
     end
   end
 
-  def upload_file
-    unless tempfile.blank?
-      self.body = File.read(tempfile.path)
-    end
-  end
-
   def validate
-    if body.blank?
-      if tempfile.blank? || !File.exists?(tempfile.path)
-        errors.add_to_base "Fail peab olema lisatud"
-      elsif !['.html', '.htm', '.txt'].include?(File.extname(filename))
+    puts "asdfasd"
+    puts file.inspect
+    if file.blank?
+      errors.add_to_base "Fail peab olema lisatud"
+    else
+      if !['.html', '.htm', '.txt'].include?(File.extname(file.original_filename))
         errors.add_to_base "Html ja txt failid ainult"
-      elsif filesize > 200 * 1024
+      elsif file.size > 200 * 1024
         errors.add_to_base "Faili suurus peab olema alla 200KB"
       end
     end

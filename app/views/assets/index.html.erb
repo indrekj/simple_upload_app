@@ -19,52 +19,58 @@
   <%= link_to 'Lisa shout', '#', :onclick => 'displayNewMessage();', :style => 'display: none;', :id => 'new_message_link' %>
 
   <div id="new_message" style="display: none;">
-    <%= form_for(Message.new, :action => '#', :onsubmit => "submitMessage(); return false;", :id => 'new_message_form') do %>
-      <p><%= text_field :author, :label => 'Nimi: ' %></p>
-
-      <p><%= text_field :body, :label => 'Sisu: ' %></p>
+    <% form_for(Message.new, :url => '#', :html => {:onsubmit => "submitMessage(); return false;", :id => 'new_message_form'}) do |f| %>
+      <p>
+        <%= f.label :author, 'Nimi: ' %>
+        <%= f.text_field :author, :size => nil %>
+      </p>
 
       <p>
-        <%= submit "Lisa", :id => 'message_submit' %>
+        <%= f.label :body, 'Sisu: ' %>
+        <%= f.text_field :body, :size => nil %>
+      </p>
+
+      <p>
+        <%= submit_tag "Lisa", :id => 'message_submit' %>
         <img src="/images/spinner.gif" alt="spinner" id="message_spinner" style="display: none;"/>
       </p>
-    <% end =%>
+    <% end %>
   </div>
 
   <div id="shouts" style="display: none;">
   </div>
 </div>
 
-<%= form_for(@asset, :action => resource(:assets), :class => 'new_asset') do %>
+<% form_for(@asset, :html => {:multipart => true}) do |f| %>
   <table>
     <tr>
-      <td><%= label 'Fail (html)', :for => 'file' %></td>
-      <td><%= file_field :name => 'file' %></td>
+      <td><%= f.label :file, 'Fail (html)' %></td>
+      <td><%= f.file_field :file, :size => nil %></td>
     </tr>
     
     <tr>
-      <td><%= label 'Tiitel', :for => 'asset_title' %></td>
-      <td><%= text_field :title %></td>
+      <td><%= f.label :title, 'Tiitel' %></td>
+      <td><%= f.text_field :title, :size => nil %></td>
     </tr>
 
     <tr>
-      <td><%= label 'Tüüp (arvutiriistvara vms)', :for => 'asset_category' %></td>
-      <td><%= text_field :category %></td>
+      <td><%= f.label :category, 'Tüüp (arvutiriistvara vms)' %></td>
+      <td><%= f.text_field :category, :size => nil %></td>
     </tr>
 
     <tr>
-      <td><%= label 'Töö aasta', :for => 'asset_year' %></td>
-      <td><%= text_field :year, :size => 4 %></td>
+      <td><%= f.label :year, 'Töö aasta' %></td>
+      <td><%= f.text_field :year, :size => 4 %></td>
     </tr>
 
     <tr>
-      <td><%= label 'Autor, kes tahab respecti', :for => 'asset_author' %></td>
-      <td><%= text_field :author %></td>
+      <td><%= f.label :author, 'Autor, kes tahab respecti' %></td>
+      <td><%= f.text_field :author, :size => nil %></td>
     </tr>
 
-    <tr><td colspan="2"><%= submit "Lisa" %></td></tr>
+    <tr><td colspan="2"><%= submit_tag "Lisa" %></td></tr>
   </table>
-<% end =%>
+<% end %>
 
 <br/>
 
@@ -101,7 +107,7 @@
       <td><%=h asset.year %></td>
       <td><%=h asset.author %></td>
       <td>
-        <%= link_to "Vaata", resource(asset) %>
+        <%= link_to "Vaata", asset %>
         <% if admin? -%>
           | <%= link_to "Kustuta", '#', :onclick => 'destroyAsset(' + asset.id.to_s + ');' %>
         <% end -%>
@@ -114,8 +120,8 @@
 <% if admin? -%>
   <script type="text/javascript">
     <% @assets.each do |asset| -%>
-      in_place_editor($('<%= dom_id(asset) %>'), 'title', '<%= resource(asset, :format => "json") %>');
-      in_place_editor($('<%= dom_id(asset) %>'), 'category', '<%= resource(asset, :format => "json") %>');
+      in_place_editor($('<%= dom_id(asset) %>'), 'title', '<%= asset_path(asset, :format => "json") %>');
+      in_place_editor($('<%= dom_id(asset) %>'), 'category', '<%= asset_path(asset, :format => "json") %>');
     <% end -%>
   </script>
 <% end -%>

@@ -1,21 +1,21 @@
 <%- set_title 'Kasulikud lingid' -%>
 <%- catch_errors_for @link -%>
 
-<%= form_for(@link, :action => resource(:links), :class => 'new_link') do %>
+<% form_for(@link) do |f| %>
   <table>
     <tr>
-      <td><%= label 'Link (http)', :for => 'link_url' %></td>
-      <td><%= text_field :url %></td>
-    </tr>
-    
-    <tr>
-      <td><%= label 'Lühike kirjeldus', :for => 'link_description' %></td>
-      <td><%= text_field :description %></td>
+      <td><%= f.label :url, 'Link (http)' %></td>
+      <td><%= f.text_field :url %></td>
     </tr>
 
-    <tr><td colspan="2"><%= submit "Lisa" %></td></tr>
+    <tr>
+      <td><%= f.label :description, 'Lühike kirjeldus' %></td>
+      <td><%= f.text_field :description %></td>
+    </tr>
+
+    <tr><td colspan="2"><%= submit_tag "Lisa" %></td></tr>
   </table>
-<% end =%>
+<% end %>
 
 <br/><br/>
 

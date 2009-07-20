@@ -35,7 +35,7 @@ function displayNewMessage() {
 }
 
 function fetchAndRenderShouts() {
-  new Ajax.Request('/messages', {
+  new Ajax.Request('/messages.json', {
     method: 'get',
     onSuccess: function(transport) {
       shouts = transport.responseJSON;
@@ -56,6 +56,7 @@ function renderShouts() {
   shouts.each(function(record) {
     var klass = (i % 2) ? 'odd' : 'even';
 
+    record = record['message']
     var p = new Element('p', {'class': klass});
     var datetime = record['created_at'].split(' +')[0];
     var span = new Element('span', {'class': 'author'}).update(record['author'].escapeHTML() + ' - ' + datetime);
@@ -90,7 +91,7 @@ function submitMessage() {
   submit.disabled = true;
   spinner.style.display = '';
 
-  new Ajax.Request('/messages', {
+  new Ajax.Request('/messages.json', {
     method: 'post', parameters: params,
     onComplete: function(transport) {
       author.disabled = false;
@@ -99,7 +100,7 @@ function submitMessage() {
       spinner.style.display = 'none';
 
       var shout = transport.responseJSON;
-      if(shout['id'] != undefined) {
+      if(shout['message'] != undefined) {
         $('new_message').style.display = 'none';
         author.value = '';
         body.value = '';
