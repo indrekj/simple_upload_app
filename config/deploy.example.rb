@@ -40,6 +40,12 @@ namespace :deploy do
   task :stop do
     run 'killall merb'
   end 
+
+  desc "Restarts your application."
+  task :restart do
+    run 'killall merb'
+    run "cd #{release_path}; merb -e production -d"
+  end
 end
 
 after 'deploy:update_code', 'deploy:symlink_shared'
