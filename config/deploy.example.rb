@@ -1,32 +1,45 @@
-set :application, "set your application name here"
-set :repository,  "set your repository location here"
+set :application, 'webct'
+set :repository,  'git@github.com:innu/simple_upload_app.git'
+set :domain,      ''
+set :deploy_to,   "/var/www/#{application}"
 
-# If you have previously been relying upon the code to start, stop 
-# and restart your mongrel application, or if you rely on the database
-# migration code, please uncomment the lines you require below
+set :scm, :git
+set :deploy_via, :remote_cache
+set :branch, 'master'
 
-# If you are deploying a rails app you probably need these:
+set :use_sudo, false
+set :ssh_options, {:forward_agent => true}
+set :user, 'root'
 
-# load 'ext/rails-database-migrations.rb'
-# load 'ext/rails-shared-directories.rb'
+set :runner, nil
+set :spinner, nil
 
-# There are also new utility libaries shipped with the core these 
-# include the following, please see individual files for more
-# documentation, or run `cap -vT` with the following lines commented
-# out to see what they make available.
+role :app, domain
+role :web, domain
+role :db,  domain, :primary => true
 
-# load 'ext/spinner.rb'              # Designed for use with script/spin
-# load 'ext/passenger-mod-rails.rb'  # Restart task for use with mod_rails
-# load 'ext/web-disable-enable.rb'   # Gives you web:disable and web:enable
+namespace :deploy do
+  desc 'Migrate the database'
+  task :migrate, :roles => :db do
+    #run "cd #{release_path}; rake db:migrate MERB_ENV=production --trace --verbose"
+  end
 
-# If you aren't deploying to /u/apps/#{application} on the target
-# servers (which is the default), you can specify the actual location
-# via the :deploy_to variable:
-# set :deploy_to, "/var/www/#{application}"
+  desc 'Create symlinks'
+  task :symlink_shared do
+    run "ln -nfs #{shared_path}/log #{release_path}/log"
+    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+    run "ln -nfs #{shared_path}/db/production.sqlite3 #{release_path}/db/production.sqlite3"
+  end
 
-# If you aren't using Subversion to manage your source code, specify
-# your SCM below:
-# set :scm, :subversion
-# see a full list by running "gem contents capistrano | grep 'scm/'"
+  desc "Start the application servers."
+  task :start do
+    run "cd #{release_path}; merb -e production -d"
+  end
 
-role :web, "your web-server here"
+  desc 'Stop the application servers.'
+  task :stop do
+    run 'killall merb'
+  end 
+end
+
+after 'deploy:update_code', 'deploy:symlink_shared'
