@@ -5,6 +5,7 @@ TAGS
 *~
 .#*
 config/database.yml
+config/deploy.rb
 schema/schema.rb
 schema/*_structure.sql
 schema/*.sqlite3
