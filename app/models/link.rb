@@ -9,6 +9,6 @@ class Link < ActiveRecord::Base
   protected
 
   def limit_description
-    self[:description] = self[:description][0..80]
+    self[:description] = self[:description][0...80]
   end
 end

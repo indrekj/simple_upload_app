@@ -6,7 +6,6 @@ class AssetsController < ApplicationController
     @asset ||= Asset.new
     @assets = Asset.find(:all, :select => 'id, title, category, author, year', :order => 'LOWER(category) ASC, year DESC, LOWER(title) ASC')
     @categories = @assets.map(&:category).map(&:downcase)
-    render :template => 'assets/index'
   end
 
   # GET /assets/:id
@@ -32,6 +31,7 @@ class AssetsController < ApplicationController
     else
       flash[:error] = "Shit happened"
       index
+      render :action => 'index'
     end
   end
 

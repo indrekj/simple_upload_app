@@ -13,7 +13,7 @@ class LinksController < ApplicationController
     if @link.save
       flash[:notice] = "Edukalt link lisatud"
       @link = nil
-      redirect '/links'
+      redirect_to links_path
     else
       flash[:error] = "Shit happened"
       index
