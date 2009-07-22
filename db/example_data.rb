@@ -1,4 +1,9 @@
 module FixtureReplacement
+  attributes_for :asset do |a|
+    a.title = random_string(15)
+    a.category = random_string(15)
+  end
+
   attributes_for :link do |l|
     l.url = 'http://google.com'
     l.description = random_string(20)

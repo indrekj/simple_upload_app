@@ -1,0 +1,2068 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!-- assessment/submission/GradeAttempt.jsp -->
+<!-- applicationframework/CommonHeader.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- applicationframework/contextPath.jspi -->
+
+
+
+
+
+
+
+
+
+<html>
+<head>
+
+<title>View Attempt</title>
+<!-- applicationframework/HeaderCSS.jspi -->
+
+
+<script language="javascript" type="text/javascript" src="/webct/libraryjs.dowebct?locale=en_US"></script>
+<script type="text/javascript">
+function navJump(){
+var appFrame = getApplicationFrame();
+if(appFrame){
+if(appFrame.TOOLFRAME.LEFTTOOLFRAME){
+if(appFrame.TOOLFRAME.LEFTTOOLFRAME.document.getElementById("cthomepage")) appFrame.TOOLFRAME.LEFTTOOLFRAME.focus();
+else appFrame.TOOLFRAME.focus();
+}else if(appFrame.TOOLFRAME.EXPLORER_LEFT){
+appFrame.TOOLFRAME.EXPLORER_LEFT.focus();
+}else appFrame.TOPAPPFRAME.focus();
+}
+}
+function contentJump(){
+var appFrame = getApplicationFrame();
+if(appFrame){
+if(appFrame.TOOLFRAME.RIGHTTOOLFRAME) appFrame.TOOLFRAME.RIGHTTOOLFRAME.focus();
+else if(appFrame.TOOLFRAME.EXPLORER_RIGHT) appFrame.TOOLFRAME.EXPLORER_RIGHT.focus();
+else appFrame.TOOLFRAME.focus();
+}
+}
+function hideLinks(){
+var appFrame = getApplicationFrame();
+if(appFrame){
+if(window.name=="LEFTTOOLFRAME" || window.name=="EXPLORER_LEFT")document.getElementById("jumpLinks").removeChild(document.getElementById("navijump"));
+if(window.name=="RIGHTTOOLFRAME" || window.name=="EXPLORER_RIGHT")document.getElementById("jumpLinks").removeChild(document.getElementById("contjump"));
+}
+else{
+document.getElementById("jumpLinks").removeChild(document.getElementById("navijump"))
+document.getElementById("jumpLinks").removeChild(document.getElementById("contjump"))
+}
+}
+</script>
+<link rel="stylesheet" href="/webct/css/styles.jsp?locale=en_US&Id=41387560001&colorSetId=FFFFCC000000000099000099cad7ee000099ffffff000099F8FAFD000099cad7ee394859ededed&fontSize=.8em&fontType=Verdana,Arial,Helvetica,sans-serif" type="text/css" />
+<div id="jumpLinks">
+<a href="Javascript:navJump()" id="navijump" accesskey="1" title="Jump to Navigation Frame" class="hideoff">Jump to Navigation Frame</a>
+<a href="Javascript:contentJump()" id="contjump" accesskey="2" title="Jump to Content Frame" class="hideoff">Jump to Content Frame</a>
+</div>
+<script type="text/javascript">hideLinks()</script>
+
+<script language="javascript" type="text/javascript" src="/webct/libraryjs.dowebct?locale=en_US"></script>
+<script language="JavaScript" type="text/javascript">
+function openNewWindow(mypage, myname, w, h)
+{
+win = openBox( mypage, myname, w, h);
+}
+</script>
+
+
+
+
+
+<script language="JavaScript" type="text/javascript">
+function refreshOpener() {
+
+}
+</script>
+</head>
+<!-- tool=assessment screenId=548 -->
+
+<body class="taskpage" onLoad="javascript:refreshOpener(); highlightct('ctassessment');" onUnLoad="unhighlightct('ctassessment');">
+
+<!-- action/breadcrumbs.jspi -->
+
+<script language="javascript">
+function isTargetValid(frame, triesleft, target) {
+if (frame == null) {
+return false;
+}
+if (triesleft < 1) {
+return false;
+}
+if (triesleft == null || triesleft == '') {
+triesleft = 6;
+}
+if (frame != null && frame.name == target ) {
+return true;
+} else {
+return isTargetValid(frame.parent, triesleft -1, target);
+}
+}
+</script>
+
+<div name="breadcrumbDiv" id="breadcrumbDiv" class="breadcrumbs" style="display:none">
+<iframe id="breadcrumb" frameborder="0"  src="/webct/blank.html" style="position:absolute; top:0px; left:0px; display:none;"
+width="0"  height="0" name="breadcrumb"
+marginwidth="0"></iframe>
+
+
+
+
+
+
+<a href="viewScoreStudent.dowebct" id="backId" title="Back" class="inline" target="RIGHTTOOLFRAME"><img src="/webct/images/small_back.gif" width="16" height="16" alt="Back"></a> <img id="divider" src="/webct/images/dot_divide2.gif" alt="">
+<script language="javascript">
+var backLink = document.getElementById('backId');
+if (isTargetValid(this.window,6,backLink.target) == false) {
+backLink.target = this.window.name;
+}
+</script>
+
+
+<span>Your location: </span>
+
+
+<a href="studentAssessmentManagerView.dowebct" id="breadcrumb0" target="RIGHTTOOLFRAME">Assessments</a> &#8250;
+<script language="javascript">
+var bcLink = document.getElementById('breadcrumb0');
+if (isTargetValid(this.window,6,bcLink.target) == false) {
+bcLink.target = this.window.name;
+}
+</script>
+
+
+
+
+<a href="viewScoreStudent.dowebct" id="breadcrumb1" target="RIGHTTOOLFRAME">View All Submissions</a> &#8250;
+<script language="javascript">
+var bcLink = document.getElementById('breadcrumb1');
+if (isTargetValid(this.window,6,bcLink.target) == false) {
+bcLink.target = this.window.name;
+}
+</script>
+
+
+
+
+View Attempt
+
+</div>
+
+
+<script language="javascript">
+var br = document.getElementById('breadcrumb');
+var brDiv = document.getElementById('breadcrumbDiv');
+// HIDE the breadcrumbs if in a pop up (i.e.  No parent is RIGHTTOOLFRAME or TOOLFRAME)
+if (isInRightToolFrame(this.window)) {
+br.height=0;
+br.src="/webct/urw/lc41387540001.tp41387560001/breadcrumbIFrame.dowebct?popup=false";
+brDiv.style.display = "block";
+}else{
+br.height=0;
+br.src="/webct/urw/lc41387540001.tp41387560001/breadcrumbIFrame.dowebct?popup=true";
+brDiv.height=0;
+brDiv.style.display = "none";
+}
+</script>
+
+
+
+<div class="taskpagetitlediv">
+<h1>
+View Attempt 1 of 2
+</h1>
+</div>
+<div class="controlset">
+<table cellspacing="0" class="simpletable" summary="">
+<tr>
+<td nowrap="nowrap">Title:</td>
+<td class="boldme">Jada- ja rööpvärat</td>
+</tr>
+
+<tr>
+<td nowrap="nowrap">Started:</td>
+<td>Tuesday  25  November 2008    16:08</td>
+</tr>
+<tr>
+<td nowrap="nowrap">Submitted:</td>
+<td>Tuesday  25  November 2008    16:17</td>
+</tr>
+<tr>
+<td nowrap="nowrap">Time spent:</td>
+<td>
+
+<a href="javascript:openNewWindow('viewAttemptEventsLog.dowebct?assmtAttemptId=78453995001','ViewAccessLog','500','500')" title="View Access Log in a new window">
+00:09:20
+</a>
+
+
+</td>
+</tr>
+
+
+
+
+
+<tr>
+<td nowrap="nowrap" width="10%"><b>Total score:</b></td>
+<td>
+<b>80/100 = 80%</b>
+
+
+
+<img align="absmiddle" alt="" border="0" src="/webct/images/dot_divide.gif"/>
+Total score adjusted by 0.0
+<img align="absmiddle" alt="" border="0" src="/webct/images/dot_divide.gif"/>
+Maximum possible score: 100
+
+</td>
+</tr>
+
+
+
+
+</table>
+</div>
+ 
+
+
+
+<div class="taskbuttondiv">
+<input type="button" class="task" onClick="document.location='/webct/urw/lc41387540001.tp41387560001/displayAssessmentScore.dowebct?assessment=41388275001'" value="Done">
+
+</div>
+
+
+<table cellspacing="0" summary="" width="100%" style="margin-top:12px;">
+
+
+
+<tr class="questionrow">
+<td><h2>1.</h2></td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<table cellspacing="0" cellpadding="3" width="98%" summary="">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!-- assessment/questiondb/GradedInclude_mc.jsp -->
+<!-- applicationframework/CommonHeader.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- applicationframework/contextPath.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+<tr valign="top">
+<td colspan="2">
+
+Milline allpoolnimetatud standarditest tähistab jadaväratit&#63;
+
+</td>
+</tr>
+
+
+
+<tr>
+<td colspan="2"><!-- assessment/questiondb/GradedInclude_Image.jspi -->
+
+
+
+</td>
+</tr>
+
+<tr valign="top">
+<td colspan="2">
+<table class="tablebody">
+
+<thead>
+<tr>
+
+<td width="3%">&nbsp;</td>
+<th scope="col">Student Response</th>
+
+
+
+<th scope="col" width="10%">Value</th>
+
+
+<th scope="col" width="20%">Correct Answer</th>
+
+
+<th scope="col" width="55%">Feedback</th>
+
+</tr>
+</thead>
+<tbody>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans1">1.</label>
+</td>
+<td>IEEE 1284</td>
+
+<td width="10%" nowrap="nowrap">0%</td>
+
+
+<td>
+&nbsp;
+</td>
+
+
+<td width="55%">&nbsp;</td>
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans2">2.</label>
+</td>
+<td>IEEE 1384</td>
+
+<td width="10%" nowrap="nowrap">0%</td>
+
+
+<td>
+&nbsp;
+</td>
+
+
+<td width="55%">&nbsp;</td>
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans3">3.</label>
+</td>
+<td>IEEE 1394</td>
+
+<td width="10%" nowrap="nowrap">0%</td>
+
+
+<td>
+&nbsp;
+</td>
+
+
+<td width="55%">&nbsp;</td>
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans4">4.</label>
+</td>
+<td>RS 125</td>
+
+<td width="10%" nowrap="nowrap">0%</td>
+
+
+<td>
+&nbsp;
+</td>
+
+
+<td width="55%">&nbsp;</td>
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+<img src="/webct/images/small_answered.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+
+
+
+<label for="ans5">5.</label>
+</td>
+<td>RS 232</td>
+
+<td width="10%" nowrap="nowrap">100%</td>
+
+
+<td>
+
+<img src="/webct/images/small_success.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+&nbsp;
+</td>
+
+
+<td width="55%">&nbsp;</td>
+
+</tr>
+
+
+</tbody>
+
+</table>
+</td>
+</tr>
+
+
+
+
+<tr>
+<td width="10%">Score:</td>
+<td>
+
+10/10
+
+
+
+</td>
+</tr>
+
+
+
+
+
+<tr>
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+
+
+
+<tr class="questionrow">
+<td><h2>2.</h2></td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<table cellspacing="0" cellpadding="3" width="98%" summary="">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!-- assessment/questiondb/GradedInclude_mc.jsp -->
+<!-- applicationframework/CommonHeader.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- applicationframework/contextPath.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+<tr valign="top">
+<td colspan="2">
+
+Mis aastast pärineb esimene IEEE 1284 standard&#63;
+
+</td>
+</tr>
+
+
+
+<tr>
+<td colspan="2"><!-- assessment/questiondb/GradedInclude_Image.jspi -->
+
+
+
+</td>
+</tr>
+
+<tr valign="top">
+<td colspan="2">
+<table class="tablebody">
+
+<thead>
+<tr>
+
+<td width="3%">&nbsp;</td>
+<th scope="col">Student Response</th>
+
+
+
+<th scope="col" width="10%">Value</th>
+
+
+<th scope="col" width="20%">Correct Answer</th>
+
+
+<th scope="col" width="55%">Feedback</th>
+
+</tr>
+</thead>
+<tbody>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans1">1.</label>
+</td>
+<td>1993</td>
+
+<td width="10%" nowrap="nowrap">0%</td>
+
+
+<td>
+&nbsp;
+</td>
+
+
+<td width="55%">&nbsp;</td>
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+<img src="/webct/images/small_answered.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+
+
+
+<label for="ans2">2.</label>
+</td>
+<td>1994</td>
+
+<td width="10%" nowrap="nowrap">100%</td>
+
+
+<td>
+
+<img src="/webct/images/small_success.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+&nbsp;
+</td>
+
+
+<td width="55%">&nbsp;</td>
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans3">3.</label>
+</td>
+<td>1995</td>
+
+<td width="10%" nowrap="nowrap">0%</td>
+
+
+<td>
+&nbsp;
+</td>
+
+
+<td width="55%">&nbsp;</td>
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans4">4.</label>
+</td>
+<td>1996</td>
+
+<td width="10%" nowrap="nowrap">0%</td>
+
+
+<td>
+&nbsp;
+</td>
+
+
+<td width="55%">&nbsp;</td>
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans5">5.</label>
+</td>
+<td>1997</td>
+
+<td width="10%" nowrap="nowrap">0%</td>
+
+
+<td>
+&nbsp;
+</td>
+
+
+<td width="55%">&nbsp;</td>
+
+</tr>
+
+
+</tbody>
+
+</table>
+</td>
+</tr>
+
+
+
+
+<tr>
+<td width="10%">Score:</td>
+<td>
+
+10/10
+
+
+
+</td>
+</tr>
+
+
+
+
+
+<tr>
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+
+
+
+<tr class="questionrow">
+<td><h2>3.</h2></td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<table cellspacing="0" cellpadding="3" width="98%" summary="">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!-- assessment/questiondb/GradedInclude_matching.jsp -->
+<!-- applicationframework/CommonHeader.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- applicationframework/contextPath.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+<tr valign="top">
+<td colspan="2">
+
+Sea vastavusse jadavärati signaalid ja kontaktid 9-kontaktisel pistikul
+
+</td>
+</tr>
+
+<tr>
+<td colspan="2"><!-- assessment/questiondb/GradedInclude_Image.jspi -->
+
+
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td colspan="2">
+<table cellspacing="0" cellpadding="3" class="previewColumn" width="100%" summary="">
+<tr valign="top">
+<td>
+
+
+<p>
+
+Kontakt 1
+</p>
+
+<p>
+
+Kontakt 2
+</p>
+
+<p>
+
+Kontakt 3
+</p>
+
+<p>
+
+Kontakt 4
+</p>
+
+<p>
+
+Kontakt 5
+</p>
+
+<p>
+
+Kontakt 6
+</p>
+
+<p>
+
+Kontakt 7
+</p>
+
+<p>
+
+Kontakt 8
+</p>
+
+<p>
+
+Kontakt 9
+</p>
+
+</td>
+<td class="clear" width="5%">&nbsp;</td>
+<td valign="top">
+
+
+<p>
+
+Ring indicator
+</p>
+
+<p>
+
+Transmit data
+</p>
+
+<p>
+
+Request to send
+</p>
+
+<p>
+
+Signal ground
+</p>
+
+<p>
+
+Data terminal ready
+</p>
+
+<p>
+
+Receive data
+</p>
+
+<p>
+
+Data set ready
+</p>
+
+<p>
+
+Carrier detect
+</p>
+
+<p>
+
+Clear to send
+</p>
+
+</td>
+</tr>
+</table>
+</td>
+</tr>
+
+
+<tr valign="top">
+<td colspan="2">
+<table class="tablebody">
+<thead>
+<tr>
+<th scope="col">Statement</th>
+<th scope="col">Response</th>
+
+
+
+<th scope="col" width="10%">
+
+Value
+</th>
+
+
+<th scope="col">Correct Match</th>
+
+</tr>
+</thead>
+<tbody>
+
+
+<tr valign="top">
+<td>
+
+Kontakt 1
+
+
+</td>
+
+<td>Carrier detect</td>
+
+
+
+<td nowrap="nowrap">
+11.11%
+</td>
+
+
+<td>Carrier detect</td>
+
+</tr>
+
+<tr valign="top">
+<td>
+
+Kontakt 2
+
+
+</td>
+
+<td>Receive data</td>
+
+
+
+<td nowrap="nowrap">
+11.11%
+</td>
+
+
+<td>Receive data</td>
+
+</tr>
+
+<tr valign="top">
+<td>
+
+Kontakt 3
+
+
+</td>
+
+<td>Transmit data</td>
+
+
+
+<td nowrap="nowrap">
+11.11%
+</td>
+
+
+<td>Transmit data</td>
+
+</tr>
+
+<tr valign="top">
+<td>
+
+Kontakt 4
+
+
+</td>
+
+<td>Data terminal ready</td>
+
+
+
+<td nowrap="nowrap">
+11.11%
+</td>
+
+
+<td>Data terminal ready</td>
+
+</tr>
+
+<tr valign="top">
+<td>
+
+Kontakt 5
+
+
+</td>
+
+<td>Signal ground</td>
+
+
+
+<td nowrap="nowrap">
+11.11%
+</td>
+
+
+<td>Signal ground</td>
+
+</tr>
+
+<tr valign="top">
+<td>
+
+Kontakt 6
+
+
+</td>
+
+<td>Data set ready</td>
+
+
+
+<td nowrap="nowrap">
+11.11%
+</td>
+
+
+<td>Data set ready</td>
+
+</tr>
+
+<tr valign="top">
+<td>
+
+Kontakt 7
+
+
+</td>
+
+<td>Request to send</td>
+
+
+
+<td nowrap="nowrap">
+11.11%
+</td>
+
+
+<td>Request to send</td>
+
+</tr>
+
+<tr valign="top">
+<td>
+
+Kontakt 8
+
+
+</td>
+
+<td>Clear to send</td>
+
+
+
+<td nowrap="nowrap">
+11.11%
+</td>
+
+
+<td>Clear to send</td>
+
+</tr>
+
+<tr valign="top">
+<td>
+
+Kontakt 9
+
+
+</td>
+
+<td>Ring indicator</td>
+
+
+
+<td nowrap="nowrap">
+11.12%
+</td>
+
+
+<td>Ring indicator</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</td>
+</tr>
+
+
+
+
+
+
+
+<tr>
+<td width="10%">Score:</td>
+<td>
+
+20/20
+
+
+
+</td>
+</tr>
+
+
+
+
+
+<tr>
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+
+
+
+<tr class="questionrow">
+<td><h2>4.</h2></td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<table cellspacing="0" cellpadding="3" width="98%" summary="">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!-- assessment/questiondb/GradedInclude_sa.jsp -->
+<!-- applicationframework/CommonHeader.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- applicationframework/contextPath.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+<tr valign="top">
+<td colspan="2">
+
+Mitmebaidist puhvrit kasutab UART 16650? 
+<br>Vastus kirjuta numbrina.
+
+</td>
+</tr>
+
+<tr>
+<td colspan="2"><!-- assessment/questiondb/GradedInclude_Image.jspi -->
+
+
+
+</td>
+</tr>
+
+
+
+<tr valign="top">
+<td colspan="2">
+<table class="tablebody">
+
+<thead>
+<tr>
+<td width="3%">&nbsp;</td>
+<th width="32%" scope="col">Student Response</th>
+
+<th scope="col" width="10%">Value</th>
+
+
+<th scope="col" width="55%">Correct Answer</th>
+
+</tr>
+</thead>
+<tbody>
+
+
+<tr>
+<td scope="row">1.&nbsp;</td>
+<td>32&nbsp;</td>
+
+<td>100%</td>
+
+
+<td>
+
+
+Equals
+<b>32</b>
+(100%)<br />
+
+</td>
+
+</tr>
+
+
+</tbody>
+
+</table>
+</td>
+</tr>
+
+
+
+
+
+
+<tr>
+<td width="10%">Score:</td>
+<td>
+
+10/10
+
+
+
+</td>
+</tr>
+
+
+
+
+
+<tr>
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+
+
+
+<tr class="questionrow">
+<td><h2>5.</h2></td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<table cellspacing="0" cellpadding="3" width="98%" summary="">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!-- assessment/questiondb/GradedInclude_sa.jsp -->
+<!-- applicationframework/CommonHeader.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- applicationframework/contextPath.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+<tr valign="top">
+<td colspan="2">
+
+Milline on UART 16750 puhul maksimaalne võimalik andmeedastuskiirus? 
+<br>Vastus kirjuta numbrina ühikutes <b>kbps</b>.
+
+</td>
+</tr>
+
+<tr>
+<td colspan="2"><!-- assessment/questiondb/GradedInclude_Image.jspi -->
+
+
+
+</td>
+</tr>
+
+
+
+<tr valign="top">
+<td colspan="2">
+<table class="tablebody">
+
+<thead>
+<tr>
+<td width="3%">&nbsp;</td>
+<th width="32%" scope="col">Student Response</th>
+
+<th scope="col" width="10%">Value</th>
+
+
+<th scope="col" width="55%">Correct Answer</th>
+
+</tr>
+</thead>
+<tbody>
+
+
+<tr>
+<td scope="row">1.&nbsp;</td>
+<td>460&nbsp;</td>
+
+<td>100%</td>
+
+
+<td>
+
+
+Equals
+<b>460</b>
+(100%)<br />
+
+</td>
+
+</tr>
+
+
+</tbody>
+
+</table>
+</td>
+</tr>
+
+
+
+
+
+
+<tr>
+<td width="10%">Score:</td>
+<td>
+
+10/10
+
+
+
+</td>
+</tr>
+
+
+
+
+
+<tr>
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+
+
+
+<tr class="questionrow">
+<td><h2>6.</h2></td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<table cellspacing="0" cellpadding="3" width="98%" summary="">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!-- assessment/questiondb/GradedInclude_mc.jsp -->
+<!-- applicationframework/CommonHeader.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- applicationframework/contextPath.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+<tr valign="top">
+<td colspan="2">
+
+Milline on jadavärati COM2 puhul traditsiooniliselt I/O aadressivahemik&#63;
+
+</td>
+</tr>
+
+
+
+<tr>
+<td colspan="2"><!-- assessment/questiondb/GradedInclude_Image.jspi -->
+
+
+
+</td>
+</tr>
+
+<tr valign="top">
+<td colspan="2">
+<table class="tablebody">
+
+<thead>
+<tr>
+
+<td width="3%">&nbsp;</td>
+<th scope="col">Student Response</th>
+
+
+
+<th scope="col" width="10%">Value</th>
+
+
+<th scope="col" width="20%">Correct Answer</th>
+
+
+<th scope="col" width="55%">Feedback</th>
+
+</tr>
+</thead>
+<tbody>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans1">1.</label>
+</td>
+<td>01E8 – 01EF</td>
+
+<td width="10%" nowrap="nowrap">0%</td>
+
+
+<td>
+&nbsp;
+</td>
+
+
+<td width="55%">&nbsp;</td>
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans2">2.</label>
+</td>
+<td>01F8 – 01FF</td>
+
+<td width="10%" nowrap="nowrap">0%</td>
+
+
+<td>
+&nbsp;
+</td>
+
+
+<td width="55%">&nbsp;</td>
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans3">3.</label>
+</td>
+<td>02E8 – 02EF</td>
+
+<td width="10%" nowrap="nowrap">0%</td>
+
+
+<td>
+&nbsp;
+</td>
+
+
+<td width="55%">&nbsp;</td>
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+<img src="/webct/images/small_answered.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+
+
+
+<label for="ans4">4.</label>
+</td>
+<td>02F8 - 02FF
+</td>
+
+<td width="10%" nowrap="nowrap">100%</td>
+
+
+<td>
+
+<img src="/webct/images/small_success.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+&nbsp;
+</td>
+
+
+<td width="55%">&nbsp;</td>
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans5">5.</label>
+</td>
+<td>03E8 – 03EF</td>
+
+<td width="10%" nowrap="nowrap">0%</td>
+
+
+<td>
+&nbsp;
+</td>
+
+
+<td width="55%">&nbsp;</td>
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans6">6.</label>
+</td>
+<td>03F8 - 03FF</td>
+
+<td width="10%" nowrap="nowrap">0%</td>
+
+
+<td>
+&nbsp;
+</td>
+
+
+<td width="55%">&nbsp;</td>
+
+</tr>
+
+
+</tbody>
+
+</table>
+</td>
+</tr>
+
+
+
+
+<tr>
+<td width="10%">Score:</td>
+<td>
+
+10/10
+
+
+
+</td>
+</tr>
+
+
+
+
+
+<tr>
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+
+
+
+<tr class="questionrow">
+<td><h2>7.</h2></td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<table cellspacing="0" cellpadding="3" width="98%" summary="">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!-- assessment/questiondb/GradedInclude_sa.jsp -->
+<!-- applicationframework/CommonHeader.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- applicationframework/contextPath.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+<tr valign="top">
+<td colspan="2">
+
+Mida tähendab lühend FIFO&#63;
+
+</td>
+</tr>
+
+<tr>
+<td colspan="2"><!-- assessment/questiondb/GradedInclude_Image.jspi -->
+
+
+
+</td>
+</tr>
+
+
+
+<tr valign="top">
+<td colspan="2">
+<table class="tablebody">
+
+<thead>
+<tr>
+<td width="3%">&nbsp;</td>
+<th width="32%" scope="col">Student Response</th>
+
+<th scope="col" width="10%">Value</th>
+
+
+<th scope="col" width="55%">Correct Answer</th>
+
+</tr>
+</thead>
+<tbody>
+
+
+<tr>
+<td scope="row">1.&nbsp;</td>
+<td>not answered&nbsp;</td>
+
+<td>0%</td>
+
+
+<td>
+
+
+Regular expression
+<b>First.*In.*First.*Out</b>
+(100%)<br />
+
+</td>
+
+</tr>
+
+
+</tbody>
+
+</table>
+</td>
+</tr>
+
+
+
+
+
+
+<tr>
+<td width="10%">Score:</td>
+<td>
+
+0/10
+
+
+
+</td>
+</tr>
+
+
+
+
+
+<tr>
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+
+
+
+<tr class="questionrow">
+<td><h2>8.</h2></td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<table cellspacing="0" cellpadding="3" width="98%" summary="">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!-- assessment/questiondb/GradedInclude_sa.jsp -->
+<!-- applicationframework/CommonHeader.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- applicationframework/contextPath.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+<tr valign="top">
+<td colspan="2">
+
+Mida tähendab lühend EPP&#63;
+
+</td>
+</tr>
+
+<tr>
+<td colspan="2"><!-- assessment/questiondb/GradedInclude_Image.jspi -->
+
+
+
+</td>
+</tr>
+
+
+
+<tr valign="top">
+<td colspan="2">
+<table class="tablebody">
+
+<thead>
+<tr>
+<td width="3%">&nbsp;</td>
+<th width="32%" scope="col">Student Response</th>
+
+<th scope="col" width="10%">Value</th>
+
+
+<th scope="col" width="55%">Correct Answer</th>
+
+</tr>
+</thead>
+<tbody>
+
+
+<tr>
+<td scope="row">1.&nbsp;</td>
+<td>Enhanced Parallel Port&nbsp;</td>
+
+<td>100%</td>
+
+
+<td>
+
+
+Regular expression
+<b>Enhanced.*Parallel.*Port</b>
+(100%)<br />
+
+</td>
+
+</tr>
+
+
+</tbody>
+
+</table>
+</td>
+</tr>
+
+
+
+
+
+
+<tr>
+<td width="10%">Score:</td>
+<td>
+
+10/10
+
+
+
+</td>
+</tr>
+
+
+
+
+
+<tr>
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+
+
+
+<tr class="questionrow">
+<td><h2>9.</h2></td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<table cellspacing="0" cellpadding="3" width="98%" summary="">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!-- assessment/questiondb/GradedInclude_calc.jsp -->
+<!-- applicationframework/CommonHeader.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- applicationframework/contextPath.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+<tr valign="top">
+<td colspan="2">
+
+Jadavärat suhtleb kiirusel 19 200 Bd. Igas sümbolis olgu praegusel juhul 4 bitti infot. Suhtlusprotokoll kasutab 1 startbitti, 8 andmebitti, 0 paarsusbitti ja 2 stoppbitti. Mitu baiti reaalseid andmeid suudetakse nendel tingimustel edastada ühe sekundiga&#63;
+
+</td>
+</tr>
+
+<tr>
+<td colspan="2"><!-- assessment/questiondb/GradedInclude_Image.jspi -->
+
+
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td colspan="2">
+<table class="tablebody">
+<thead>
+<tr>
+<td>&nbsp;</td>
+<th scope="col" nowrap="nowrap">Student Response</th>
+
+<th scope="col" width="10%">Value</th>
+
+
+<th scope="col" width="55%">Correct Answer</th>
+
+</tr>
+</thead>
+<tbody>
+<tr>
+<td scope="row"><strong>Answer:</strong></td>
+<td nowrap="nowrap" scope="row">6981&nbsp;&nbsp;</td>
+
+<td>0%</td>
+
+
+<td>6 982</td>
+
+</tr>
+
+</tbody>
+
+</table>
+</td>
+</tr>
+
+
+
+
+
+
+<tr>
+<td width="10%">Score:</td>
+<td>
+
+0/10
+
+
+
+</td>
+</tr>
+
+
+
+
+
+<tr>
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+
+</tbody>
+</table>
+
+
+
+
+
+
+<div class="taskbuttondiv">
+<input type="button" class="task" onClick="document.location='/webct/urw/lc41387540001.tp41387560001/displayAssessmentScore.dowebct?assessment=41388275001'" value="Done">&nbsp;
+
+</div>
+
+
+</body>
+</html>
