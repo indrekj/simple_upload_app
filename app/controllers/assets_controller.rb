@@ -56,4 +56,12 @@ class AssetsController < ApplicationController
       render :json => {:success => false}
     end
   end
+
+  def category
+    index
+    render :action => 'index'
+    # TODO
+    #@categories = @categories.select {|c| c == params[:name].downcase}
+    #render :action => 'index'
+  end
 end

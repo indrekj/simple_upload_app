@@ -3,7 +3,18 @@
  *************/
 Event.observe(window, 'load', function() {
   Assets.loadAssets();
+
+  var page = History.get('page');
+  if(page) {
+    Assets.showByCategory(unescape(page));
+  }
 });
+
+function changeCategory(page) {
+  History.set('page', escape(page));
+  Assets.showByCategory(page);
+  return false;
+}
 
 /**********
  * SHOUTS *
