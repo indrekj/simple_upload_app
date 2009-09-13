@@ -7,7 +7,8 @@
       <script type="text/javascript" charset="utf-8" src="http://drop.io/it_inf/remote_chat_bar.js?chat_password="></script>
     <% end -%>
     <%= stylesheet_link_tag 'master' %>
-    <%= javascript_include_tag 'prototype', 'scriptaculous', 'prototypextensions', 'application'%>
+    <%= javascript_include_tag 'prototype', 'scriptaculous', 'prototypextensions' %>
+    <%= javascript_include_tag 'application' %>
   </head>
   <body>
     <h1><%= yield :title %></h1>
@@ -29,6 +30,7 @@
       <%= yield %>
     </div>
 
+    <%- if RAILS_ENV != 'development' -%>
     <!-- Google analytics -->
     <script type="text/javascript">
       document.write(unescape("%3Cscript src='http://www.google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -37,5 +39,6 @@
       var pageTracker = _gat._getTracker("UA-3366869-2");
       pageTracker._trackPageview();
     </script>
+    <%- end -%>
   </body>
 </html>

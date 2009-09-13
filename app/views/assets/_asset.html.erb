@@ -1,0 +1,12 @@
+<tr id="<%= dom_id(asset) %>" class="asset <%= cycle('even', 'odd') %>">
+  <td><span class="title"><%=h title(asset.title) %></span></td>
+  <td><span class="category"><%=h title(asset.category) %></span></td>
+  <td><%=h asset.year %></td>
+  <td><%=h asset.author %></td>
+  <td>
+    <%= link_to "Vaata", asset %>
+    <% if admin? -%>
+      | <%= link_to "Kustuta", '#', :onclick => 'destroyAsset(' + asset.id.to_s + ');' %>
+    <% end -%>
+  </td>     
+</tr>

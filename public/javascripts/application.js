@@ -170,10 +170,14 @@ Object.extend(Assets, {
 
   loadAssets: function() {
     $$('.asset').each(function(asset) {
-      var cat = asset.getElementsByClassName('category')[0].innerHTML;
-      var a = new Asset({id: asset.id, category: cat});
-      Assets.assets.push(a);
+      Assets.loadAsset(asset)
     });
+  },
+
+  loadAsset: function(asset) {
+    var cat = asset.getElementsByClassName('category')[0].innerHTML;
+    var a = new Asset({id: asset.id, category: cat});
+    Assets.add(a);
   },
 
   find: function(id) {

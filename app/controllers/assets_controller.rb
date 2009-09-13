@@ -26,7 +26,6 @@ class AssetsController < ApplicationController
 
     if @asset.save
       flash[:notice] = "Edukalt fail lisatud"
-      @asset = nil
       redirect_to home_path
     else
       flash[:error] = "Shit happened"

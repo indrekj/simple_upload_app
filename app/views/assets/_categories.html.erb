@@ -1,0 +1,13 @@
+<div id="categories">
+  <h2>Kategooriate pilv  
+    <span><a onclick="displayCategoriesCloud();" href="#">(näita / peida)</a></span>
+  </h2>
+
+  <ul id="categories_cloud" style="display: none;">
+    <li><%= link_to 'KÕIK', '#', :onclick => 'Assets.showAll();', :class => 'c5'%></li>
+    <% category_cloud(@categories, %w(c1 c2 c3 c4 c5)) do |name, css_class| -%>
+      <li><%= link_to title(name), "#page=#{name}", :onclick => "changeCategory('#{name}');", :class => css_class %></li>
+    <% end -%>
+  </ul>
+  <br style="clear: both;"/>
+</div>

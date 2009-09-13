@@ -1,0 +1,29 @@
+<div id="shoutbox">
+  <h2>ShoutBox 
+    <span><%= link_to '(näita / peida)', '#', :onclick => 'displayShouts();' %></span>
+  </h2>
+  <%= link_to 'Lisa shout', '#', :onclick => 'displayNewMessage();', :style => 'display: none;', :id => 'new_message_link' %>
+
+  <div id="new_message" style="display: none;">
+    <% form_for(Message.new, :url => '#', :html => {:onsubmit => "submitMessage(); return false;", :id => 'new_message_form'}) do |f| %>
+      <p>
+        <%= f.label :author, 'Nimi: ' %>
+        <%= f.text_field :author, :size => nil %>
+      </p>
+
+      <p>
+        <%= f.label :body, 'Sisu: ' %>
+        <%= f.text_field :body, :size => nil %>
+      </p>
+
+      <p>
+        <%= submit_tag "Lisa", :id => 'message_submit' %>
+        <img src="/images/spinner.gif" alt="spinner" id="message_spinner" style="display: none;"/>
+      </p>
+    <% end %>
+  </div>
+
+  <div id="shouts" style="display: none;">
+  </div>
+</div>
+

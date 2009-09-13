@@ -1,0 +1,31 @@
+<% form_for(@asset, :html => {:multipart => true}) do |f| %>
+  <table>
+    <tr>
+      <td><%= f.label :file, 'Fail (html)' %></td>
+      <td><%= f.file_field :file, :size => nil %><p id="asset_file_selected" style="display: none;"></p></td>
+    </tr>
+    
+    <tr>
+      <td><%= f.label :title, 'Tiitel' %></td>
+      <td><%= f.text_field :title, :size => nil %></td>
+    </tr>
+
+    <tr>
+      <td><%= f.label :category, 'Tüüp (arvutiriistvara vms)' %></td>
+      <td><%= f.text_field :category, :size => nil %></td>
+    </tr>
+
+    <tr>
+      <td><%= f.label :year, 'Töö aasta' %></td>
+      <td><%= f.text_field :year, :size => 4 %></td>
+    </tr>
+
+    <tr>
+      <td><%= f.label :author, 'Autor, kes tahab respecti' %></td>
+      <td><%= f.text_field :author, :size => nil %></td>
+    </tr>
+
+    <tr><td colspan="2"><%= submit_tag "Lisa", :id => 'upload_asset_button' %></td></tr>
+  </table>
+<% end %>
+
