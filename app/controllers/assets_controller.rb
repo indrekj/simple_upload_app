@@ -25,7 +25,7 @@ class AssetsController < ApplicationController
     @asset.creator_ip = request.remote_ip
 
     if @asset.save
-      flash[:notice] = "Edukalt fail lisatud"
+      flash[:notice] = "Fail edukalt lisatud"
       redirect_to home_path
     else
       flash[:error] = "Shit happened"
