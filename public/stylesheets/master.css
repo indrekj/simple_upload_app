@@ -64,6 +64,7 @@ form.new_asset, form.new_link {
   width: 60%;
   margin-left: auto;
   margin-right: auto;
+  padding-bottom: 20px;
 }
 #assets .odd, #links .odd {
   background-color: #DEDEDE;
