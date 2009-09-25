@@ -1,0 +1,38 @@
+<%- set_title 'Kalendri konventeerimine' -%>
+
+<div id="howto">
+  <h2>HowTo</h2>
+  <ol>
+    <li>Lugege kõik vasakul olev tekst üle arusaamatuste vältimiseks.</li>
+    <li>Sisestage ÕISi kasutajanimi ja salasõna</li>
+    <li>Server saadab teile nüüd faili <strong>calendar.ics</strong></li>
+    <li>Avage <a href="http://www.google.com/calendar/">Google Calendar</a></li>
+    <li>My Calendars alt valige Create ja tehke uus kalender nimega <strong>Tunniplaan</strong></li>
+    <li><strong>Other Calendar</strong>s alt valige nüüd <strong>Add</strong> ja sealt <strong>Import Calendar</strong></li>
+    <li>Failiks valige serveri poolt saadud <strong>calendar.ics</strong> ja <strong>Calendar></strong> muutke <strong>Tunniplaan</strong>iks.</li>
+    <li>Voila. Ja peakski kõik olemas olema. Edasi uurige kuidas telefoni GCal syncis hoida<br/> ja kuidas GCal saadaks mobiilile teateid.</li>
+  </ol>
+</div>
+
+<div id="calendars">
+  <p>Selle isendiga saab konvertida oma ÕISi tunniplaan ICS formaati. St, et saate selle oma ICal või Google kalendrisse importida. Testitud ainult Google-ga hetkel.</p>
+  <p>HOIATUS: Ühendus teie ja serveri vahel on krüpteerimata. Ise teate, kas üldse julgete seda kasutada. Muidugi on võimalus peale konvertimist oma ülikooli parool ära vahetada.</p>
+  <p>Kuidas teie andmeid käsitletakse? Uurige välja. Kogu lehe source kood on saadaval <a href="http://http://github.com/innu/simple_upload_app">siin</a></p>
+  <p>Ahjaa, kui ÕISis midagi muudetakse siis ei pruugi see teenus siin enam töötada.</p>
+
+  <br/>
+
+  <p>Siia sisestage siis oma UT kasutajanimi ja salasõna</p>
+
+  <% form_tag calendars_path do %>
+    <p><%= label_tag :username, 'Kasutajanimi' %><br/>
+    <%= text_field_tag :username %></p>
+
+    <p><%= label_tag :password, 'Salasõna' %><br/>
+    <%= password_field_tag :password %></p>
+
+    <p><%= submit_tag 'Konventeeri' %></p>
+  <% end %>
+
+  <p>Vigade leidmisel kirjutage shoutboxi</p>
+</div>

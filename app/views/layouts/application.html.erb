@@ -16,13 +16,16 @@
     <ul id="menu">
       <li><%= menu_link 'WebCT failid', '/' %></li>
       <li><%= menu_link 'Kasulikud lingid', '/links' %></li>
+      <li><%= menu_link 'Tunniplaani konventeerija', '/calendars' %></li>
     </ul>
 
     <% if flash[:notice] || flash[:error] -%>
       <div class="message">
         <span style="font-weight: bold;"><%= flash[:notice] || flash[:error] %></span>
-      
-        <%= error_messages_for @e_model %>
+
+        <%- if @e_model -%>  
+          <%= error_messages_for @e_model %>
+        <%- end -%>
       </div>
     <% end -%>
 

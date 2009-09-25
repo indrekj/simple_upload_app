@@ -1,6 +1,6 @@
 require 'digest/sha2'
 class ApplicationController < ActionController::Base
-  filter_parameter_logging :pw
+  filter_parameter_logging :pw, :password
 
   before_filter :check_admin
 
