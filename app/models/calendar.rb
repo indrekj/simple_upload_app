@@ -85,6 +85,9 @@ class Calendar
     
     res = Net::HTTP.get_response(URI.parse(url))
     @ois_data = Iconv.conv('UTF-8', 'ISO-8859-15', res.body)
+    unless @ois_data.include?('KL_NADALAPAEV')
+      raise NoScheduleFound
+    end
     @ois_data
   end
 

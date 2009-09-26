@@ -51,6 +51,9 @@ class CalendarsController < ApplicationController
   def fetch_from_ois_using_url(ois_url)
     begin
       @calendar.fetch_from_ois_using_url!(ois_url)
+    rescue Calendar::NoScheduleFound => e
+      flash[:error] = 'Juhtus midagi. Äkki sisestasid vale aadressi?'
+      redirect_to calendars_path and return false
     rescue Exception => e
       Rails.logger.error e.inspect
       flash[:error] = 'Juhtus midagi, mida oodata ei osanud. Proovi paari tunni pärast uuesti'
