@@ -18,8 +18,8 @@ class Calendar
 
   def initialize
     @calendar = {}
-    (1..44).each do |week|
-      @calendar.merge!({week => []})
+    (1..7).each do |day|
+      @calendar.merge!({day => []})
     end
 
     @ois_data = nil
@@ -94,10 +94,9 @@ class Calendar
   def ois_data_to_hash!
     doc = Hpricot::XML(@ois_data)
     (doc/:G_KL_NADALAPAEV).each do |kl_day|
-      day = kl_day.at(:KL_NADALAPAEV).innerText
+      day = kl_day.at(:KL_NADALAPAEV).innerText.to_i
       (kl_day/:G_ALGUSKELL).each do |kl_class|
         class_hash = {}
-        class_hash.merge!(:day => day.to_i - 1)
 
         start_time = fix_time(kl_class.at(:ALGUSKELL).innerText)
         end_time = fix_time(kl_class.at(:LOPPKELL).innerText)
@@ -112,17 +111,19 @@ class Calendar
 
         class_hash.merge!(:description => description)
 
-        weeks = kl_class.at(:NADALAD).innerText
-        weeks.split(', ').each do |week|
+        weeks = []
+        kl_weeks = kl_class.at(:NADALAD).innerText
+        kl_weeks.split(', ').each do |week|
           if week.include?('-')
             first, last = week.split('-')
-            (first.to_i..last.to_i).to_a.each do |week|
-              @calendar[week.to_i] << class_hash
-            end
+            weeks += (first.to_i..last.to_i).to_a
           else
-            @calendar[week.to_i] << class_hash
+            weeks << week.to_i
           end
         end
+        class_hash.merge!(:weeks => weeks)
+
+        @calendar[day] << class_hash
       end
     end  
   end
@@ -136,19 +137,71 @@ class Calendar
     str += "METHOD:PUBLISH\n"
     str += "X-WR-TIMEZONE:Europe/Tallinn\n"
 
-    @calendar.each do |week, classes|
-      # Time.local(Time.now.year, 9, 1) + 1.week => Sep 08. We need Sep 07.
-      date = Time.local(Time.now.year, 9, 1) + week.weeks - 1.day
+    @calendar.each do |day, classes|
       classes.each do |klass|
-        class_date = date + klass[:day].days
-        class_date = class_date.strftime("%Y%m%d")
-        str += "BEGIN:VEVENT\n"
-        str += "DTSTART;TZID=Europe/Tallinn:#{class_date}T#{klass[:start_time]}\n"
-        str += "DTEND;TZID=Europe/Tallinn:#{class_date}T#{klass[:end_time]}\n"
-        str += "LOCATION:#{klass[:location]}\n"
-        str += "SUMMARY:#{klass[:class_name]}\n"
-        str += "DESCRIPTION:#{klass[:description]}\n"
-        str += "END:VEVENT\n"
+        weeks = klass[:weeks]
+        interval = nil
+
+        # interval 1 week
+        start_week = weeks[0]
+        if weeks[1]
+          end_week = start_week + 1
+          weeks.each do |week|
+            if end_week + 1 == week
+              end_week = week
+              interval = 1
+            end
+          end
+        end
+
+        # interval 2 weeks
+        start_week = weeks[0]
+        if weeks[2] && !interval
+          end_week = start_week + 2
+          weeks.each do |week|
+            if end_week + 2 == week
+              end_week = week
+              interval = 2
+            end
+          end
+        end
+
+        # Time.local(Time.now.year, 9, 1) + 1.week => Sep 08. We need Sep 07.
+        date = Time.local(Time.now.year, 9, 1) + (day - 2).days
+
+        if interval
+          weeks[weeks.rindex(start_week)..weeks.rindex(end_week)] = nil
+
+          class_date = date + start_week.weeks - 1.week
+          class_date = class_date.strftime("%Y%m%d")
+
+          end_date = (date + end_week.weeks - 1.week).strftime("%Y%m%d")
+
+          str += "BEGIN:VEVENT\n"
+          
+          str += "RRULE:FREQ=WEEKLY;INTERVAL=#{interval};WKST=MO;"
+          str += "UNTIL=#{end_date};BYDAY=#{to_ics_day(day)}\n"
+          
+          str += "DTSTART;TZID=Europe/Tallinn:#{class_date}T#{klass[:start_time]}\n"
+          str += "DTEND;TZID=Europe/Tallinn:#{class_date}T#{klass[:end_time]}\n"
+          str += "LOCATION:#{klass[:location]}\n"
+          str += "SUMMARY:#{klass[:class_name]}\n"
+          str += "DESCRIPTION:#{klass[:description]}\n"
+          str += "END:VEVENT\n"
+        end
+
+        weeks.each do |week|
+          class_date = date + week.weeks - 1.week
+          class_date = class_date.strftime("%Y%m%d")
+
+          str += "BEGIN:VEVENT\n"
+          str += "DTSTART;TZID=Europe/Tallinn:#{class_date}T#{klass[:start_time]}\n"
+          str += "DTEND;TZID=Europe/Tallinn:#{class_date}T#{klass[:end_time]}\n"
+          str += "LOCATION:#{klass[:location]}\n"
+          str += "SUMMARY:#{klass[:class_name]}\n"
+          str += "DESCRIPTION:#{klass[:description]}\n"
+          str += "END:VEVENT\n"
+        end
       end
     end
 
@@ -195,5 +248,19 @@ class Calendar
     time[3] || time << '0'
     time << '00'
     time
+  end
+
+  def to_ics_day(i)
+    case i
+    when 1 then 'MO'
+    when 2 then 'TU'
+    when 3 then 'WE'
+    when 4 then 'TH'
+    when 5 then 'FR'
+    when 6 then 'SA'
+    when 7 then 'SU'
+    else
+      'MO'
+    end
   end
 end

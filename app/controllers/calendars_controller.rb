@@ -15,6 +15,7 @@ class CalendarsController < ApplicationController
       @calendar.ois_data_to_hash!
     rescue Exception => e
       Rails.logger.error e.inspect
+      Rails.logger.error e.backtrace.join("\n")
       flash[:error] = 'Juhtus midagi süsteemi formaati konventeerimisel. Proovi paari tunni pärast uuesti'
       redirect_to calendars_path and return
     end
@@ -23,6 +24,7 @@ class CalendarsController < ApplicationController
       data = @calendar.to_ics!
     rescue Exception => e
       Rails.logger.error e.inspect
+      Rails.logger.error e.backtrace.join("\n")
       flash[:error] = 'Juhtus midagi ics faili tegemisel. Proovi paari tunni pärast uuesti'
       redirect_to calendars_path and return
     end
