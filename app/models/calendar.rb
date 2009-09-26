@@ -139,14 +139,14 @@ class Calendar
 
     @calendar.each do |day, classes|
       classes.each do |klass|
-        weeks = klass[:weeks]
+        weeks = klass[:weeks].sort
         interval = nil
 
         # interval 1 week
         start_week = weeks[0]
         if weeks[1]
-          end_week = start_week + 1
-          weeks.each do |week|
+          end_week = start_week
+          weeks[1..-1].each do |week|
             if end_week + 1 == week
               end_week = week
               interval = 1
@@ -156,9 +156,9 @@ class Calendar
 
         # interval 2 weeks
         start_week = weeks[0]
-        if weeks[2] && !interval
-          end_week = start_week + 2
-          weeks.each do |week|
+        if weeks[1] && !interval
+          end_week = start_week
+          weeks[1..-1].each do |week|
             if end_week + 2 == week
               end_week = week
               interval = 2
@@ -180,7 +180,7 @@ class Calendar
           str += "BEGIN:VEVENT\n"
           
           str += "RRULE:FREQ=WEEKLY;INTERVAL=#{interval};WKST=MO;"
-          str += "UNTIL=#{end_date};BYDAY=#{to_ics_day(day)}\n"
+          str += "UNTIL=#{end_date}T230000Z;BYDAY=#{to_ics_day(day)}\n"
           
           str += "DTSTART;TZID=Europe/Tallinn:#{class_date}T#{klass[:start_time]}\n"
           str += "DTEND;TZID=Europe/Tallinn:#{class_date}T#{klass[:end_time]}\n"
