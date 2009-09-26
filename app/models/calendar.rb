@@ -26,7 +26,7 @@ class Calendar
     @ics_data = nil
   end
 
-  def fetch_from_ois!(user, pw)
+  def fetch_from_ois_using_pw!(user, pw)
     url = URI.parse(OIS_ADDR)
     
     # Certs
@@ -75,6 +75,17 @@ class Calendar
 
       @ois_data = Iconv.conv('UTF-8', 'ISO-8859-15', body)
     end
+  end
+
+  def fetch_from_ois_using_url!(url)
+    url.gsub!('https', 'http')
+    url.gsub!('HTML', 'XML')
+    url.gsub!('text/html', 'application/xml')
+    url.gsub!('https://www.is.ut.ee', '')
+    
+    res = Net::HTTP.get_response(URI.parse(url))
+    @ois_data = Iconv.conv('UTF-8', 'ISO-8859-15', res.body)
+    @ois_data
   end
 
   def ois_data_to_hash!

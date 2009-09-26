@@ -4,18 +4,11 @@ class CalendarsController < ApplicationController
 
   def create
     @calendar = Calendar.new
-    begin
-      @calendar.fetch_from_ois!(params[:username], params[:password])
-    rescue Calendar::InvalidLogin
-      flash[:error] = 'Logimine ebaõnnestus'
-      redirect_to calendars_path and return
-    rescue Calendar::NoScheduleFound
-      flash[:error] = 'Miskipärast me ei leidnud teie tunniplaani aadressit'
-      redirect_to calendars_path and return
-    rescue Exception => e
-      Rails.logger.error e.inspect
-      flash[:error] = 'Juhtus midagi, mida oodata ei osanud. Proovi paari tunni pärast uuesti'
-      redirect_to calendars_path and return
+    
+    if !params[:ois_url].blank?
+      return if !fetch_from_ois_using_url(params[:ois_url])
+    else
+      return if !fetch_from_ois_using_pw(params[:username], params[:password])
     end
 
     begin
@@ -35,5 +28,33 @@ class CalendarsController < ApplicationController
     end
 
     send_data(data, :filename => 'calendar.ics', :disposition => 'attachment')
+  end
+
+  private
+
+  def fetch_from_ois_using_pw(username, password)
+    begin
+      @calendar.fetch_from_ois_using_pw!(username, password)
+    rescue Calendar::InvalidLogin
+      flash[:error] = 'Logimine ebaõnnestus'
+      redirect_to calendars_path and return false
+    rescue Calendar::NoScheduleFound
+      flash[:error] = 'Miskipärast me ei leidnud teie tunniplaani aadressit'
+      redirect_to calendars_path and return false
+    rescue Exception => e
+      Rails.logger.error e.inspect
+      flash[:error] = 'Juhtus midagi, mida oodata ei osanud. Proovi paari tunni pärast uuesti'
+      redirect_to calendars_path and return false
+    end
+  end
+
+  def fetch_from_ois_using_url(ois_url)
+    begin
+      @calendar.fetch_from_ois_using_url!(ois_url)
+    rescue Exception => e
+      Rails.logger.error e.inspect
+      flash[:error] = 'Juhtus midagi, mida oodata ei osanud. Proovi paari tunni pärast uuesti'
+      redirect_to calendars_path and return false
+    end
   end
 end

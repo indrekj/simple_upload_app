@@ -134,6 +134,14 @@ form.new_asset, form.new_link {
   font-weight: bold;
 }
 
+#calendars h2 {
+  font-size: 20px;
+  color: #121A84;
+}
+#calendars li {
+  margin-left: 40px;
+}
+
 /********************
  * CATEGORIES CLOUD *
  ********************/
