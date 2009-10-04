@@ -240,13 +240,16 @@ class Calendar
   end
 
   def fix_time(time)
-    time.gsub!('.', '')
-    if time.length == 1 || time.length == 3
-      time = '0' + time
+    hours, minutes = time.split('.')
+    if hours.length == 1
+      hours = '0' + hours
     end
-    time[2] || time << '0'
-    time[3] || time << '0'
-    time << '00'
+
+    if minutes.length == 1
+      minutes += '0'
+    end
+
+    time = hours + minutes + '00'
     time
   end
 
