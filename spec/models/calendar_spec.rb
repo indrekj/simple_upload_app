@@ -17,4 +17,8 @@ describe Calendar, 'fix time' do
   it 'should be valid time' do
     @calendar.send(:fix_time, '10.15').should == '101500'
   end
+
+  it 'should add minutes' do
+    @calendar.send(:fix_time, '10').should == '100000'
+  end
 end

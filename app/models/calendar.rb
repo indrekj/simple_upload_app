@@ -245,7 +245,9 @@ class Calendar
       hours = '0' + hours
     end
 
-    if minutes.length == 1
+    if !minutes
+      minutes = '00'
+    elsif minutes.length == 1
       minutes += '0'
     end
 
