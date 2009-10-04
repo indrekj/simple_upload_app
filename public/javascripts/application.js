@@ -69,7 +69,7 @@ function renderShouts() {
 
     record = record['message']
     var p = new Element('p', {'class': klass});
-    var datetime = record['created_at'].split(' +')[0];
+    var datetime = formatDate(record['created_at']);
     var span = new Element('span', {'class': 'author'}).update(record['author'].escapeHTML() + ' - ' + datetime);
     p.insert(span);
     p.insert('<br/>');
@@ -79,6 +79,26 @@ function renderShouts() {
     i++;
   });
   new Effect.Shake($('shouts'), {duration: 0.8});
+}
+
+function formatDate(d) {
+  if (typeof d == 'string') {
+    d = d.toDate();
+  }
+
+  var month = d.getMonth() + 1;
+  var day_month_year = d.getDate() + '/' + month + '/' + d.getFullYear();
+
+  var hours = d.getHours();
+  if (hours < 10) {
+    hours = '0' + hours;
+  }
+  var minutes = d.getMinutes();
+  if (minutes < 10) {
+    minutes = '0' + minutes;
+  }
+
+  return (day_month_year + ' - ' + hours + ':' + minutes);
 }
 
 function submitMessage() {
@@ -269,3 +289,15 @@ var Asset = Class.create({
     this.element.hide();
   }
 });
+
+
+// Prototype extensions
+String.prototype.toDate = function() {
+  var a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*)?)Z$/.exec(this);
+  if (a) {
+    return new Date(Date.UTC(+a[1], +a[2] - 1, +a[3], +a[4], +a[5], +a[6]));
+  } else {
+    return null;
+  }
+}
+
