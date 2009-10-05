@@ -111,8 +111,8 @@ function submitMessage() {
     alert('Nimi peab olema vahemikus 5 kuni 20 tähemärki');
     return false;
   }
-  if(body.value.length > 100 || body.value.length < 5) {
-    alert('Sisu peab olema vahemikus 5 kuni 100 tähemärki');
+  if(body.value.length > 150 || body.value.length < 5) {
+    alert('Sisu peab olema vahemikus 5 kuni 150 tähemärki');
     return false;
   }
 
