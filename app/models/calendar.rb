@@ -167,7 +167,8 @@ class Calendar
         end
 
         # Time.local(Time.now.year, 9, 1) + 1.week => Sep 08. We need Sep 07.
-        date = Time.local(Time.now.year, 9, 1) + (day - 2).days
+        # this should be calculated automatically
+        date = Time.local(2009, 9, 1) + (day - 2).days
 
         if interval
           weeks[weeks.rindex(start_week)..weeks.rindex(end_week)] = nil
