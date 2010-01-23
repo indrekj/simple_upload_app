@@ -73,7 +73,7 @@ class Calendar
         raise e
       end
 
-      @ois_data = Iconv.conv('UTF-8', 'ISO-8859-15', body)
+      @ois_data = body
     end
   end
 
@@ -84,10 +84,11 @@ class Calendar
     url.gsub!('https://www.is.ut.ee', '')
     
     res = Net::HTTP.get_response(URI.parse(url))
-    @ois_data = Iconv.conv('UTF-8', 'ISO-8859-15', res.body)
+    @ois_data = res.body
     unless @ois_data.include?('KL_NADALAPAEV')
       raise NoScheduleFound
     end
+
     @ois_data
   end
 
@@ -130,7 +131,7 @@ class Calendar
 
   def to_ics!
     str = "BEGIN:VCALENDAR\n"
-    str += "X-WR-CALNAME:Tartu ülikooli tunniplaan\n"
+    str += "X-WR-CALNAME:Tartu Ülikooli tunniplaan\n"
     str += "PRODID:-//University Of Tartu tunniplaan//Urgas.eu//EN\n"
     str += "VERSION:2.0\n"
     str += "CALSCALE:GREGORIAN\n"
