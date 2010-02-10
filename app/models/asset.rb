@@ -7,7 +7,7 @@ class Asset < ActiveRecord::Base
 
   validates_presence_of :title, :message => 'Tiitel peab olema lisatud'
   validates_presence_of :category, :message => 'Tüüp peab olema lisatud'
-  validates_numericality_of :year, :greater_than => 2008, :less_than => 2020, :message => 'Aasta paeb olema neljakohaline ning reaalne'
+  validates_numericality_of :year, :greater_than => 2007, :less_than => 2020, :message => 'Aasta paeb olema neljakohaline ning reaalne'
 
   before_validation_on_create :determine_source!
   before_create :remove_delicate_info!
@@ -60,6 +60,9 @@ class Asset < ActiveRecord::Base
       # Hacking attempts? No need for these either.
       body.gsub!(/sesskey=.{10}/, "")
     end
+
+    # AR doesn't like to touch when using gsub!. << :)
+    self.touch(:body)
   end
 
   protected
