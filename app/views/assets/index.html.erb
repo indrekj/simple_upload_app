@@ -1,13 +1,18 @@
-<%- set_title 'WebCT failid' -%>
+<%- set_title 'WebCT / Moodle failid' -%>
 <%- catch_errors_for @asset -%>
 
 <div id="howto">
   <h2>HowTo</h2>
   <ol>
-    <li>WebCT</li>
+    <li><strong>WebCT</strong></li>
     <li>Ava assasments ning vali töö</li>
     <li>Edasi "View Submission"</li>
     <li>Nüüd ava <strong>uues</strong> aknas vastav Attempt</li>
+    <li>Right click ja Save Page As... (html only)</li>
+  </ol>
+  <ol>
+    <li><strong>Moodle</strong></li>
+    <li>Ava töö tulemused (kõik ühel lehel)</li>
     <li>Right click ja Save Page As... (html only)</li>
   </ol>
 </div>
@@ -39,6 +44,7 @@
 </table>
 
 <%# In place text editors for title and category columns %>
+<%# TODO: kasuta unobtrusive js-i %>
 <% if admin? -%>
   <script type="text/javascript">
     <% @assets.each do |asset| -%>

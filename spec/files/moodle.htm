@@ -1,0 +1,384 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="et" xml:lang="et">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="https://moodle.ut.ee/theme/standard/styles.php" />
+<link rel="stylesheet" type="text/css" href="https://moodle.ut.ee/theme/UT/styles.php" />
+<script type="text/javascript"  src="https://moodle.ut.ee/lib/yui/yahoo/yahoo-min.js"></script><script type="text/javascript"  src="https://moodle.ut.ee/lib/yui/event/event-min.js"></script><script type="text/javascript"  src="https://moodle.ut.ee/lib/yui/connection/connection-min.js"></script><script type="text/javascript"  src="https://moodle.ut.ee/lib/swfobject/swfobject.js"></script><script type="text/javascript">
+  var flashversion = swfobject.getFlashPlayerVersion();
+  YAHOO.util.Connect.asyncRequest('GET','https://moodle.ut.ee/login/environment.php?sesskey=quFV5RrziJ&amp;flashversion='+flashversion.major+'.'+flashversion.minor+'.'+flashversion.release);
+</script>
+<!--[if IE 7]>
+    <link rel="stylesheet" type="text/css" href="https://moodle.ut.ee/theme/standard/styles_ie7.css" />
+<![endif]-->
+<!--[if IE 6]>
+    <link rel="stylesheet" type="text/css" href="https://moodle.ut.ee/theme/standard/styles_ie6.css" />
+<![endif]-->
+
+
+    <meta name="keywords" content="moodle, FPM: Harjutustest 1 " />
+    <title>FPM: Harjutustest 1</title>
+    <link rel="shortcut icon" href="https://moodle.ut.ee/theme/UT/favicon.ico" />
+    <!--<style type="text/css">/*<![CDATA[*/ body{behavior:url(https://moodle.ut.ee/lib/csshover.htc);} /*]]>*/</style>-->
+
+<script type="text/javascript" src="https://moodle.ut.ee/lib/javascript-static.js"></script>
+<script type="text/javascript" src="https://moodle.ut.ee/lib/javascript-mod.php"></script>
+<script type="text/javascript" src="https://moodle.ut.ee/lib/overlib/overlib.js"></script>
+<script type="text/javascript" src="https://moodle.ut.ee/lib/overlib/overlib_cssstyle.js"></script>
+<script type="text/javascript" src="https://moodle.ut.ee/lib/cookies.js"></script>
+<script type="text/javascript" src="https://moodle.ut.ee/lib/ufo.js"></script>
+<script type="text/javascript" src="https://moodle.ut.ee/lib/dropdown.js"></script>  
+
+<script type="text/javascript" defer="defer">
+//<![CDATA[
+setTimeout('fix_column_widths()', 20);
+//]]>
+</script>
+<script type="text/javascript">
+//<![CDATA[
+function openpopup(url, name, options, fullscreen) {
+    var fullurl = "https://moodle.ut.ee" + url;
+    var windowobj = window.open(fullurl, name, options);
+    if (!windowobj) {
+        return true;
+    }
+    if (fullscreen) {
+        windowobj.moveTo(0, 0);
+        windowobj.resizeTo(screen.availWidth, screen.availHeight);
+    }
+    windowobj.focus();
+    return false;
+}
+
+function uncheckall() {
+    var inputs = document.getElementsByTagName('input');
+    for(var i = 0; i < inputs.length; i++) {
+        inputs[i].checked = false;
+    }
+}
+
+function checkall() {
+    var inputs = document.getElementsByTagName('input');
+    for(var i = 0; i < inputs.length; i++) {
+        inputs[i].checked = true;
+    }
+}
+
+function inserttext(text) {
+  text = ' ' + text + ' ';
+  if ( opener.document.forms['theform'].message.createTextRange && opener.document.forms['theform'].message.caretPos) {
+    var caretPos = opener.document.forms['theform'].message.caretPos;
+    caretPos.text = caretPos.text.charAt(caretPos.text.length - 1) == ' ' ? text + ' ' : text;
+  } else {
+    opener.document.forms['theform'].message.value  += text;
+  }
+  opener.document.forms['theform'].message.focus();
+}
+
+function getElementsByClassName(oElm, strTagName, oClassNames){
+	var arrElements = (strTagName == "*" && oElm.all)? oElm.all : oElm.getElementsByTagName(strTagName);
+	var arrReturnElements = new Array();
+	var arrRegExpClassNames = new Array();
+	if(typeof oClassNames == "object"){
+		for(var i=0; i<oClassNames.length; i++){
+			arrRegExpClassNames.push(new RegExp("(^|\\s)" + oClassNames[i].replace(/\-/g, "\\-") + "(\\s|$)"));
+		}
+	}
+	else{
+		arrRegExpClassNames.push(new RegExp("(^|\\s)" + oClassNames.replace(/\-/g, "\\-") + "(\\s|$)"));
+	}
+	var oElement;
+	var bMatchesAll;
+	for(var j=0; j<arrElements.length; j++){
+		oElement = arrElements[j];
+		bMatchesAll = true;
+		for(var k=0; k<arrRegExpClassNames.length; k++){
+			if(!arrRegExpClassNames[k].test(oElement.className)){
+				bMatchesAll = false;
+				break;
+			}
+		}
+		if(bMatchesAll){
+			arrReturnElements.push(oElement);
+		}
+	}
+	return (arrReturnElements)
+}
+//]]>
+</script>
+</head>
+
+<body  class="mod-quiz course-191 dir-ltr lang-et_utf8" id="mod-quiz-review">
+
+<div id="page">
+
+    <!-- 29.10. 2009 Added 1024px as default with for silky-red theme -->
+    <!-- This table fixes the width of the main layout. Help dialogues and other small popups don't have a header, so won't be affected by this -->
+    <!-- Altering the width value of this table will alter the width to which the layout is fixed. Removing the following line altogether will return Moodle to a normal, full width, scalable layout. -->
+    <TABLE align="center" width="965"><tr><td>
+    <div id="header" class=" clearfix">       <h1 class="headermain">Funktsionaalprogrammeerimise meetod </h1>
+        <div class="headermenu"><div class="logininfo">Oled sisenenud kui <a  href="https://moodle.ut.ee/user/view.php?id=1349&amp;course=191">John Doe</a>  (<a  href="https://moodle.ut.ee/login/logout.php?sesskey=quFV5RrziJ">Välju</a>)</div></div>
+    </div>      <!-- 28.10.2009 removed <h1 class="headermain">TÜ Moodle</h1> from banner div -->
+    <div id="banner"></div>
+    <div class="navbar clearfix">
+        <div class="breadcrumb"><h2 class="accesshide " >Te olete siin</h2> <ul>
+<li class="first"><a  onclick="this.target='_top'" href="https://moodle.ut.ee/">TÜ Moodle</a></li><li> <span class="accesshide " >/&nbsp;</span><span class="arrow sep">&#x25B6;</span> <a  onclick="this.target='_top'" href="https://moodle.ut.ee/course/view.php?id=191">FPM</a></li><li> <span class="accesshide " >/&nbsp;</span><span class="arrow sep">&#x25B6;</span> <a  onclick="this.target='_top'" href="https://moodle.ut.ee/mod/quiz/index.php?id=191">Testid</a></li><li> <span class="accesshide " >/&nbsp;</span><span class="arrow sep">&#x25B6;</span> <a  onclick="this.target='_top'" href="https://moodle.ut.ee/mod/quiz/view.php?id=4088">Harjutustest 1</a></li><li> <span class="accesshide " >/&nbsp;</span><span class="arrow sep">&#x25B6;</span> Katse 1 ülevaade</li></ul></div>
+        <div class="navbutton">&nbsp;</div>
+    </div>
+    <!-- END OF HEADER -->
+    <div id="content"><div id="overDiv" style="position:absolute; visibility:hidden; z-index:1000;"></div><h2   class="main">Harjutustest 1</h2><h2   class="main">Katse 1 ülevaade</h2>
+<div class="controls">
+<div class="singlebutton"><form action="view.php" method="get"><div><input type="hidden" name="id" value="4088" /><input type="submit" value="Finish review"   /></div></form></div></div>
+<table class="generaltable generalbox quizreviewsummary"><tbody>
+<tr><th scope="row" class="cell">Alustatud</th><td class="cell">kolmapäev,  10 veebruar 2010, 12:27 </td></tr>
+<tr><th scope="row" class="cell">Lõpetatud</th><td class="cell">kolmapäev,  10 veebruar 2010, 12:39 </td></tr>
+<tr><th scope="row" class="cell">Aega kulus</th><td class="cell">12 minutit 8 sekundit</td></tr>
+<tr><th scope="row" class="cell">Hinne</th><td class="cell"><b>1</b> out of a maximum of 4 (<b>25</b>%)</td></tr>
+</tbody></table>
+<div id="q2876" class="que multichoice clearfix">
+  <div class="info">
+    <span class="no"><span class="accesshide">Question </span>1</span>
+          <div class="grade">
+        Punktid: 1      </div>
+      </div>
+  <div class="content">
+    <div class="qtext">
+  Millise käsuga saab GHCi keskkonnas (praktikumiklassi versioonis >= 6.8) korrata viimast sisselugemiskäsku?</div>
+
+
+<div class="ablock clearfix">
+  <div class="prompt">
+    Vali üks või enam vastust.  </div>
+
+  <table class="answer">
+          <tr class="r0">
+        <td class="c0 control">
+          <input disabled="disabled" id="resp3524_7260" name="resp3524_7260"   type="checkbox"  value="7260" />        </td>
+        <td class="c1 text ">
+          <label for="resp3524_7260">
+            <span class="anun">a<span class="anumsep">.</span></span> :repeat            <img src="https://moodle.ut.ee/theme/UT/pix/i/cross_red_small.gif" alt="Väär" class="icon" />          </label>
+        </td>
+        <td class="c0 feedback">
+                  </td>
+      </tr>
+          <tr class="r1">
+        <td class="c0 control">
+          <input disabled="disabled" id="resp3524_7257" name="resp3524_7257"   type="checkbox"  value="7257" />        </td>
+        <td class="c1 text ">
+          <label for="resp3524_7257">
+            <span class="anun">b<span class="anumsep">.</span></span> :l            <img src="https://moodle.ut.ee/theme/UT/pix/i/cross_red_small.gif" alt="Väär" class="icon" />          </label>
+        </td>
+        <td class="c0 feedback">
+                  </td>
+      </tr>
+          <tr class="r0">
+        <td class="c0 control">
+          <input disabled="disabled" id="resp3524_7259" name="resp3524_7259"   type="checkbox"  value="7259" />        </td>
+        <td class="c1 text ">
+          <label for="resp3524_7259">
+            <span class="anun">c<span class="anumsep">.</span></span> :L            <img src="https://moodle.ut.ee/theme/UT/pix/i/cross_red_small.gif" alt="Väär" class="icon" />          </label>
+        </td>
+        <td class="c0 feedback">
+                  </td>
+      </tr>
+          <tr class="r1">
+        <td class="c0 control">
+          <input disabled="disabled" id="resp3524_7256" name="resp3524_7256" checked="checked"  type="checkbox"  value="7256" />        </td>
+        <td class="c1 text correct">
+          <label for="resp3524_7256">
+            <span class="anun">d<span class="anumsep">.</span></span> :r            <img src="https://moodle.ut.ee/theme/UT/pix/i/tick_green_big.gif" alt="Õige" class="icon" />          </label>
+        </td>
+        <td class="c0 feedback">
+          :r või :reload kordab viimast sisselugemiskäsku        </td>
+      </tr>
+          <tr class="r0">
+        <td class="c0 control">
+          <input disabled="disabled" id="resp3524_7258" name="resp3524_7258"   type="checkbox"  value="7258" />        </td>
+        <td class="c1 text ">
+          <label for="resp3524_7258">
+            <span class="anun">e<span class="anumsep">.</span></span> :R            <img src="https://moodle.ut.ee/theme/UT/pix/i/cross_red_small.gif" alt="Väär" class="icon" />          </label>
+        </td>
+        <td class="c0 feedback">
+                  </td>
+      </tr>
+      </table>
+    </div>
+    <div class="grading">
+      <div class="correctness  correct">Õige</div><div class="gradingdetails">Selle esituse hinded 1/1.</div>    </div>  </div>
+</div>
+<div id="q3233" class="que multichoice clearfix">
+  <div class="info">
+    <span class="no"><span class="accesshide">Question </span>2</span>
+          <div class="grade">
+        Punktid: 1      </div>
+      </div>
+  <div class="content">
+    <div class="qtext">
+  Millised nimed andmemuutuja jaoks ei sobi?</div>
+
+
+<div class="ablock clearfix">
+  <div class="prompt">
+    Vali üks või enam vastust.  </div>
+
+  <table class="answer">
+          <tr class="r0">
+        <td class="c0 control">
+          <input disabled="disabled" id="resp3525_7929" name="resp3525_7929"   type="checkbox"  value="7929" />        </td>
+        <td class="c1 text ">
+          <label for="resp3525_7929">
+            <span class="anun">a<span class="anumsep">.</span></span> _S            <img src="https://moodle.ut.ee/theme/UT/pix/i/cross_red_small.gif" alt="Väär" class="icon" />          </label>
+        </td>
+        <td class="c0 feedback">
+                  </td>
+      </tr>
+          <tr class="r1">
+        <td class="c0 control">
+          <input disabled="disabled" id="resp3525_7927" name="resp3525_7927" checked="checked"  type="checkbox"  value="7927" />        </td>
+        <td class="c1 text ">
+          <label for="resp3525_7927">
+            <span class="anun">b<span class="anumsep">.</span></span> -            <img src="https://moodle.ut.ee/theme/UT/pix/i/cross_red_big.gif" alt="Väär" class="icon" />          </label>
+        </td>
+        <td class="c0 feedback">
+          koosneb sobivatest erisümbolitest        </td>
+      </tr>
+          <tr class="r0">
+        <td class="c0 control">
+          <input disabled="disabled" id="resp3525_7926" name="resp3525_7926"   type="checkbox"  value="7926" />        </td>
+        <td class="c1 text ">
+          <label for="resp3525_7926">
+            <span class="anun">c<span class="anumsep">.</span></span> s            <img src="https://moodle.ut.ee/theme/UT/pix/i/cross_red_small.gif" alt="Väär" class="icon" />          </label>
+        </td>
+        <td class="c0 feedback">
+                  </td>
+      </tr>
+          <tr class="r1">
+        <td class="c0 control">
+          <input disabled="disabled" id="resp3525_7928" name="resp3525_7928"   type="checkbox"  value="7928" />        </td>
+        <td class="c1 text correct">
+          <label for="resp3525_7928">
+            <span class="anun">d<span class="anumsep">.</span></span> s-            <img src="https://moodle.ut.ee/theme/UT/pix/i/tick_green_small.gif" alt="Õige" class="icon" />          </label>
+        </td>
+        <td class="c0 feedback">
+                  </td>
+      </tr>
+          <tr class="r0">
+        <td class="c0 control">
+          <input disabled="disabled" id="resp3525_7930" name="resp3525_7930"   type="checkbox"  value="7930" />        </td>
+        <td class="c1 text ">
+          <label for="resp3525_7930">
+            <span class="anun">e<span class="anumsep">.</span></span> s_            <img src="https://moodle.ut.ee/theme/UT/pix/i/cross_red_small.gif" alt="Väär" class="icon" />          </label>
+        </td>
+        <td class="c0 feedback">
+                  </td>
+      </tr>
+      </table>
+    </div>
+    <div class="grading">
+      <div class="correctness  incorrect">Väär</div><div class="gradingdetails">Selle esituse hinded 0/1.</div>    </div>  </div>
+</div>
+<div id="q3500" class="que numerical clearfix">
+  <div class="info">
+    <span class="no"><span class="accesshide">Question </span>3</span>
+          <div class="grade">
+        Punktid: 1      </div>
+      </div>
+  <div class="content">
+    <div class="qtext">
+  Maksimaalselt mitu paari sulge saab kirjutises<br />
+<br />
+(2 - 2) : (pi : ((2 ** (5 ** 2)) : []))<br />
+<br />
+ära jätta, ilma et avaldis muutuks?</div>
+
+
+<div class="ablock clearfix">
+  <div class="prompt">
+    Vastus:   </div>
+
+  <div class="answer">
+    <input type="text" class="incorrect" readonly="readonly"  name="resp3527_"   value="3"  size="80"/>
+    <img src="https://moodle.ut.ee/theme/UT/pix/i/cross_red_big.gif" alt="Väär" class="icon" />  </div>
+      <div class="feedback">
+      ära võib jätta kõik sulud    </div>
+    </div>
+    <div class="grading">
+      <div class="correctness  incorrect">Väär<div class="correctness">Õige vastus: 5</div></div><div class="gradingdetails">Selle esituse hinded 0/1.</div>    </div>  </div>
+</div>
+<div id="q3502" class="que multichoice clearfix">
+  <div class="info">
+    <span class="no"><span class="accesshide">Question </span>4</span>
+          <div class="grade">
+        Punktid: 1      </div>
+      </div>
+  <div class="content">
+    <div class="qtext">
+  Millist tüüpi ei saa olla avaldis (1.0 , 10)?</div>
+
+
+<div class="ablock clearfix">
+  <div class="prompt">
+    Vali üks või enam vastust.  </div>
+
+  <table class="answer">
+          <tr class="r0">
+        <td class="c0 control">
+          <input disabled="disabled" id="resp3528_8989" name="resp3528_8989"   type="checkbox"  value="8989" />        </td>
+        <td class="c1 text correct">
+          <label for="resp3528_8989">
+            <span class="anun">a<span class="anumsep">.</span></span> (Integral a) => (a , a)            <img src="https://moodle.ut.ee/theme/UT/pix/i/tick_green_small.gif" alt="Õige" class="icon" />          </label>
+        </td>
+        <td class="c0 feedback">
+                  </td>
+      </tr>
+          <tr class="r1">
+        <td class="c0 control">
+          <input disabled="disabled" id="resp3528_8991" name="resp3528_8991"   type="checkbox"  value="8991" />        </td>
+        <td class="c1 text ">
+          <label for="resp3528_8991">
+            <span class="anun">b<span class="anumsep">.</span></span> (Floating a, Integral b) => (a , b)            <img src="https://moodle.ut.ee/theme/UT/pix/i/cross_red_small.gif" alt="Väär" class="icon" />          </label>
+        </td>
+        <td class="c0 feedback">
+                  </td>
+      </tr>
+          <tr class="r0">
+        <td class="c0 control">
+          <input disabled="disabled" id="resp3528_8992" name="resp3528_8992" checked="checked"  type="checkbox"  value="8992" />        </td>
+        <td class="c1 text ">
+          <label for="resp3528_8992">
+            <span class="anun">c<span class="anumsep">.</span></span> (Double , Double)            <img src="https://moodle.ut.ee/theme/UT/pix/i/cross_red_big.gif" alt="Väär" class="icon" />          </label>
+        </td>
+        <td class="c0 feedback">
+          kumbki komponent saab olla suure täpsusega ujukomaarv        </td>
+      </tr>
+          <tr class="r1">
+        <td class="c0 control">
+          <input disabled="disabled" id="resp3528_8990" name="resp3528_8990" checked="checked"  type="checkbox"  value="8990" />        </td>
+        <td class="c1 text ">
+          <label for="resp3528_8990">
+            <span class="anun">d<span class="anumsep">.</span></span> (Floating a) => (a , a)            <img src="https://moodle.ut.ee/theme/UT/pix/i/cross_red_big.gif" alt="Väär" class="icon" />          </label>
+        </td>
+        <td class="c0 feedback">
+          komponendid saavad olla sama tüüpi ujukomaarvud        </td>
+      </tr>
+          <tr class="r0">
+        <td class="c0 control">
+          <input disabled="disabled" id="resp3528_8993" name="resp3528_8993" checked="checked"  type="checkbox"  value="8993" />        </td>
+        <td class="c1 text ">
+          <label for="resp3528_8993">
+            <span class="anun">e<span class="anumsep">.</span></span> (Double , Int)            <img src="https://moodle.ut.ee/theme/UT/pix/i/cross_red_big.gif" alt="Väär" class="icon" />          </label>
+        </td>
+        <td class="c0 feedback">
+          esimene komponent saab olla suure täpsusega ujukomaarv ja teine lühike täisarv        </td>
+      </tr>
+      </table>
+    </div>
+    <div class="grading">
+      <div class="correctness  incorrect">Väär</div><div class="gradingdetails">Selle esituse hinded 0/1.</div>    </div>  </div>
+</div>
+
+<div class="controls">
+<div class="singlebutton"><form action="view.php" method="get"><div><input type="hidden" name="id" value="4088" /><input type="submit" value="Finish review"   /></div></form></div></div>
+</div><div id="footer"></div></div>
+</body>
+</html>

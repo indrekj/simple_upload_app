@@ -13,6 +13,7 @@ schema/*_structure.sql
 schema/*.sqlite3
 schema/*.sqlite
 schema/*.db
+db/schema.rb
 *.sqlite
 *.sqlite3
 *.db

@@ -1,8 +1,16 @@
 class Asset < ActiveRecord::Base
+  module Sources
+    WEBCT = 'webct'
+    MOODLE = 'moodle'
+    UNKNOWN = 'unknown'
+  end
+
   validates_presence_of :title, :message => 'Tiitel peab olema lisatud'
   validates_presence_of :category, :message => 'Tüüp peab olema lisatud'
   validates_numericality_of :year, :greater_than => 2008, :less_than => 2020, :message => 'Aasta paeb olema neljakohaline ning reaalne'
 
+  before_validation_on_create :determine_source!
+  before_create :remove_delicate_info!
   before_save :check_year
   before_save Proc.new {|a| a.file.delete if a.file}
 
@@ -28,6 +36,30 @@ class Asset < ActiveRecord::Base
 
   def to_json(options = {:except => 'body'})
     super(options)
+  end
+
+  def determine_source!
+    self.source = 
+      case body
+      when /moodle/i then Sources::MOODLE
+      when /webct/i then Sources::WEBCT
+      else
+        Sources::UNKNOWN
+      end
+  end
+
+  def remove_delicate_info!
+    case self.source
+    when Sources::MOODLE
+      # No need for header (including user real name)
+      body.gsub!(/<div id="header" .*?(<div id="content")/m, '\1')
+
+      # No need for submit forms
+      body.gsub!(/<form.*?<\/form>/m, "")
+
+      # Hacking attempts? No need for these either.
+      body.gsub!(/sesskey=.{10}/, "")
+    end
   end
 
   protected

@@ -1,7 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<!DOCTYPE html>
+<html>
   <head>
-    <title>WebCT failide koguja</title>
+    <title>WebCT / Moodle failide koguja</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <%- if RAILS_ENV != 'development' -%>
       <script type="text/javascript" charset="utf-8" src="http://drop.io/it_inf/remote_chat_bar.js?chat_password="></script>
@@ -14,7 +14,7 @@
     <h1><%= yield :title %></h1>
 
     <ul id="menu">
-      <li><%= menu_link 'WebCT failid', '/' %></li>
+      <li><%= menu_link 'WebCT / Moodle failid', '/' %></li>
       <li><%= menu_link 'Kasulikud lingid', '/links' %></li>
       <li><%= menu_link 'Tunniplaani konverteerija', '/calendars' %></li>
     </ul>
