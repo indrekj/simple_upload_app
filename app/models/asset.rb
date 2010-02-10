@@ -62,7 +62,7 @@ class Asset < ActiveRecord::Base
     end
 
     # AR doesn't like to touch when using gsub!. << :)
-    self.touch(:body)
+    self.body_will_change!
   end
 
   protected
