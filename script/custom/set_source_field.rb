@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-RAILS_ENV = ENV['RAILS_ENV'] ||= 'development'
+RAILS_ENV = ENV['RAILS_ENV'] ||= "development"
 require File.dirname(__FILE__) + "/../../config/environment"
 
 puts "Started!"
