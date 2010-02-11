@@ -1,18 +1,18 @@
 /*************
  * OBSERVERS *
  *************/
-Event.observe(window, 'load', function() {
-  Assets.loadAssets();
-
-  var page = History.get('page');
-  if(page) {
-    Assets.showByCategory(unescape(page));
-  }
+Event.observe(window, "load", function() {
+  $$(".category").each(function(cat) {
+    cat.observe("click", function(e) {
+      changeCategory(cat); 
+      Event.stop(e);
+    }.bind(this));
+  });
 });
 
-function changeCategory(page) {
-  History.set('page', escape(page));
-  Assets.showByCategory(page);
+function changeCategory(category) {
+  $("assets").hide();
+  $("assets_spinner").show();
   return false;
 }
 

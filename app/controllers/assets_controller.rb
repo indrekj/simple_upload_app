@@ -3,9 +3,18 @@ class AssetsController < ApplicationController
 
   # GET /assets
   def index
-    @asset ||= Asset.new
-    @assets = Asset.find(:all, :select => 'id, title, category, author, year', :order => 'LOWER(category) ASC, year DESC, LOWER(title) ASC')
-    @categories = @assets.map(&:category).map(&:downcase)
+    respond_to do |format|
+      format.html do
+        @asset ||= Asset.new
+        @categories = Category.all
+      end
+
+      format.json do
+        @category = Category.find(params[:category_id], :include => :assets)
+        @assets = @category.assets(:select => "id, title, author, year", :order => "year DESC, LOWER(title) ASC")
+        render :json => {:category => @category.name, :assets => @assets.to_json}.to_json
+      end
+    end
   end
 
   # GET /assets/:id

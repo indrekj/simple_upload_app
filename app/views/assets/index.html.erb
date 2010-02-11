@@ -29,7 +29,7 @@
 
 <br style="clear: both;"/>
 
-<table id="assets">
+<table id="assets" style="display: none;">
   <thead class="odd">
     <tr>
       <td>Tiitel</td>
@@ -40,10 +40,11 @@
     </tr>
   </thead>
   
-  <% @assets.each do |asset| -%>
-    <%= render asset %>
-  <% end -%>
+  <%#- @assets.each do |asset| -%>
+    <%#= render asset %>
+  <%#- end -%>
 </table>
+<div id="assets_spinner" style="display: none;"><%= image_tag "spinner.gif" %></div>
 
 <%# In place text editors for title and category columns %>
 <%# TODO: kasuta unobtrusive js-i %>

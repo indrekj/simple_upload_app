@@ -5,13 +5,18 @@ class Asset < ActiveRecord::Base
     UNKNOWN = 'unknown'
   end
 
+  belongs_to :category, :counter_cache => true
+
+  attr_accessor :category_name
+
   validates_presence_of :title, :message => 'Tiitel peab olema lisatud'
-  validates_presence_of :category, :message => 'Tüüp peab olema lisatud'
+  validates_presence_of :category_name, :message => 'Tüüp peab olema lisatud'
   validates_numericality_of :year, :greater_than => 2007, :less_than => 2020, :message => 'Aasta paeb olema neljakohaline ning reaalne'
 
   before_validation_on_create :determine_source!
   before_create :remove_delicate_info!
   before_save :check_year
+  before_save :assign_category
   before_save Proc.new {|a| a.file.delete if a.file}
 
   default_value_for :year, Time.now.year
@@ -66,6 +71,10 @@ class Asset < ActiveRecord::Base
   end
 
   protected
+
+  def assign_category
+    self.category = Category.find_or_create_by_name(self[:category_name])
+  end
 
   def check_year
     unless self[:year] < 2030 && self[:year] > 2000

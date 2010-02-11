@@ -11,8 +11,7 @@ module AssetsHelper
   def category_cloud(categories, classes)
     cat_hash = {}
     categories.each do |cat|
-      cat_hash[cat] ||= 0
-      cat_hash[cat] += 1
+      cat_hash[cat] = cat.assets_count
     end
 
     max, min = 0, 0

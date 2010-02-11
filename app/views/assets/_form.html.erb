@@ -11,8 +11,13 @@
     </tr>
 
     <tr>
-      <td><%= f.label :category, 'Tüüp (arvutiriistvara vms)' %></td>
-      <td><%= f.text_field :category, :size => nil %></td>
+      <td><%= f.label :category_name, 'Tüüp (arvutiriistvara vms)' %></td>
+      <td><%= f.text_field :category_name %></td>
+
+      <div class="autocomplete" id="category_list" style="display: none;"></div>
+      <script type="text/javascript">
+        new Autocompleter.Local("asset_category_name", "category_list", <%= Category.all.map(&:name).to_json %>);
+      </script>
     </tr>
 
     <tr>
