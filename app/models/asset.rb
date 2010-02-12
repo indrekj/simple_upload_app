@@ -10,13 +10,13 @@ class Asset < ActiveRecord::Base
   attr_accessor :category_name
 
   validates_presence_of :title, :message => 'Tiitel peab olema lisatud'
-  validates_presence_of :category_name, :message => 'Tüüp peab olema lisatud', :unless => :category
+  validates_presence_of :category_name, :message => 'Tüüp peab olema lisatud', :if => Proc.new {|a| a[:category].blank?}
   validates_numericality_of :year, :greater_than => 2007, :less_than => 2020, :message => 'Aasta paeb olema neljakohaline ning reaalne'
 
   before_validation_on_create :determine_source!
   before_create :remove_delicate_info!
   before_save :check_year
-  before_save :assign_category
+  before_validation :assign_category, :if => Proc.new {|a| !a.category_name.blank?}
   before_save Proc.new {|a| a.file.delete if a.file}
 
   default_value_for :year, Time.now.year
@@ -69,7 +69,10 @@ class Asset < ActiveRecord::Base
   protected
 
   def assign_category
-    self[:category_id] = Category.find_or_create_by_name(self.category_name).id
+    cat = Category.first(:conditions => ["LOWER(name) = ?", self.category_name.downcase])
+    cat ||= Category.create(:name => self.category_name)
+
+    self[:category_id] = cat.id
   end
 
   def check_year

@@ -1,7 +1,7 @@
 module FixtureReplacement
   attributes_for :asset do |a|
     a.title = random_string(15)
-    a.category_name = create_category
+    a.category = create_category
   end
 
   attributes_for :category do |c|

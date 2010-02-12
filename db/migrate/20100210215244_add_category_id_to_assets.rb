@@ -6,7 +6,10 @@ class AddCategoryIdToAssets < ActiveRecord::Migration
     categories = assets.map {|a| a[:category]}.uniq
 
     categories.each do |cat|
-      c = Category.create(:name => cat)
+      # No need for duplicate categories
+      c = Category.first(:conditions => ["LOWER(name) = ?", cat.downcase])
+      c ||= Category.create(:name => cat)
+
       Asset.update_all("category_id = #{c.id}", ["category = ?", cat])
     end
 
