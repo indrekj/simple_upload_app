@@ -3,7 +3,7 @@ class AddCategoryIdToAssets < ActiveRecord::Migration
     add_column :assets, :category_id, :integer
 
     assets = Asset.find(:all, :select => "category")
-    categories = assets.map(&:category).uniq
+    categories = assets.map {|a| a[:category]}.uniq
 
     categories.each do |cat|
       c = Category.create(:name => cat)
