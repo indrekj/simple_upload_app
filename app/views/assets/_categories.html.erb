@@ -3,8 +3,7 @@
     <span><a onclick="displayCategoriesCloud();" href="#">(näita / peida)</a></span>
   </h2>
 
-  <ul id="categories_cloud" style="display: none;">
-    <li><%= link_to 'KÕIK', '#', :onclick => 'Assets.showAll();', :class => 'c5'%></li>
+  <ul id="categories_cloud">
     <%- category_cloud(@categories, %w(c1 c2 c3 c4 c5)) do |cat, css_class| -%>
       <li><%= link_to title(cat.name), assets_path(:category_id => cat.id), :class => "category #{css_class}" %></li>
     <%- end -%>

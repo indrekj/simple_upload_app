@@ -21,7 +21,7 @@ describe AssetsController do
 
   it "should upload a file" do
     lambda {
-      post :create, :asset => {:file => uploaded_html(@html_file_path), :title => 'title', :category => 'category'}
+      post :create, :asset => {:file => uploaded_html(@html_file_path), :title => 'title', :category_name => 'category'}
     }.should change(Asset, :count).by(1)
     response.should be_redirect
     flash[:notice].should_not be_blank

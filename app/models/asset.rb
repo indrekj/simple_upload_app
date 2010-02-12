@@ -10,7 +10,7 @@ class Asset < ActiveRecord::Base
   attr_accessor :category_name
 
   validates_presence_of :title, :message => 'Tiitel peab olema lisatud'
-  validates_presence_of :category_name, :message => 'Tüüp peab olema lisatud'
+  validates_presence_of :category_name, :message => 'Tüüp peab olema lisatud', :unless => :category
   validates_numericality_of :year, :greater_than => 2007, :less_than => 2020, :message => 'Aasta paeb olema neljakohaline ning reaalne'
 
   before_validation_on_create :determine_source!
@@ -37,10 +37,6 @@ class Asset < ActiveRecord::Base
     @file = f
     write_attribute(:body, f.read)
     write_attribute(:content_type, f.content_type)
-  end
-
-  def to_json(options = {:except => 'body'})
-    super(options)
   end
 
   def determine_source!
@@ -73,7 +69,7 @@ class Asset < ActiveRecord::Base
   protected
 
   def assign_category
-    self.category = Category.find_or_create_by_name(self[:category_name])
+    self[:category_id] = Category.find_or_create_by_name(self.category_name).id
   end
 
   def check_year

@@ -1,6 +1,5 @@
 module AssetsHelper
-  def title(t)
-    title = t.dup # can't modify frozen string
+  def title(title)
     title = title.split(' ').each do |w|
       w.upcase! if w =~ /\A[ivx]+\z/i
       w[0..0] = w[0..0].upcase
@@ -22,7 +21,7 @@ module AssetsHelper
 
     divisor = ((max - min) / classes.size) + 1
 
-    cat_hash.sort.each do |category, size|
+    cat_hash.each do |category, size|
       yield category, classes[(size - min) / divisor]
     end
   end

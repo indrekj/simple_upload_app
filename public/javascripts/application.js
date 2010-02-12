@@ -2,6 +2,11 @@
  * OBSERVERS *
  *************/
 Event.observe(window, "load", function() {
+  if ($("assets")) {
+    Assets.assets_table = $("assets");
+    Assets.assets_section = $("assets").childElements()[1];
+  }
+
   $$(".category").each(function(cat) {
     cat.observe("click", function(e) {
       changeCategory(cat); 
@@ -11,9 +16,33 @@ Event.observe(window, "load", function() {
 });
 
 function changeCategory(category) {
-  $("assets").hide();
+  Assets.assets_table.hide();
   $("assets_spinner").show();
-  return false;
+
+  Assets.clear();
+
+  new Ajax.Request(category.href + "&format=json", {
+    method: "get",
+    onComplete: function(transport) {
+      var json = transport.responseJSON; // category (String), assets (array)
+      json.assets.each(function(asset) {
+        asset = asset.asset;
+
+        Assets.loadAsset({
+          id: asset.id, 
+          title: asset.title,
+          category: json.category, 
+          year: asset.year, 
+          author: asset.author,
+          url: unescape(asset.url)
+        });
+      }.bind(this));
+
+      $("assets_spinner").hide();
+      Assets.assets_table.show();
+      Assets.show();
+    }.bind(this)
+  });
 }
 
 /**********
@@ -186,110 +215,94 @@ var Assets = Class.create({
 });
 Object.extend(Assets, {
   assets: new Array(),
-  assetsToShow: new Array(),
+  assets_table: null,
+  assets_section: null,
 
-  loadAssets: function() {
-    $$('.asset').each(function(asset) {
-      Assets.loadAsset(asset)
-    });
+  clear: function() {
+    this.assets_section.innerHTML = "";
+    this.assets = new Array();
   },
 
-  loadAsset: function(asset) {
-    var cat = asset.getElementsByClassName('category')[0].innerHTML;
-    var a = new Asset({id: asset.id, category: cat});
-    Assets.add(a);
+  show: function() {
+    var i = 0;
+    this.assets.each(function(asset) {
+      var parity = i % 2 == 0 ? "even" : "odd";
+      var el = "<tr class=" + parity + "><td>" + asset["title"] + "</td>";
+      el += "<td>" + asset["category"] + "</td>";
+      el += "<td>" + asset["year"] + "</td>";
+      el += "<td>" + asset["author"] + "</td>";
+      el += "<td><a href=" + asset["url"] + ">Vaata</a></td></tr>";
+
+      this.assets_section.insert({bottom: el});
+      i++;
+    }.bind(this));
   },
 
   find: function(id) {
-    assets.each(function(asset) {
-      if(asset.id == 'asset_' + id || asset.id == id) {
+    this.assets.each(function(asset) {
+      if (asset.id == id) {
         return asset;
       }
     });
   },
 
-  add: function(asset) {
-    Assets.assets.push(asset);
+  loadAsset: function(options) {
+    this.add(new Asset(options));
   },
 
-  // NOTE: Usual id, not dom_id.
+  add: function(asset) {
+    this.assets.push(asset);
+  },
+
+  remove: function(asset) {
+    var index = this.assets.indexOf(asset);
+    this.assets.splice(index, index);
+    asset.fade();
+  },
+
   destroy: function(id) {
-    new Ajax.Request('/assets/' + id + '.json', {
-      method: 'delete',
+    new Ajax.Request("/assets/" + id + ".json", {
+      method: "delete",
       onComplete: function(transport) {
         var response = transport.responseJSON;
-        if(response['success'] == true) {
+        if(response["success"] == true) {
           var asset = Assets.find(id);
-          asset.fade();
-          
-          // remove asset from list
-          var index = Assets.assets.indexOf(asset);
-          Assets.assets.splice(index, index);
-          index = Assets.assetsToShow.indexOf(asset);
-          Assets.assetsToShow.splice(index, index);
+          this.remove(asset)
         } else {
-          alert('Kustutamine ebaõnnestus');
+          alert("Kustutamine ebaõnnestus");
         }
-      }
-    });
-  },
-
-  showAll: function() {
-    Assets.assetsToShow = Assets.assets;
-    Assets.show();
-  },
-
-  showByCategory: function(category) {
-    Assets.assetsToShow = new Array();
-    Assets.assets.each(function(asset) {
-      if(asset.category.toLowerCase() == category.toLowerCase()) {
-        Assets.assetsToShow.push(asset);
-      }
-    });
-    Assets.show();
-  },
-
-  show: function() {
-    var odd = 0;
-    Assets.assets.each(function(asset) {
-      if(Assets.assetsToShow.indexOf(asset) != -1) {
-        asset.setOdd(odd % 2);
-        asset.show();
-        odd++;
-      } else {
-        asset.hide();
-      }
+      }.bind(this)
     });
   }
 });
 
 var Asset = Class.create({
-  id: null,
-  category: null,
-  element: null,
-
-  initialize: function(hash) {
-    this.id       = hash['id'];
-    this.category = hash['category'];
-    this.element  = $(this.id);
-  },
-
-  setOdd: function(bool) {
-    this.element.removeClassName('odd');
-    this.element.removeClassName('even');
-    var parity = bool ? 'odd' : 'even';
-    this.element.addClassName(parity);
-  },
-
-  show: function() {
-    this.element.show();
-  },
-
-  hide: function() {
-    this.element.hide();
+  initialize: function(opts) {
+    this.id       = opts["id"];
+    this.title    = titlelize(opts["title"]);
+    this.category = titlelize(opts["category"]);
+    this.year     = opts["year"];
+    this.author   = opts["author"];
+    this.url      = opts["url"];
   }
 });
 
+function titlelize(str) {
+  var title = str.split(" ");
+  var output = new Array();
+
+  $(title).each(function(w) {
+    w = w[0, 0].toUpperCase() + w.substring(1);
+
+    if (w.match(/^[ivx]*$/i)) {
+      w = w.toUpperCase();
+    }
+
+    output.push(w);
+  }.bind(this));
+
+  return output.join(" ");
+}
 
 // Prototype extensions
 String.prototype.toDate = function() {

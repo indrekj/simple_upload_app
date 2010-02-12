@@ -60,7 +60,7 @@ form.new_asset, form.new_link {
   margin-right: auto;
 }
 
-#assets, #links, #calendars {
+#assets, #links, #calendars, #assets_spinner {
   width: 60%;
   margin-left: auto;
   margin-right: auto;

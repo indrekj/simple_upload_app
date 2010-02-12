@@ -49,7 +49,6 @@ describe Asset do
 
       it "should remove name" do
         @asset.body.should_not include("John Doe")
-        puts @asset.body
       end
 
       it "should remove session keys" do
