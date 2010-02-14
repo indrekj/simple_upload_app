@@ -12,8 +12,34 @@ Event.observe(window, "load", function() {
       changeCategory(cat); 
       Event.stop(e);
     }.bind(this));
-  });
+  }.bind(this));
+
+  // Google analytics
+  loadScript("http://www.google-analytics.com/ga.js", function() {
+    var pageTracker = _gat._getTracker("UA-3366869-2");
+    pageTracker._trackPageview();
+  }.bind(this));
+
+  // DropIO Chat
+  loadScript("http://drop.io/it_inf/remote_chat_bar.js?chat_password=", function() {});
 });
+
+function loadScript(src, callback) {
+  var head = document.getElementsByTagName('head')[0];
+  var script = document.createElement('script');
+  var loaded = false;
+  script.setAttribute('src', src);
+  script.onload = script.onreadystatechange = function() {
+    if (!loaded && (!this.readyState || this.readyState == 'complete'
+                                     || this.readyState == 'loaded') ) {
+      loaded = true;
+      callback();
+      script.onload = script.onreadystatechange = null;
+      head.removeChild(script);
+    }
+  }
+  head.appendChild(script);
+}
 
 function changeCategory(category) {
   Assets.assets_table.hide();
