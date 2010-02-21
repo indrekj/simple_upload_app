@@ -9,8 +9,8 @@ Event.observe(window, "load", function() {
 
   $$(".category").each(function(cat) {
     cat.observe("click", function(e) {
-      changeCategory(cat); 
       Event.stop(e);
+      changeCategory(cat); 
     }.bind(this));
   }.bind(this));
 
