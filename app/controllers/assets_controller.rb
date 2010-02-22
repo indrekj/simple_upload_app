@@ -12,7 +12,7 @@ class AssetsController < ApplicationController
       format.json do
         @category = Category.find(params[:category_id])
         @assets = @category.assets.find(:all, :select => "id, title, author, year", 
-                                        :order => "year DESC, LOWER(title) ASC")
+                                        :order => "LOWER(title) ASC, year DESC")
         @assets.each {|a| a[:url] = asset_path(a)}
         render :json => {:category => @category.name, :assets => @assets}.to_json
       end
