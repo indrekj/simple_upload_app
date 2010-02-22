@@ -34,6 +34,7 @@ class AssetsController < ApplicationController
     @asset = Asset.new(params[:asset])
     @asset.year = Time.now.strftime("%Y").to_i if params[:asset][:year].blank?
     @asset.creator_ip = request.remote_ip
+    cookies[:author] = @asset.author
 
     if @asset.save
       flash[:notice] = "Fail edukalt lisatud"

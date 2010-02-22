@@ -27,7 +27,7 @@
 
     <tr>
       <td><%= f.label :author, 'Autor, kes tahab respecti' %></td>
-      <td><%= f.text_field :author, :size => nil %></td>
+      <td><%= f.text_field :author, :size => nil, :value => cookies[:author] || f.object.author %></td>
     </tr>
 
     <tr><td colspan="2"><%= submit_tag "Lisa", :id => 'upload_asset_button' %></td></tr>
