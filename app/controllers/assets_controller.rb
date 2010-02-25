@@ -36,26 +36,29 @@ class AssetsController < ApplicationController
     @asset.creator_ip = request.remote_ip
     cookies[:author] = @asset.author
 
-    # Tagasta asseti andmed, et kasutaja saaks need üle kontrollida ja siis viimase confirmi teha
-    render :json => {:ha => "ba"}.to_json
-#    if @asset.save
-#      flash[:notice] = "Fail edukalt lisatud"
-#      redirect_to home_path
-#    else
-#      flash[:error] = "Shit happened"
-#      index
-#      render :action => 'index'
-#    end
+    respond_to do |format|
+      format.html { render :text => "No JS support?" }
+  
+      format.js do
+        if @asset.save
+          render :json => {:success => true, :id => @asset.id, :title => @asset.title, 
+                           :category_name => @asset.category_name}.to_json
+        else
+          render :json => {:success => false}.to_json
+        end
+      end
+    end
   end
 
   # PUT /assets/:id
   def update
     @asset = Asset.find_by_id(params[:id])
+    success = @asset.update_attributes(params[:asset])
 
-    if @asset.update_attributes(params[:asset])
-      render :json => @asset
-    else
-      render :json => @asset, :status => 409
+    respond_to do |format|
+      format.html { render :text => "No JS support?" }
+      format.js   { render :json => {:success => success} }
+      format.json { render :json => @asset.to_json, :status => (success ? 200 : 409 ) }
     end
   end
 

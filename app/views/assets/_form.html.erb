@@ -1,47 +1,42 @@
-<div id="progress" style="display: none;">
-  <div id="progress_bar">
-    Palun oota!<br/>
-    <%= image_tag "spinner.gif" %> <span id="progress_percentage">0%</span>
+<div id="upload_step_one">
+  <div id="progress" style="display: none;">
+    <div id="progress_bar">
+      Palun oota!<br/>
+      <%= image_tag "spinner.gif" %> <span id="progress_percentage">0%</span>
+    </div>
   </div>
+
+  <div id="new_asset_button">&nbsp;</div>
 </div>
 
-<div id="new_asset_button">Lisa fail...</div>
+<div style="display: none" id="upload_step_two">
+  <p>Palun kontrolli ja täienda andmeid</p>
 
-<div style="display: none">
-  siia sisse step 2 mille siis peale onCompletet võtab ette.
-<% form_for @asset, :html => {:multipart => true} do |f| %>
-  <table>
-    <tr>
-      <td><%= f.label :file, 'Fail (html)' %></td>
-      <td><%= f.file_field :file, :size => nil %><p id="asset_file_selected" style="display: none;"></p></td>
-    </tr>
-    
-    <tr>
-      <td><%= f.label :title, 'Tiitel' %></td>
-      <td><%= f.text_field :title, :size => nil %></td>
-    </tr>
+  <% form_tag "#" do %>
+    <%= hidden_field_tag :asset_id, "" %>
 
-    <tr>
-      <td><%= f.label :category_name, 'Tüüp (arvutiriistvara vms)' %></td>
-      <td><%= f.text_field :category_name, :size => nil %></td>
+    <table>
+      <tr>
+        <td><%= label_tag :asset_title, "Tiitel" %></td>
+        <td><%= text_field_tag :asset_title %></td>
+      </tr>
 
-      <div class="autocomplete" id="category_list" style="display: none;"></div>
-      <script type="text/javascript">
-        new Autocompleter.Local("asset_category_name", "category_list", <%= Category.all.map(&:name).to_json %>);
-      </script>
-    </tr>
+      <tr>
+        <td><%= label_tag :asset_category_name, "Tüüp (arvutiriistvara vms)" %></td>
+        <td><%= text_field_tag :asset_category_name %></td>
 
-    <tr>
-      <td><%= f.label :year, 'Töö aasta' %></td>
-      <td><%= f.text_field :year, :size => 4 %></td>
-    </tr>
+        <div class="autocomplete" id="category_list" style="display: none;"></div>
+        <script type="text/javascript">
+          new Autocompleter.Local("asset_category_name", "category_list", <%= Category.all.map(&:name).to_json %>);
+        </script>
+      </tr>
 
-    <tr>
-      <td><%= f.label :author, 'Autor, kes tahab respecti' %></td>
-      <td><%= f.text_field :author, :size => nil, :value => cookies[:author] || f.object.author %></td>
-    </tr>
+      <tr>
+        <td><%= label_tag :asset_author, "Autor, kes tahab respecti" %></td>
+        <td><%= text_field_tag :asset_author, (cookies[:author] || "itimees") %></td>
+      </tr>
 
-    <tr><td colspan="2"><%= submit_tag "Lisa", :id => 'upload_asset_button' %></td></tr>
-  </table>
-<% end %>
+      <tr><td colspan="2"><div id="new_asset_done_button">&nbsp;</div></td></tr>
+    </table>
+  <% end %>
 </div>

@@ -87,6 +87,11 @@ class Asset < ActiveRecord::Base
     self.body_will_change!
   end
 
+  def to_json(options = {})
+    options[:only] = [:id, :title, :category_name, :author]
+    super(options)
+  end
+
   protected
 
   def assign_category

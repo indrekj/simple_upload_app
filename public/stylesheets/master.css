@@ -223,3 +223,34 @@ div.autocomplete ul li {
   list-style-type: none;
   cursor: pointer;
 }
+
+#upload_step_two {
+  padding: 10px;
+}
+#new_asset_button {
+  background: url(/images/new_asset.png) no-repeat;
+  width: 281px;
+  height: 88px;
+  margin: 50px auto 0 auto;
+  cursor: pointer;
+}
+/* Not working. Can't use #new_asset_button:hover because ajaxUpload puts its own layer over that.
+/*.new_asset_hover {
+  background: url(/images/new_asset_hover.png) no-repeat;
+}*/
+#new_asset_done_button {
+  background: url(/images/new_asset_done.png) no-repeat;
+  width: 129px;
+  height: 29px;
+  margin: 3px auto 0 auto;
+  cursor: pointer;
+}
+#new_asset_done_button:hover {
+  background: url(/images/new_asset_done_hover.png) no-repeat;
+}
+#upload_step_two td {
+  padding: 5px;
+}
+#upload_step_two input {
+  width: 330px;
+}

@@ -25,7 +25,7 @@ Event.observe(window, "load", function() {
   }.bind(this));
 
   // DropIO Chat
-  loadScript("http://drop.io/it_inf/remote_chat_bar.js?chat_password=", function() {});
+  //loadScript("http://drop.io/it_inf/remote_chat_bar.js?chat_password=", function() {});
 });
 
 function loadScript(src, callback) {
@@ -47,9 +47,12 @@ function loadScript(src, callback) {
 
 var interval = null;
 function initializeAjaxUploader() {
+  $("upload_step_one").show();
+  $("upload_step_two").hide();
+
   var uuid = randomUUID();
   new AjaxUpload("new_asset_button", {
-    action: "/assets?X-Progress-ID=" + uuid,
+    action: "/assets?format=js&X-Progress-ID=" + uuid + "&callback=uploadStepTwo",
     autoSubmit: true,
     name: "asset[file]",
     responseType: "json",
@@ -59,11 +62,19 @@ function initializeAjaxUploader() {
         fetch(uuid);
       }, 1000);
     },
-    onComplete: function(file, response) {
-      alert("Yey");
-      // näita järgmist sammu
-    }
   });
+}
+
+function uploadStepTwo(response) {
+  if (response.success) {
+    $("asset_id").value = response.id;
+    $("asset_title").value = response.title;
+    $("asset_category_name").value = response.category_name;
+    $("upload_step_one").hide();
+    Effect.SlideDown("upload_step_two", {duration: 1.5});
+  } else {
+    $("upload_step_one").innerHTML = "Miskit failis!";
+  }
 }
 
 function fetch(uuid) {
