@@ -6,22 +6,26 @@ class Asset < ActiveRecord::Base
     MOODLE = "moodle"
     UNKNOWN = "unknown"
   end
+  
+  attr_accessor :category_name
+
+  before_validation_on_create :determine_source!
+  before_validation_on_create :determine_type_and_title!
+
+  # can't use before_validation because it happens before the before_validation_on_create
+  before_validation_on_create :assign_category, :if => Proc.new {|a| !a.category_name.blank?}
+  before_validation_on_update :assign_category, :if => Proc.new {|a| !a.category_name.blank?}
+
+  before_create :remove_delicate_info!
+  before_save :check_year
+  before_save Proc.new {|a| a.file.delete if a.file}
+  before_update Proc.new {|a| a.confirmed = true}
 
   belongs_to :category, :counter_cache => true
-
-  attr_accessor :category_name
 
   validates_presence_of :title, :on => :update
   validates_presence_of :category_name, :if => Proc.new {|a| a[:category].blank?}, :on => :update
   validates_numericality_of :year, :greater_than => 2007, :less_than => 2020, :on => :update
-
-  before_validation_on_create :determine_source!
-  before_validation_on_create :determine_type_and_title!
-  before_create :remove_delicate_info!
-  before_save :check_year
-  before_validation :assign_category, :if => Proc.new {|a| !a.category_name.blank?}
-  before_save Proc.new {|a| a.file.delete if a.file}
-  before_update Proc.new {|a| a.confirmed = true}
 
   default_value_for :year, Time.now.year
 
@@ -88,7 +92,7 @@ class Asset < ActiveRecord::Base
   end
 
   def to_json(options = {})
-    options[:only] = [:id, :title, :category_name, :author]
+    options[:only] = [:id, :title, :category_name, :author, :year]
     super(options)
   end
 
