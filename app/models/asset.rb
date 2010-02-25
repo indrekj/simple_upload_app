@@ -21,8 +21,12 @@ class Asset < ActiveRecord::Base
   before_save :check_year
   before_validation :assign_category, :if => Proc.new {|a| !a.category_name.blank?}
   before_save Proc.new {|a| a.file.delete if a.file}
+  before_update Proc.new {|a| a.confirmed = true}
 
   default_value_for :year, Time.now.year
+
+  named_scope :confirmed, :conditions => {:confirmed => true}
+  named_scope :unconfirmed, :conditions => {:confirmed => false}
 
   def title=(t)
     self[:title] = t.to_s.strip
