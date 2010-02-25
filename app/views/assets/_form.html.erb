@@ -1,3 +1,14 @@
+<div id="progress" style="display: none;">
+  <div id="progress_bar">
+    Palun oota!<br/>
+    <%= image_tag "spinner.gif" %> <span id="progress_percentage">0%</span>
+  </div>
+</div>
+
+<div id="new_asset_button">Lisa fail...</div>
+
+<div style="display: none">
+  siia sisse step 2 mille siis peale onCompletet võtab ette.
 <% form_for @asset, :html => {:multipart => true} do |f| %>
   <table>
     <tr>
@@ -33,4 +44,4 @@
     <tr><td colspan="2"><%= submit_tag "Lisa", :id => 'upload_asset_button' %></td></tr>
   </table>
 <% end %>
-
+</div>

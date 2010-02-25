@@ -61,4 +61,44 @@ describe Asset do
       end
     end
   end
+
+  describe "determination of title and type" do
+    describe "from moodle" do
+      before(:all) do
+        @asset = Asset.new
+        @asset.body = File.read(RAILS_ROOT + "/spec/files/moodle.htm")
+        @asset.determine_source!
+        @asset.source.should == Asset::Sources::MOODLE
+        
+        @asset.determine_type_and_title!
+      end
+
+      it "should detect the title" do
+        @asset.title.should == "Harjutustest 1"
+      end
+
+      it "should detect the category" do
+        @asset.category_name.should == "Funktsionaalprogrammeerimise meetod"
+      end
+    end
+
+    describe "from webct" do
+      before(:all) do
+        @asset = Asset.new
+        @asset.body = File.read(RAILS_ROOT + "/spec/files/jada.html")
+        @asset.determine_source!
+        @asset.source.should == Asset::Sources::WEBCT
+        
+        @asset.determine_type_and_title!
+      end
+
+      it "should detect the title" do
+        @asset.title.should == "Jada- ja rööpvärat"
+      end
+
+      it "should not detect the category" do
+        @asset.category_name.should be_blank
+      end
+    end
+  end
 end

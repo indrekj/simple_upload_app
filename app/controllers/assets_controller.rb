@@ -36,14 +36,16 @@ class AssetsController < ApplicationController
     @asset.creator_ip = request.remote_ip
     cookies[:author] = @asset.author
 
-    if @asset.save
-      flash[:notice] = "Fail edukalt lisatud"
-      redirect_to home_path
-    else
-      flash[:error] = "Shit happened"
-      index
-      render :action => 'index'
-    end
+    # Tagasta asseti andmed, et kasutaja saaks need üle kontrollida ja siis viimase confirmi teha
+    render :json => {:ha => "ba"}.to_json
+#    if @asset.save
+#      flash[:notice] = "Fail edukalt lisatud"
+#      redirect_to home_path
+#    else
+#      flash[:error] = "Shit happened"
+#      index
+#      render :action => 'index'
+#    end
   end
 
   # PUT /assets/:id

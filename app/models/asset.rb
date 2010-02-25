@@ -1,19 +1,22 @@
+require "hpricot"
+
 class Asset < ActiveRecord::Base
   module Sources
-    WEBCT = 'webct'
-    MOODLE = 'moodle'
-    UNKNOWN = 'unknown'
+    WEBCT = "webct"
+    MOODLE = "moodle"
+    UNKNOWN = "unknown"
   end
 
   belongs_to :category, :counter_cache => true
 
   attr_accessor :category_name
 
-  validates_presence_of :title, :message => 'Tiitel peab olema lisatud'
-  validates_presence_of :category_name, :message => 'Tüüp peab olema lisatud', :if => Proc.new {|a| a[:category].blank?}
-  validates_numericality_of :year, :greater_than => 2007, :less_than => 2020, :message => 'Aasta paeb olema neljakohaline ning reaalne'
+  validates_presence_of :title, :on => :update
+  validates_presence_of :category_name, :if => Proc.new {|a| a[:category].blank?}, :on => :update
+  validates_numericality_of :year, :greater_than => 2007, :less_than => 2020, :on => :update
 
   before_validation_on_create :determine_source!
+  before_validation_on_create :determine_type_and_title!
   before_create :remove_delicate_info!
   before_save :check_year
   before_validation :assign_category, :if => Proc.new {|a| !a.category_name.blank?}
@@ -47,6 +50,20 @@ class Asset < ActiveRecord::Base
       else
         Sources::UNKNOWN
       end
+  end
+
+  def determine_type_and_title!
+    case self.source
+    when Sources::MOODLE
+      doc = Hpricot.parse(self.body)
+      self.title = doc.search("tr/td/div[3]/div/ul/li[4]/a").innerHTML.strip
+      self.category_name = doc.search("tr/td/div/h1").innerHTML.strip
+    when Sources::WEBCT
+      doc = Hpricot.parse(self.body)
+      self.title = doc.search(".controlset/table/tr[1]/td[2]").innerHTML.strip
+    end
+
+    self.title = "" if self.title.to_s.downcase == "test"
   end
 
   def remove_delicate_info!

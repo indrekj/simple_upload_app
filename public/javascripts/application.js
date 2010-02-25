@@ -2,6 +2,10 @@
  * OBSERVERS *
  *************/
 Event.observe(window, "load", function() {
+  Event.observe($("new_file_link"), "click", function() {
+    setTimeout(function() {initializeAjaxUploader()}, 500);
+  });
+
   if ($("assets")) {
     Assets.assets_table = $("assets");
     Assets.assets_section = $("assets").childElements()[1];
@@ -39,6 +43,59 @@ function loadScript(src, callback) {
     }
   }
   head.appendChild(script);
+}
+
+var interval = null;
+function initializeAjaxUploader() {
+  var uuid = randomUUID();
+  new AjaxUpload("new_asset_button", {
+    action: "/assets?X-Progress-ID=" + uuid,
+    autoSubmit: true,
+    name: "asset[file]",
+    responseType: "json",
+    onSubmit: function(file, extension) {
+      $("new_asset_button").hide();
+      interval = window.setInterval(function() {
+        fetch(uuid);
+      }, 1000);
+    },
+    onComplete: function(file, response) {
+      alert("Yey");
+      // näita järgmist sammu
+    }
+  });
+}
+
+function fetch(uuid) {
+  new Ajax.Request("/progress", {
+    method: "get",
+    requestHeaders: {"X-Progress-ID": uuid, "Accept": "application/json"},
+    onComplete: function(transport) {
+      var upload = eval(transport.responseText);
+
+      $("progress").show();
+
+      /* change the width if the inner progress-bar */
+      if (upload.state == "uploading") {
+        var percentage = 100 * upload.received / upload.size
+        $("progress_percentage").innerHTML = "" + percentage + "%";
+      }
+    
+      /* we are done, stop the interval */
+      if (upload.state == "done") {
+        $("progress").hide();
+        window.clearTimeout(interval);
+      }
+    }
+  });
+}
+
+function randomUUID() {
+  uuid = "";
+  for (i = 0; i < 32; i++) {
+    uuid += Math.floor(Math.random() * 16).toString(16);
+  }
+  return uuid;
 }
 
 function changeCategory(category) {

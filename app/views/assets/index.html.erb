@@ -21,7 +21,13 @@
 
 <%= render :partial => 'shouts' %>
 
-<%= render :partial => 'form' %>
+<div id="new_file_div">
+  <%= link_to "Lisa uus fail", "#", :onclick => "Modalbox.show($('new_asset_modalbox'), {title: 'Lisa uus fail', width: 520, height: 220, slideDownDuration: 0}); return false;", :id => "new_file_link" %>
+</div>
+
+<div id="new_asset_modalbox" style="display: none;">
+  <%= render :partial => 'form' %>
+</div>
 
 <br/>
 
