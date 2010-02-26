@@ -63,7 +63,7 @@ function initializeAjaxUploader() {
       $("new_asset_button").hide();
       interval = window.setInterval(function() {
         fetch(uuid);
-      }, 1000);
+      }, 500);
     }
   });
 }
