@@ -11,8 +11,8 @@ class AssetsController < ApplicationController
 
       format.json do
         @category = Category.find(params[:category_id])
-        @assets = @category.assets.find(:all, :select => "id, title, author, year", 
-                                        :order => "LOWER(title) ASC, year DESC")
+        @assets = @category.assets.confirmed.find(:all, :select => "id, title, author, year", 
+                                                  :order => "LOWER(title) ASC, year DESC")
         @assets.each {|a| a[:asset_path] = asset_path(a)}
         render :json => {:category => @category.name, :assets => @assets}.to_json
       end
@@ -48,7 +48,9 @@ class AssetsController < ApplicationController
   # PUT /assets/:id
   def update
     @asset = Asset.find_by_id(params[:id])
-    success = @asset.update_attributes(params[:asset])
+    @asset.confirmed = true
+    @asset.attributes = params[:asset]
+    success = @asset.save
     @asset[:asset_path] = asset_path(@asset)
 
     respond_to do |format|
