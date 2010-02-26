@@ -50,6 +50,9 @@ function initializeAjaxUploader() {
   $("upload_step_one").show();
   $("upload_step_two").hide();
 
+  if (categoriesList)
+    new Autocompleter.Local("asset_category_name", "category_list", categoriesList);
+
   var uuid = randomUUID();
   new AjaxUpload("new_asset_button", {
     action: "/assets?format=js&X-Progress-ID=" + uuid + "&callback=uploadStepTwo",
