@@ -242,7 +242,8 @@ div.autocomplete ul li {
   background: url(/images/new_asset_done.png) no-repeat;
   width: 129px;
   height: 29px;
-  margin: 3px auto 0 auto;
+  margin-top: 3px;
+  float: right;
   cursor: pointer;
 }
 #new_asset_done_button:hover {
@@ -253,4 +254,8 @@ div.autocomplete ul li {
 }
 #upload_step_two input {
   width: 330px;
+}
+.actions {
+  margin-left: auto;
+  margin-right: auto;
 }

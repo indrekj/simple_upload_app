@@ -25,7 +25,6 @@ class Asset < ActiveRecord::Base
 
   validates_presence_of :title, :on => :update
   validates_presence_of :category_name, :if => Proc.new {|a| a[:category].blank?}, :on => :update
-  validates_numericality_of :year, :greater_than => 2007, :less_than => 2020, :on => :update
 
   default_value_for :year, Time.now.year
 
@@ -91,10 +90,14 @@ class Asset < ActiveRecord::Base
     self.body_will_change!
   end
 
+  def asset_path
+    self[:asset_path]
+  end
+
   def to_json(options = {})
     opts = {}
     opts[:only] = [:id, :title, :category_name, :author, :year]
-    opts[:methods] = [:category_name]
+    opts[:methods] = [:category_name, :asset_path]
     super(opts.merge(options))
   end
 

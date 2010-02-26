@@ -3,7 +3,7 @@
  *************/
 Event.observe(window, "load", function() {
   Event.observe($("new_file_link"), "click", function() {
-    setTimeout(function() {initializeAjaxUploader()}, 1300);
+    setTimeout(function() {initializeAjaxUploader()}, 1500);
   });
 
   if ($("assets")) {
@@ -68,13 +68,14 @@ function initializeAjaxUploader() {
 function uploadStepTwo(response) {
   if (response.success) {
     asset = response.data.asset;
-    $("asset_id").value = asset.id;
     $("asset_title").value = asset.title;
     $("asset_category_name").value = asset.category_name;
 
     $("upload_step_one").hide();
     $("new_asset_done_button").show();
     $("upload_step_two_spinner").hide();
+    $("upload_step_two_failure").hide();
+    $("upload_step_two_success").hide();
 
     Effect.SlideDown("upload_step_two", {duration: 1.5});
 
@@ -85,23 +86,20 @@ function uploadStepTwo(response) {
         onLoading: function() {
           $("upload_step_two_spinner").show();
           $("new_asset_done_button").hide();
+          $("upload_step_two_failure").hide();
         },
         onSuccess: function(transport) {
           $("upload_step_two_spinner").hide();
           var asset = transport.responseJSON.asset;
           // Add asset to list when uploaded to the current category
           //Assets.loadAsset(asset);
-          //
-          // Green ok image
-          //
+          $("upload_step_two_success").show();
           setTimeout(function() { Modalbox.hide() }, 2000);
         },
         onFailure: function(transport) {
           $("upload_step_two_spinner").hide();
-          // 
-          // Red fail image
-          //
-          setTimeout(function() { Modalbox.hide() }, 2000);
+          $("upload_step_two_failure").show();
+          setTimeout(function() { $("new_asset_done_button").show() }, 2000);
         }
       });
     });
@@ -161,7 +159,7 @@ function changeCategory(category) {
           category: json.category, 
           year: asset.year, 
           author: asset.author,
-          url: unescape(asset.url)
+          url: unescape(asset.asset_path)
         });
       }.bind(this));
 
@@ -239,7 +237,7 @@ function renderShouts() {
 
 function formatDate(d) {
   if (typeof d == 'string') {
-    d = d.toDate();
+    d = new Date(d);
   }
 
   var month = d.getMonth() + 1;

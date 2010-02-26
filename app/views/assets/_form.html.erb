@@ -13,8 +13,6 @@
   <p>Palun kontrolli ja täienda andmeid</p>
 
   <% form_tag "#", :id => "upload_step_two_form" do %>
-    <%= hidden_field_tag :asset_id, "", :name => "asset[id]" %>
-
     <table>
       <tr>
         <td><%= label_tag :asset_title, "Tiitel" %></td>
@@ -39,7 +37,17 @@
       <tr>
         <td colspan="2">
           <div id="new_asset_done_button">&nbsp;</div>
-          <div id="upload_step_two_spinner" style="display: none;"><%= image_tag "spinner.gif" %></div>
+          <div class="actions">
+            <%= image_tag "spinner.gif", :id => "upload_step_two_spinner", :style => "display: none;" %>
+
+            <div id="upload_step_two_success" style="display: none;">
+              <%= image_tag "success.png" %> Success!
+            </div>
+            
+            <div id="upload_step_two_failure" style="display: none;">
+              <%= image_tag "failure.png" %> Failure! Lisa vajalik info ja proovi uuesti.
+            </div>
+          </div>
         </td>
       </tr>
     </table>

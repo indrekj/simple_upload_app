@@ -1,5 +1,3 @@
-* Ajax Uploader
 * Sweeper that removes unused categories
 * WRITE SOME TESTS!!!
-* From moodle files grep the category (title too?)
 * Change the url when selecting a category (but no refresh)

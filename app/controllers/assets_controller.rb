@@ -13,7 +13,7 @@ class AssetsController < ApplicationController
         @category = Category.find(params[:category_id])
         @assets = @category.assets.find(:all, :select => "id, title, author, year", 
                                         :order => "LOWER(title) ASC, year DESC")
-        @assets.each {|a| a[:url] = asset_path(a)}
+        @assets.each {|a| a[:asset_path] = asset_path(a)}
         render :json => {:category => @category.name, :assets => @assets}.to_json
       end
     end
@@ -49,6 +49,7 @@ class AssetsController < ApplicationController
   def update
     @asset = Asset.find_by_id(params[:id])
     success = @asset.update_attributes(params[:asset])
+    @asset[:asset_path] = asset_path(@asset)
 
     respond_to do |format|
       format.html { render :text => "No JS support?" }
