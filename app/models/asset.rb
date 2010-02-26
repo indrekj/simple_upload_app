@@ -92,8 +92,10 @@ class Asset < ActiveRecord::Base
   end
 
   def to_json(options = {})
-    options[:only] = [:id, :title, :category_name, :author, :year]
-    super(options)
+    opts = {}
+    opts[:only] = [:id, :title, :category_name, :author, :year]
+    opts[:methods] = [:category_name]
+    super(opts.merge(options))
   end
 
   protected

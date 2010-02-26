@@ -12,18 +12,18 @@
 <div style="display: none" id="upload_step_two">
   <p>Palun kontrolli ja täienda andmeid</p>
 
-  <% form_tag "#" do %>
-    <%= hidden_field_tag :asset_id, "" %>
+  <% form_tag "#", :id => "upload_step_two_form" do %>
+    <%= hidden_field_tag :asset_id, "", :name => "asset[id]" %>
 
     <table>
       <tr>
         <td><%= label_tag :asset_title, "Tiitel" %></td>
-        <td><%= text_field_tag :asset_title %></td>
+        <td><%= text_field_tag :asset_title, "", :name => "asset[title]" %></td>
       </tr>
 
       <tr>
         <td><%= label_tag :asset_category_name, "Tüüp (arvutiriistvara vms)" %></td>
-        <td><%= text_field_tag :asset_category_name %></td>
+        <td><%= text_field_tag :asset_category_name, "", :name => "asset[category_name]" %></td>
 
         <div class="autocomplete" id="category_list" style="display: none;"></div>
         <script type="text/javascript">
@@ -33,10 +33,15 @@
 
       <tr>
         <td><%= label_tag :asset_author, "Autor, kes tahab respecti" %></td>
-        <td><%= text_field_tag :asset_author, (cookies[:author] || "itimees") %></td>
+        <td><%= text_field_tag :asset_author, (cookies[:author] || "itimees"), :name => "asset[author]" %></td>
       </tr>
 
-      <tr><td colspan="2"><div id="new_asset_done_button">&nbsp;</div></td></tr>
+      <tr>
+        <td colspan="2">
+          <div id="new_asset_done_button">&nbsp;</div>
+          <div id="upload_step_two_spinner" style="display: none;"><%= image_tag "spinner.gif" %></div>
+        </td>
+      </tr>
     </table>
   <% end %>
 </div>

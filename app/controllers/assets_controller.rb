@@ -36,17 +36,12 @@ class AssetsController < ApplicationController
     @asset.creator_ip = request.remote_ip
     cookies[:author] = @asset.author
 
+    success = @asset.save
+
     respond_to do |format|
       format.html { render :text => "No JS support?" }
-  
-      format.js do
-        if @asset.save
-          render :json => {:success => true, :id => @asset.id, :title => @asset.title, 
-                           :category_name => @asset.category_name}.to_json
-        else
-          render :json => {:success => false}.to_json
-        end
-      end
+      format.js   { render :json => {:success => success, :data => @asset}.to_json }
+      format.json { render :json => @asset.to_json, :status => (success ? 200 : 409 ) }
     end
   end
 
@@ -57,7 +52,7 @@ class AssetsController < ApplicationController
 
     respond_to do |format|
       format.html { render :text => "No JS support?" }
-      format.js   { render :json => {:success => success} }
+      format.js   { render :json => {:success => success, :data => @asset}.to_json }
       format.json { render :json => @asset.to_json, :status => (success ? 200 : 409 ) }
     end
   end

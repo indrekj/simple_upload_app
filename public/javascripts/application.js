@@ -3,7 +3,7 @@
  *************/
 Event.observe(window, "load", function() {
   Event.observe($("new_file_link"), "click", function() {
-    setTimeout(function() {initializeAjaxUploader()}, 500);
+    setTimeout(function() {initializeAjaxUploader()}, 1300);
   });
 
   if ($("assets")) {
@@ -61,17 +61,50 @@ function initializeAjaxUploader() {
       interval = window.setInterval(function() {
         fetch(uuid);
       }, 1000);
-    },
+    }
   });
 }
 
 function uploadStepTwo(response) {
   if (response.success) {
-    $("asset_id").value = response.id;
-    $("asset_title").value = response.title;
-    $("asset_category_name").value = response.category_name;
+    asset = response.data.asset;
+    $("asset_id").value = asset.id;
+    $("asset_title").value = asset.title;
+    $("asset_category_name").value = asset.category_name;
+
     $("upload_step_one").hide();
+    $("new_asset_done_button").show();
+    $("upload_step_two_spinner").hide();
+
     Effect.SlideDown("upload_step_two", {duration: 1.5});
+
+    Event.observe($("new_asset_done_button"), "click", function() {
+      new Ajax.Request("/assets/" + asset.id + "?format=json", {
+        parameters: $("upload_step_two_form").serialize(true),
+        method: "put",
+        onLoading: function() {
+          $("upload_step_two_spinner").show();
+          $("new_asset_done_button").hide();
+        },
+        onSuccess: function(transport) {
+          $("upload_step_two_spinner").hide();
+          var asset = transport.responseJSON.asset;
+          // Add asset to list when uploaded to the current category
+          //Assets.loadAsset(asset);
+          //
+          // Green ok image
+          //
+          setTimeout(function() { Modalbox.hide() }, 2000);
+        },
+        onFailure: function(transport) {
+          $("upload_step_two_spinner").hide();
+          // 
+          // Red fail image
+          //
+          setTimeout(function() { Modalbox.hide() }, 2000);
+        }
+      });
+    });
   } else {
     $("upload_step_one").innerHTML = "Miskit failis!";
   }
@@ -201,7 +234,7 @@ function renderShouts() {
 
     i++;
   });
-  new Effect.Shake($('shouts'), {duration: 0.8});
+  new Effect.BlindDown($('shouts'), {duration: 1});
 }
 
 function formatDate(d) {
