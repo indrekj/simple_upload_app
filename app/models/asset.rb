@@ -7,7 +7,7 @@ class Asset < ActiveRecord::Base
     UNKNOWN = "unknown"
   end
   
-  attr_accessor :category_name
+  attr_writer :category_name
 
   before_validation_on_create :determine_source!
   before_validation_on_create :determine_type_and_title!
@@ -37,6 +37,10 @@ class Asset < ActiveRecord::Base
 
   def category=(c)
     self[:category] = c.to_s.strip
+  end
+
+  def category_name
+    @category_name || self.category && self.category.name
   end
 
   def file
