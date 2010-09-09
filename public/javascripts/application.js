@@ -2,9 +2,9 @@
  * OBSERVERS *
  *************/
 Event.observe(window, "load", function() {
-  Event.observe($("new_file_link"), "click", function() {
-    setTimeout(function() {initializeAjaxUploader()}, 1500);
-  });
+  //Event.observe($("new_file_link"), "click", function() {
+  //  setTimeout(function() {initializeAjaxUploader()}, 1500);
+  //});
 
   if ($("assets")) {
     Assets.assets_table = $("assets");
