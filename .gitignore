@@ -6,7 +6,6 @@ TAGS
 *~
 .#*
 config/database.yml
-config/deploy.rb
 config/password.yml
 schema/schema.rb
 schema/*_structure.sql
