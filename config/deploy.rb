@@ -16,7 +16,7 @@ namespace :vlad do
   desc "Full deployment cycle"
   task :deploy => [
     "vlad:update",
-    "vlad:migrate",
+    #"vlad:migrate",
     "vlad:start_app",
     "vlad:cleanup"
   ]
