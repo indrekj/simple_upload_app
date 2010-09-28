@@ -1,4 +1,5 @@
 SimpleUploadApp::Application.routes.draw do
+  resources :assets
   resources :assessments
   resources :links
   resources :messages

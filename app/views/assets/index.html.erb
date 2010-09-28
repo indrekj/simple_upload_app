@@ -1,0 +1,26 @@
+<%- set_title 'Muu pahn' -%>
+
+<div id="dropio_logo">
+  <div>Powered by</div> <%= link_to image_tag("dropioapi_logo.png"), "http://rmb.drop.io" %>
+</div>
+<br/>
+
+<table id="assets">
+  <% @assets.each do |asset| %>
+    <tr>
+      <td><%= image_tag improved_small_thumbnail(asset) %></td>
+      <td>
+        <strong><%= asset.title %></strong><br/>
+
+        <% case asset.type %>
+        <% when "note" %>
+          <% if asset.type == "note" %>
+            <%= truncate strip_tags(contents(asset)), :length => 400 %>
+          <% end %>
+        <% when "audio" %>
+          <%= duration(asset) %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>

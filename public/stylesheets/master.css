@@ -86,7 +86,19 @@ form.new_assessment, form.new_link {
   font-size: 28px;
 }
 
-#assessments, #links, #calendars, #assessments_spinner {
+img { border: 0;}
+#dropio_logo {
+  position: absolute;
+  right: 10px;
+}
+#dropio_logo div {
+  margin: 0l
+  padding: 0;
+  float: left;
+  margin-top: 18px;
+}
+
+#assets, #assessments, #links, #calendars, #assessments_spinner {
   width: 60%;
   margin-left: auto;
   margin-right: auto;
