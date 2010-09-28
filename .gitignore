@@ -10,3 +10,4 @@ tmp/**/*
 .bundle
 config/database.yml
 config/password.yml
+config/dropio.yml

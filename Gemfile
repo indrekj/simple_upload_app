@@ -5,6 +5,7 @@ gem "rails", "3.0.0"
 gem "sqlite3-ruby", :require => "sqlite3"
 gem "hpricot", :require => false
 gem "rack"
+gem "dropio", ">= 3.0.0.pre"
 
 # for test env
 group :test do
