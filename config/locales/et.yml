@@ -1,9 +1,9 @@
 et:
   activerecord:
     models:
-      asset: Töö
+      assessment: Töö
     attributes:
-      asset:
+      assessment:
         title: tiitel
         category_name: tüüp
     errors:

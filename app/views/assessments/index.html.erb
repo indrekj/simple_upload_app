@@ -1,5 +1,5 @@
 <%- set_title 'WebCT / Moodle failid' -%>
-<%- catch_errors_for @asset -%>
+<%- catch_errors_for @assessment -%>
 
 <div id="howto">
   <h2>HowTo</h2>
@@ -31,10 +31,10 @@
 </div>
 <!-- read only db
   <div id="new_file_div">
-    <%= link_to "lisa uus fail", "#", :onclick => "Modalbox.show($('new_asset_modalbox'), {title: 'Lisa uus fail', width: 520, height: 265, slideDownDuration: 1}); return false;", :id => "new_file_link" %>
+    <%= link_to "lisa uus fail", "#", :onclick => "Modalbox.show($('new_assessment_modalbox'), {title: 'Lisa uus fail', width: 520, height: 265, slideDownDuration: 1}); return false;", :id => "new_file_link" %>
   </div>
 
-  <div id="new_asset_modalbox" style="display: none;">
+  <div id="new_assessment_modalbox" style="display: none;">
     <%= render :partial => 'form' %>
   </div>
 -->
@@ -45,7 +45,7 @@
 
 <br style="clear: both;"/>
 
-<table id="assets" style="display: none;">
+<table id="assessments" style="display: none;">
   <thead class="odd">
     <tr>
       <td>Tiitel</td>
@@ -59,15 +59,15 @@
   <tbody>
   </tbody>
 </table>
-<div id="assets_spinner" style="display: none;"><%= image_tag "spinner.gif" %></div>
+<div id="assessments_spinner" style="display: none;"><%= image_tag "spinner.gif" %></div>
 
 <%# In place text editors for title and category columns %>
 <%# TODO: kasuta unobtrusive js-i %>
 <% if admin? -%>
   <script type="text/javascript">
-    <% @assets.each do |asset| -%>
-      in_place_editor($('<%= dom_id(asset) %>'), 'title', '<%= asset_path(asset, :format => "json") %>');
-      in_place_editor($('<%= dom_id(asset) %>'), 'category', '<%= asset_path(asset, :format => "json") %>');
+    <% @assessments.each do |assessment| -%>
+      in_place_editor($('<%= dom_id(assessment) %>'), 'title', '<%= assessment_path(assessment, :format => "json") %>');
+      in_place_editor($('<%= dom_id(assessment) %>'), 'category', '<%= assessment_path(assessment, :format => "json") %>');
     <% end -%>
   </script>
 <% end -%>

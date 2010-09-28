@@ -1,4 +1,4 @@
-module AssetsHelper
+module AssessmentsHelper
   def title(title)
     title = title.split(' ').each do |w|
       w.upcase! if w =~ /\A[ivx]+\z/i
@@ -10,7 +10,7 @@ module AssetsHelper
   def category_cloud(categories, classes)
     cat_hash = {}
     categories.each do |cat|
-      cat_hash[cat] = cat.assets_count
+      cat_hash[cat] = cat.assessments_count
     end
 
     max, min = 0, 0

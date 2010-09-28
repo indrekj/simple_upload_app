@@ -55,7 +55,7 @@ a:hover {
   text-decoration: underline;
 }
 
-form.new_asset, form.new_link {
+form.new_assessment, form.new_link {
   width: 500px;
   margin-left: auto;
   margin-right: auto;
@@ -86,16 +86,16 @@ form.new_asset, form.new_link {
   font-size: 28px;
 }
 
-#assets, #links, #calendars, #assets_spinner {
+#assessments, #links, #calendars, #assessments_spinner {
   width: 60%;
   margin-left: auto;
   margin-right: auto;
   padding-bottom: 20px;
 }
-#assets .odd, #links .odd {
+#assessments .odd, #links .odd {
   background-color: #DEDEDE;
 }
-#assets thead td, #links thead td {
+#assessments thead td, #links thead td {
   font-weight: bold;
   text-align: center;
 }
@@ -227,27 +227,27 @@ div.autocomplete ul li {
 #upload_step_two {
   padding: 10px;
 }
-#new_asset_button {
-  background: url(/images/new_asset.png) no-repeat;
+#new_assessment_button {
+  background: url(/images/new_assessment.png) no-repeat;
   width: 281px;
   height: 88px;
   margin: 50px auto 0 auto;
   cursor: pointer;
 }
-/* Not working. Can't use #new_asset_button:hover because ajaxUpload puts its own layer over that.
-/*.new_asset_hover {
-  background: url(/images/new_asset_hover.png) no-repeat;
+/* Not working. Can't use #new_assessment_button:hover because ajaxUpload puts its own layer over that.
+/*.new_assessment_hover {
+  background: url(/images/new_assessment_hover.png) no-repeat;
 }*/
-#new_asset_done_button {
-  background: url(/images/new_asset_done.png) no-repeat;
+#new_assessment_done_button {
+  background: url(/images/new_assessment_done.png) no-repeat;
   width: 129px;
   height: 29px;
   margin-top: 3px;
   float: right;
   cursor: pointer;
 }
-#new_asset_done_button:hover {
-  background: url(/images/new_asset_done_hover.png) no-repeat;
+#new_assessment_done_button:hover {
+  background: url(/images/new_assessment_done_hover.png) no-repeat;
 }
 #upload_step_two td {
   padding: 5px;

@@ -4,7 +4,7 @@ class AddAssetsCountToCategories < ActiveRecord::Migration
 
     Category.reset_column_information
     Category.all.each do |c|
-      Category.update_counters(c.id, :assets_count => c.assets.length)
+      Category.update_counters(c.id, :assets_count => c.assessments.length)
     end
   end
 

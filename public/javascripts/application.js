@@ -6,9 +6,9 @@ Event.observe(window, "load", function() {
   //  setTimeout(function() {initializeAjaxUploader()}, 1500);
   //});
 
-  if ($("assets")) {
-    Assets.assets_table = $("assets");
-    Assets.assets_section = $("assets").childElements()[1];
+  if ($("assessments")) {
+    Assessments.assessments_table = $("assessments");
+    Assessments.assessments_section = $("assessments").childElements()[1];
   }
 
   $$(".category").each(function(cat) {
@@ -51,16 +51,16 @@ function initializeAjaxUploader() {
   $("upload_step_two").hide();
 
   if (categoriesList)
-    new Autocompleter.Local("asset_category_name", "category_list", categoriesList);
+    new Autocompleter.Local("assessment_category_name", "category_list", categoriesList);
 
   var uuid = randomUUID();
-  new AjaxUpload("new_asset_button", {
-    action: "/assets?format=js&X-Progress-ID=" + uuid + "&callback=uploadStepTwo",
+  new AjaxUpload("new_assessment_button", {
+    action: "/assessments?format=js&X-Progress-ID=" + uuid + "&callback=uploadStepTwo",
     autoSubmit: true,
-    name: "asset[file]",
+    name: "assessment[file]",
     responseType: "json",
     onSubmit: function(file, extension) {
-      $("new_asset_button").hide();
+      $("new_assessment_button").hide();
       interval = window.setInterval(function() {
         fetch(uuid);
       }, 500);
@@ -70,39 +70,39 @@ function initializeAjaxUploader() {
 
 function uploadStepTwo(response) {
   if (response.success) {
-    asset = response.data.asset;
-    $("asset_title").value = asset.title;
-    $("asset_category_name").value = asset.category_name;
+    assessment = response.data.assessment;
+    $("assessment_title").value = assessment.title;
+    $("assessment_category_name").value = assessment.category_name;
 
     $("upload_step_one").hide();
-    $("new_asset_done_button").show();
+    $("new_assessment_done_button").show();
     $("upload_step_two_spinner").hide();
     $("upload_step_two_failure").hide();
     $("upload_step_two_success").hide();
 
     Effect.SlideDown("upload_step_two", {duration: 1.5});
 
-    Event.observe($("new_asset_done_button"), "click", function() {
-      new Ajax.Request("/assets/" + asset.id + "?format=json", {
+    Event.observe($("new_assessment_done_button"), "click", function() {
+      new Ajax.Request("/assessments/" + assessment.id + "?format=json", {
         parameters: $("upload_step_two_form").serialize(true),
         method: "put",
         onLoading: function() {
           $("upload_step_two_spinner").show();
-          $("new_asset_done_button").hide();
+          $("new_assessment_done_button").hide();
           $("upload_step_two_failure").hide();
         },
         onSuccess: function(transport) {
           $("upload_step_two_spinner").hide();
-          var asset = transport.responseJSON.asset;
-          // Add asset to list when uploaded to the current category
-          //Assets.loadAsset(asset);
+          var assessment = transport.responseJSON.assessment;
+          // Add assessment to list when uploaded to the current category
+          //Assessments.loadAssessment(assessment);
           $("upload_step_two_success").show();
           setTimeout(function() { Modalbox.hide() }, 2000);
         },
         onFailure: function(transport) {
           $("upload_step_two_spinner").hide();
           $("upload_step_two_failure").show();
-          setTimeout(function() { $("new_asset_done_button").show() }, 2000);
+          setTimeout(function() { $("new_assessment_done_button").show() }, 2000);
         }
       });
     });
@@ -144,31 +144,31 @@ function randomUUID() {
 }
 
 function changeCategory(category) {
-  Assets.assets_table.hide();
-  $("assets_spinner").show();
+  Assessments.assessments_table.hide();
+  $("assessments_spinner").show();
 
-  Assets.clear();
+  Assessments.clear();
 
   new Ajax.Request(category.href + "&format=json", {
     method: "get",
     onComplete: function(transport) {
-      var json = transport.responseJSON; // category (String), assets (array)
-      json.assets.each(function(asset) {
-        asset = asset.asset;
+      var json = transport.responseJSON; // category (String), assessments (array)
+      json.assessments.each(function(assessment) {
+        assessment = assessment.assessment;
 
-        Assets.loadAsset({
-          id: asset.id, 
-          title: asset.title,
+        Assessments.loadAssessment({
+          id: assessment.id, 
+          title: assessment.title,
           category: json.category, 
-          year: asset.year, 
-          author: asset.author,
-          url: unescape(asset.asset_path)
+          year: assessment.year, 
+          author: assessment.author,
+          url: unescape(assessment.assessment_path)
         });
       }.bind(this));
 
-      $("assets_spinner").hide();
-      Assets.assets_table.show();
-      Assets.show();
+      $("assessments_spinner").hide();
+      Assessments.assessments_table.show();
+      Assessments.show();
     }.bind(this)
   });
 }
@@ -316,7 +316,7 @@ function addShout(shout) {
 function in_place_editor(element, column, url) {
   var obj = element.select('.' + column)[0];
   new Ajax.InPlaceEditor(obj, url, {
-    callback: function(form, value) { return 'asset[' + column + ']=' + escape(value) },
+    callback: function(form, value) { return 'assessment[' + column + ']=' + escape(value) },
     ajaxOptions: { method: 'put' },
     onComplete: function(transport, element) {
       response = transport.responseJSON;
@@ -336,66 +336,66 @@ function displayCategoriesCloud() {
   }
 }
 
-/**********
- * ASSETS *
- **********/
-var Assets = Class.create({
+/***************
+ * ASSESSMENTS *
+ ***************/
+var Assessments = Class.create({
 });
-Object.extend(Assets, {
-  assets: new Array(),
-  assets_table: null,
-  assets_section: null,
+Object.extend(Assessments, {
+  assessments: new Array(),
+  assessments_table: null,
+  assessments_section: null,
 
   clear: function() {
-    this.assets_section.innerHTML = "";
-    this.assets = new Array();
+    this.assessments_section.innerHTML = "";
+    this.assessments = new Array();
   },
 
   show: function() {
     var i = 0;
-    this.assets.each(function(asset) {
+    this.assessments.each(function(assessment) {
       var parity = i % 2 == 0 ? "even" : "odd";
-      var el = "<tr class=" + parity + "><td>" + asset["title"] + "</td>";
-      el += "<td>" + asset["category"] + "</td>";
-      el += "<td>" + asset["year"] + "</td>";
-      el += "<td>" + asset["author"] + "</td>";
-      el += "<td><a href=" + asset["url"] + ">Vaata</a></td></tr>";
+      var el = "<tr class=" + parity + "><td>" + assessment["title"] + "</td>";
+      el += "<td>" + assessment["category"] + "</td>";
+      el += "<td>" + assessment["year"] + "</td>";
+      el += "<td>" + assessment["author"] + "</td>";
+      el += "<td><a href=" + assessment["url"] + ">Vaata</a></td></tr>";
 
-      this.assets_section.insert({bottom: el});
+      this.assessments_section.insert({bottom: el});
       i++;
     }.bind(this));
   },
 
   find: function(id) {
-    this.assets.each(function(asset) {
-      if (asset.id == id) {
-        return asset;
+    this.assessments.each(function(assessment) {
+      if (assessment.id == id) {
+        return assessment;
       }
     });
   },
 
-  loadAsset: function(options) {
-    this.add(new Asset(options));
+  loadAssessment: function(options) {
+    this.add(new Assessment(options));
   },
 
-  add: function(asset) {
-    this.assets.push(asset);
+  add: function(assessment) {
+    this.assessments.push(assessment);
   },
 
-  remove: function(asset) {
-    var index = this.assets.indexOf(asset);
-    this.assets.splice(index, index);
-    asset.fade();
+  remove: function(assessment) {
+    var index = this.assessments.indexOf(assessment);
+    this.assessments.splice(index, index);
+    assessment.fade();
   },
 
   destroy: function(id) {
-    new Ajax.Request("/assets/" + id + ".json", {
+    new Ajax.Request("/assessments/" + id + ".json", {
       method: "delete",
       onComplete: function(transport) {
         var response = transport.responseJSON;
         if(response["success"] == true) {
-          var asset = Assets.find(id);
-          this.remove(asset)
+          var assessment = Assessments.find(id);
+          this.remove(assessment)
         } else {
           alert("Kustutamine ebaõnnestus");
         }
@@ -404,7 +404,7 @@ Object.extend(Assets, {
   }
 });
 
-var Asset = Class.create({
+var Assessment = Class.create({
   initialize: function(opts) {
     this.id       = opts["id"];
     this.title    = titlelize(opts["title"]);

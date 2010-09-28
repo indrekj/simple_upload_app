@@ -21,6 +21,6 @@ describe LinksController do
       post :create, :link => {:url => 'some_weird_url', :description => 'Description is ok'}
     }.should_not change(Link, :count)
     response.should be_success
-    flash[:error].should_not be_blank
+    flash[:alert].should_not be_blank
   end
 end

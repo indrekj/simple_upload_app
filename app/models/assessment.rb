@@ -1,6 +1,6 @@
 require "hpricot"
 
-class Asset < ActiveRecord::Base
+class Assessment < ActiveRecord::Base
   module Sources
     WEBCT = "webct"
     MOODLE = "moodle"

@@ -5,7 +5,7 @@
 
   <ul id="categories_cloud">
     <%- category_cloud(@categories, %w(c1 c2 c3 c4 c5)) do |cat, css_class| -%>
-      <li><%= link_to title(cat.name), assets_path(:category_id => cat.id), :class => "category #{css_class}" %></li>
+      <li><%= link_to title(cat.name), assessments_path(:category_id => cat.id), :class => "category #{css_class}" %></li>
     <%- end -%>
   </ul>
   <br style="clear: both;"/>

@@ -1,6 +1,6 @@
 class AddSourceColumnToAssets < ActiveRecord::Migration
   def self.up
-    add_column :assets, :source, :string, :limit => 20, :default => Asset::Sources::UNKNOWN
+    add_column :assets, :source, :string, :limit => 20, :default => Assessments::Sources::UNKNOWN
   end
 
   def self.down

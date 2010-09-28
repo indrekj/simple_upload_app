@@ -1,7 +1,7 @@
 require "factory_girl"
 require "faker"
 
-Factory.define :asset do |a|
+Factory.define :assessment do |a|
   a.title { Faker::Lorem.words(1).to_s }
   a.association :category
 end

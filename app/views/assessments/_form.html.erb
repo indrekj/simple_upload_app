@@ -6,7 +6,7 @@
     </div>
   </div>
 
-  <div id="new_asset_button">&nbsp;</div>
+  <div id="new_assessment_button">&nbsp;</div>
 </div>
 
 <div style="display: none" id="upload_step_two">
@@ -15,25 +15,25 @@
   <%= form_tag "#", :id => "upload_step_two_form" do %>
     <table>
       <tr>
-        <td><%= label_tag :asset_title, "Tiitel" %></td>
-        <td><%= text_field_tag :asset_title, "", :name => "asset[title]" %></td>
+        <td><%= label_tag :assessment_title, "Tiitel" %></td>
+        <td><%= text_field_tag :assessment_title, "", :name => "assessment[title]" %></td>
       </tr>
 
       <tr>
-        <td><%= label_tag :asset_category_name, "Tüüp (arvutiriistvara vms)" %></td>
-        <td><%= text_field_tag :asset_category_name, "", :name => "asset[category_name]" %></td>
+        <td><%= label_tag :assessment_category_name, "Tüüp (arvutiriistvara vms)" %></td>
+        <td><%= text_field_tag :assessment_category_name, "", :name => "assessment[category_name]" %></td>
 
         <div class="autocomplete" id="category_list" style="display: none;"></div>
       </tr>
 
       <tr>
-        <td><%= label_tag :asset_author, "Autor, kes tahab respecti" %></td>
-        <td><%= text_field_tag :asset_author, (cookies[:author] || "itimees"), :name => "asset[author]" %></td>
+        <td><%= label_tag :assessment_author, "Autor, kes tahab respecti" %></td>
+        <td><%= text_field_tag :assessment_author, (cookies[:author] || "itimees"), :name => "assessment[author]" %></td>
       </tr>
 
       <tr>
         <td colspan="2">
-          <div id="new_asset_done_button">&nbsp;</div>
+          <div id="new_assessment_done_button">&nbsp;</div>
           <div class="actions">
             <%= image_tag "spinner.gif", :id => "upload_step_two_spinner", :style => "display: none;" %>
 

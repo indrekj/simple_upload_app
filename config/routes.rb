@@ -1,9 +1,9 @@
 SimpleUploadApp::Application.routes.draw do
-  resources :assets
+  resources :assessments
   resources :links
   resources :messages
 
-  match "assets/category/:name" => "assets#category", :as => :category
+  match "assessments/category/:name" => "assessments#category", :as => :category
 
-  root :to => "assets#index"
+  root :to => "assessments#index"
 end
