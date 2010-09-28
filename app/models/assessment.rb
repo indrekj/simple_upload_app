@@ -95,14 +95,14 @@ class Assessment < ActiveRecord::Base
     self.body_will_change!
   end
 
-  def asset_path
-    self[:asset_path]
+  def assessment_path
+    self[:assessment_path]
   end
 
   def to_json(options = {})
     opts = {}
     opts[:only] = [:id, :title, :category_name, :author, :year]
-    opts[:methods] = [:category_name, :asset_path]
+    opts[:methods] = [:category_name, :assessment_path]
     super(opts.merge(options))
   end
 

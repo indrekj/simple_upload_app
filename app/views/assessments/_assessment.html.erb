@@ -6,7 +6,7 @@
   <td>
     <%= link_to "Vaata", assessment %>
     <% if admin? -%>
-      | <%= link_to "Kustuta", '#', :onclick => 'destroyAsset(' + assessment.id.to_s + ');' %>
+      | <%= link_to "Kustuta", '#', :onclick => 'destroyAssessment(' + assessment.id.to_s + ');' %>
     <% end -%>
   </td>     
 </tr>

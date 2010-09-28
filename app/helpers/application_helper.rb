@@ -16,12 +16,12 @@ module ApplicationHelper
     @e_model = model
   end
 
-  def error_messages_for(asset)
-    return if asset.errors.empty?
+  def error_messages_for(model)
+    return if model.errors.empty?
     str = '<div class="error">'
     str += "<h2>Tekkisid järgnevad vead:</h2>"
     str += "<ul>"
-    asset.errors.each do |key, msg|
+    model.errors.each do |key, msg|
       str += "<li>#{msg}</li>"
     end
     str += "</ul></div>"
