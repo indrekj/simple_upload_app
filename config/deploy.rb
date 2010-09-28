@@ -33,4 +33,13 @@ namespace :vlad do
     system = "#{deploy_to}/shared/system"
     run "ln -s #{system}/production.sqlite3 #{latest_release}/db/production.sqlite3"
   end
+
+  remote_task :update, :roles => :app do
+    Rake::Task["vlad:install_gems"].invoke
+  end
+ 
+  remote_task :install_gems, :roles => :app do
+    puts "Installing gems"
+    run "cd #{latest_release}; bundle install --without development test deployment --deployment"
+  end
 end
