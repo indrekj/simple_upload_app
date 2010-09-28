@@ -1,7 +1,7 @@
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require "spec_helper"
 
 describe LinksController do
-  integrate_views
+  render_views
 
   it "should show index page" do
     get :index

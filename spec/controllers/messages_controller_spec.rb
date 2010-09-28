@@ -1,6 +1,8 @@
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require "spec_helper"
 
 describe MessagesController do
+  render_views
+
   it "should return all messages" do
     get :index, :format => 'json'
     response.should be_success
@@ -30,7 +32,7 @@ describe MessagesController do
   end
 
   it "should fetch a message" do
-    message = create_message
+    message = Factory.create(:message)
 
     get :show, :id => message.id
     response.should be_success

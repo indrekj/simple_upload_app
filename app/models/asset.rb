@@ -9,12 +9,14 @@ class Asset < ActiveRecord::Base
   
   attr_writer :category_name
 
-  before_validation_on_create :determine_source!
-  before_validation_on_create :determine_type_and_title!
-
-  # can't use before_validation because it happens before the before_validation_on_create
-  before_validation_on_create :assign_category, :if => Proc.new {|a| !a.category_name.blank?}
-  before_validation_on_update :assign_category, :if => Proc.new {|a| !a.category_name.blank?}
+  before_validation(:on => :create) { self.determine_source! }
+  before_validation(:on => :create) { self.determine_type_and_title! }
+  before_validation(:on => :create) do
+    self.year = Time.now.year if self.year.blank?
+  end
+  before_validation do
+    self.assign_category if !self.category_name.blank?
+  end
 
   before_create :remove_delicate_info!
   before_save :check_year
@@ -25,11 +27,10 @@ class Asset < ActiveRecord::Base
 
   validates_presence_of :title, :on => :update
   validates_presence_of :category_name, :if => Proc.new {|a| a[:category].blank?}, :on => :update
+  validate :file_attributes
 
-  default_value_for :year, Time.now.year
-
-  named_scope :confirmed, :conditions => {:confirmed => true}
-  named_scope :unconfirmed, :conditions => {:confirmed => false}
+  scope :confirmed, :conditions => {:confirmed => true}
+  scope :unconfirmed, :conditions => {:confirmed => false}
 
   def title=(t)
     self[:title] = t.to_s.strip
@@ -120,7 +121,7 @@ class Asset < ActiveRecord::Base
     end
   end
 
-  def validate
+  def file_attributes
     return unless new_record?
     if file.blank?
       errors.add_to_base "Fail peab olema lisatud"

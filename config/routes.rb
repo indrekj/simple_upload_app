@@ -1,8 +1,9 @@
-ActionController::Routing::Routes.draw do |map|
-  map.resources :calendars
+SimpleUploadApp::Application.routes.draw do
+  resources :assets
+  resources :links
+  resources :messages
 
-  map.resources :assets, :links, :messages
-  map.category 'assets/category/:name', :controller => 'assets', :action => 'category'
+  match "assets/category/:name" => "assets#category", :as => :category
 
-  map.home '/', :controller => 'assets', :action => 'index'
+  root :to => "assets#index"
 end

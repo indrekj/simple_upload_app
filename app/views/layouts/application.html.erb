@@ -15,12 +15,12 @@
       <li><%= menu_link 'Kasulikud lingid', '/links' %></li>
     </ul>
 
-    <% if flash[:notice] || flash[:error] -%>
+    <% if notice || alert -%>
       <div class="message">
-        <span style="font-weight: bold;"><%= flash[:notice] || flash[:error] %></span>
+        <span style="font-weight: bold;"><%= notice || alert %></span>
 
         <%- if @e_model -%>  
-          <%= error_messages_for @e_model %>
+          <%= raw error_messages_for(@e_model) %>
         <%- end -%>
       </div>
     <% end -%>

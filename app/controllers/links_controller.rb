@@ -2,7 +2,7 @@ class LinksController < ApplicationController
   # GET /links
   def index
     @link ||= Link.new
-    @links = Link.find(:all, :order => 'url ASC')
+    @links = Link.order('url ASC').all
   end
     
   # POST /links
@@ -11,13 +11,12 @@ class LinksController < ApplicationController
     @link.creator_ip = request.remote_ip
 
     if @link.save
-      flash[:notice] = "Edukalt link lisatud"
       @link = nil
-      redirect_to links_path
+      redirect_to links_path, :notice => "Edukalt link lisatud"
     else
-      flash[:error] = "Shit happened"
       index
-      render :action => 'index'
+      flash.now[:alert] = "Shit happened"
+      render :action => "index"
     end
   end
     

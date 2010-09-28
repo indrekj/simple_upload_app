@@ -5,7 +5,7 @@
   <%= link_to 'Lisa shout', '#', :onclick => 'displayNewMessage();', :style => 'display: none;', :id => 'new_message_link' %>
 
   <div id="new_message" style="display: none;">
-    <% form_for(Message.new, :url => '#', :html => {:onsubmit => "submitMessage(); return false;", :id => 'new_message_form'}) do |f| %>
+    <%= form_for(Message.new, :url => '#', :html => {:onsubmit => "submitMessage(); return false;", :id => 'new_message_form'}) do |f| %>
       <p>
         <%= f.label :author, 'Nimi: ' %>
         <%= f.text_field :author, :size => nil %>

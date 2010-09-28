@@ -6,7 +6,7 @@ module ApplicationHelper
   def menu_link(name, path)
     link = link_to(name, path)
     if path == request.path
-      %!<span class="selected">#{link}</span>!
+      raw %!<span class="selected">#{link}</span>!
     else
       link
     end
@@ -17,11 +17,11 @@ module ApplicationHelper
   end
 
   def error_messages_for(asset)
-    return if asset.errors.blank?
+    return if asset.errors.empty?
     str = '<div class="error">'
     str += "<h2>Tekkisid järgnevad vead:</h2>"
     str += "<ul>"
-    asset.errors.to_a.each do |type, msg|
+    asset.errors.each do |key, msg|
       str += "<li>#{msg}</li>"
     end
     str += "</ul></div>"

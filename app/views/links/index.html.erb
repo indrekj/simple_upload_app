@@ -1,7 +1,7 @@
 <%- set_title 'Kasulikud lingid' -%>
 <%- catch_errors_for @link -%>
 
-<% form_for(@link) do |f| %>
+<%= form_for(@link) do |f| %>
   <table>
     <tr>
       <td><%= f.label :url, 'Link (http)' %></td>
@@ -30,8 +30,8 @@
 
   <% @links.each do |link| -%>
     <tr class="<%= cycle('even', 'odd') %>">
-      <td><%= link_to truncate(h(link.url), 30), link.url, :target => '_none' %></td>
-      <td><%=h link.description %></td>
+      <td><%= link_to truncate(link.url, :length => 30), link.url, :target => '_none' %></td>
+      <td><%= link.description %></td>
       <td><%= link.created_at.to_date %></td>
     </tr>
   <% end -%>

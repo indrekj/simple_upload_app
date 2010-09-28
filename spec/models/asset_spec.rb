@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+require "spec_helper"
 
 describe Asset do
   describe "source determination" do
@@ -43,7 +43,7 @@ describe Asset do
     describe "from moodle" do
       before(:each) do
         @asset = Asset.new(:source => Asset::Sources::MOODLE)
-        @asset.body = File.read(RAILS_ROOT + "/spec/files/moodle.htm")
+        @asset.body = File.read(Rails.root.to_s + "/spec/files/moodle.htm")
         @asset.remove_delicate_info!
       end
 
