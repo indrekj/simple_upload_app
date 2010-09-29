@@ -40,7 +40,8 @@ module SimpleUploadApp
     config.filter_parameters += [:password, :pw]
 
     # Middlewares
-    require Rails.root.to_s + "/app/rack/jsonp"
+    Dir[Rails.root.to_s + "/app/rack/*"].each {|f| require(f)}
     config.middleware.use "Rack::JSONP"
+    config.middleware.use "Rack::RawUpload"
   end
 end

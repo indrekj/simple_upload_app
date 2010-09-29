@@ -24,22 +24,13 @@
 </script>
 
 <div id="new_file_div">
-  Hetkel Read-Only Database<br/><br/>
+  <%= link_to "lisa uus fail", "#", :id => "new_file_link" %>
   <%= link_to "teachers.ee", "http://teachers:teachers@teachers.ee" %>
 </div>
-<!-- read only db
-  <div id="new_file_div">
-    <%= link_to "lisa uus fail", "#", :onclick => "Modalbox.show($('new_assessment_modalbox'), {title: 'Lisa uus fail', width: 520, height: 265, slideDownDuration: 1}); return false;", :id => "new_file_link" %>
-  </div>
-
-  <div id="new_assessment_modalbox" style="display: none;">
-    <%= render :partial => 'form' %>
-  </div>
--->
 
 <br/>
 
-<%= render :partial => 'categories' %>
+<%= render :partial => "categories" %>
 
 <br style="clear: both;"/>
 

@@ -1,7 +1,17 @@
 $(document).ready(function() {
-  //Event.observe($("new_file_link"), "click", function() {
-  //  setTimeout(function() {initializeAjaxUploader()}, 1500);
-  //});
+  if ($("#new_file_link")) {
+    $("#new_file_link").fancybox({
+      title: "Lisa uus fail",
+      titleShow: false,
+      modal: false,
+      width: 520,
+      height: 265,
+      showCloseButton: true,
+      autoDimensions: false,
+      autoScale: false,
+      href: "/assessments/new"
+    });
+  }
 
   $(".category").click(function(e) {
     changeCategory(this); 
@@ -35,7 +45,6 @@ function loadScript(src, callback) {
   head.appendChild(script);
 }
 
-var interval = null;
 function initializeAjaxUploader() {
   $("#upload_step_one").show();
   $("#upload_step_two").hide();
@@ -43,26 +52,22 @@ function initializeAjaxUploader() {
   if (categoriesList)
     new Autocompleter.Local("assessment_category_name", "category_list", categoriesList);
 
-  var uuid = randomUUID();
   new AjaxUpload("new_assessment_button", {
-    action: "/assessments?format=js&X-Progress-ID=" + uuid + "&callback=uploadStepTwo",
+    action: "/assessments?format=js&callback=uploadStepTwo",
     autoSubmit: true,
     name: "assessment[file]",
     responseType: "json",
     onSubmit: function(file, extension) {
       $("#new_assessment_button").hide();
-      interval = window.setInterval(function() {
-        fetch(uuid);
-      }, 500);
     }
   });
 }
 
 function uploadStepTwo(response) {
   if (response.success) {
-    assessment = response.data.assessment;
-    $("#assessment_title").value = assessment.title;
-    $("#assessment_category_name").value = assessment.category_name;
+    assessment = response.assessment;
+    $("#assessment_title").val(assessment.title);
+    $("#assessment_category_name").val(assessment.category_name);
 
     $("#upload_step_one").hide();
     $("#new_assessment_done_button").show();
@@ -70,26 +75,25 @@ function uploadStepTwo(response) {
     $("#upload_step_two_failure").hide();
     $("#upload_step_two_success").hide();
 
-    Effect.SlideDown("#upload_step_two", {duration: 1.5});
+    $("#upload_step_two").slideDown("slow");
 
-    Event.observe($("#new_assessment_done_button"), "click", function() {
-      new Ajax.Request("/assessments/" + assessment.id + "?format=json", {
-        parameters: $("#upload_step_two_form").serialize(true),
-        method: "put",
-        onLoading: function() {
+    $("#new_assessment_done_button").click(function() {
+      $.ajax({
+        url: "/assessments/" + assessment.id + "?format=json",
+        type: "PUT",
+        dataType: "json",
+        data: $("#upload_step_two_form").serialize(true),
+        beforeSend: function() {
           $("#upload_step_two_spinner").show();
           $("#new_assessment_done_button").hide();
           $("#upload_step_two_failure").hide();
         },
-        onSuccess: function(transport) {
+        success: function(data) {
           $("#upload_step_two_spinner").hide();
-          var assessment = transport.responseJSON.assessment;
-          // Add assessment to list when uploaded to the current category
-          //Assessments.loadAssessment(assessment);
           $("#upload_step_two_success").show();
-          setTimeout(function() { Modalbox.hide() }, 2000);
+          setTimeout(function() { $.fancybox.close() }, 2000);
         },
-        onFailure: function(transport) {
+        error: function(transport) {
           $("#upload_step_two_spinner").hide();
           $("#upload_step_two_failure").show();
           setTimeout(function() { $("#new_assessment_done_button").show() }, 2000);

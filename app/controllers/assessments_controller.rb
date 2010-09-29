@@ -1,11 +1,10 @@
 class AssessmentsController < ApplicationController
-  before_filter :admin?, :only => [:update, :destroy]
+  before_filter :admin?, :only => [:destroy]
 
   # GET /assessments
   def index
     respond_to do |format|
       format.html do
-        @assessment ||= Assessment.new
         @categories = Category.all
       end
 
@@ -18,6 +17,12 @@ class AssessmentsController < ApplicationController
         render :json => {:category => @category.name, :assessments => @assessments}.to_json
       end
     end
+  end
+
+  # GET /assessments/new
+  def new
+    @assessment = Assessment.new
+    render :layout => false
   end
 
   # GET /assessments/:id
@@ -33,32 +38,31 @@ class AssessmentsController < ApplicationController
   # POST /assessments
   def create
     @assessment = Assessment.new(params[:assessment])
-    @assessment.year = Time.now.strftime("%Y").to_i if params[:assessment][:year].blank?
     @assessment.creator_ip = request.remote_ip
-    cookies[:author] = @assessment.author
+    @assessment.file = params[:file]
+    success = !!@assessment.save
 
-    success = @assessment.save
-
-    respond_to do |format|
-      format.html { render :text => "No JS support?" }
-      format.js   { render :json => {:success => success, :data => @assessment}.to_json }
-      format.json { render :json => @assessment.to_json, :status => (success ? 200 : 409 ) }
-    end
+    render :json => {
+      :success => success, 
+      :assessment => {
+        :id => @assessment.id,
+        :title => @assessment.title,
+        :category_name => @assessment.category_name
+      }
+    }.to_json, :status => (success ? 200 : 409 ) 
   end
 
   # PUT /assessments/:id
   def update
-    @assessment = Assessment.find_by_id(params[:id])
+    @assessment = Assessment.unconfirmed.find_by_id(params[:id])
     @assessment.confirmed = true
     @assessment.attributes = params[:assessment]
-    success = @assessment.save
-    @assessment[:assessment_path] = assessment_path(@assessment)
+    success = !!@assessment.save
 
-    respond_to do |format|
-      format.html { render :text => "No JS support?" }
-      format.js   { render :json => {:success => success, :data => @assessment}.to_json }
-      format.json { render :json => @assessment.to_json, :status => (success ? 200 : 409 ) }
-    end
+    cookies[:author] = @assessment.author
+
+    render :json => {:success => success}.to_json, 
+      :status => (success ? 200 : 409 ) 
   end
 
   # DELETE /assessments/:id

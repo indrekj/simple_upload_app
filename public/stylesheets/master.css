@@ -271,3 +271,7 @@ div.autocomplete ul li {
   margin-left: auto;
   margin-right: auto;
 }
+
+#fancybox-wrap a:hover {
+  background-color: transparent;
+}

@@ -124,12 +124,12 @@ class Assessment < ActiveRecord::Base
   def file_attributes
     return unless new_record?
     if file.blank?
-      errors.add_to_base "Fail peab olema lisatud"
+      errors.add(:base, "Fail peab olema lisatud")
     else
       if !['.html', '.htm', '.txt'].include?(File.extname(file.original_filename))
-        errors.add_to_base "Html ja txt failid ainult"
+        errors.add(:base, "Html ja txt failid ainult")
       elsif file.size > 200 * 1024
-        errors.add_to_base "Faili suurus peab olema alla 200KB"
+        errors.add(:base, "Faili suurus peab olema alla 200KB")
       end
     end
   end
