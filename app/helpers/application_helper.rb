@@ -3,9 +3,9 @@ module ApplicationHelper
     content_for(:title) { title }
   end
 
-  def menu_link(name, path)
+  def menu_link(name, path, contr)
     link = link_to(name, path)
-    if path == request.path
+    if params[:controller] == contr
       raw %!<span class="selected">#{link}</span>!
     else
       link

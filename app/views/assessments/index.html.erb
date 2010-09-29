@@ -20,10 +20,8 @@
 </div>
 
 <script type="text/javascript">
-  var categoriesList = <%= @categories.map(&:name).to_json %>;
+  var categoriesList = <%=raw @categories.map(&:name).to_json %>;
 </script>
-
-<%= render :partial => 'shouts' %>
 
 <div id="new_file_div">
   Hetkel Read-Only Database<br/><br/>

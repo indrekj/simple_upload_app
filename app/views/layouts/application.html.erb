@@ -3,17 +3,19 @@
   <head>
     <title>WebCT / Moodle failide koguja</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <%= stylesheet_link_tag 'master', 'modalbox' %>
-    <%= javascript_include_tag 'prototype', 'scriptaculous', 'modalbox' %>
-    <%= javascript_include_tag 'ajaxupload', 'application' %>
+    <%= stylesheet_link_tag "master" %>
+    <%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/themes/pepper-grinder/jquery-ui.css" %>
+    <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" %>
+    <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js" %>
+    <%= javascript_include_tag "application" %>
   </head>
   <body>
     <h1><%= yield :title %></h1>
 
     <ul id="menu">
-      <li><%= menu_link 'WebCT / Moodle failid', '/' %></li>
-      <li><%= menu_link 'Kasulikud lingid', '/links' %></li>
-      <li><%= menu_link 'Muu pahn', '/assets' %></li>
+      <li><%= menu_link 'WebCT / Moodle failid', root_path, 'assessments' %></li>
+      <li><%= menu_link 'Kasulikud lingid', links_path, 'links' %></li>
+      <li><%= menu_link 'Muu pahn', assets_path, 'assets' %></li>
     </ul>
 
     <% if notice || alert -%>
