@@ -1,4 +1,5 @@
 <%= stylesheet_link_tag "fileuploader" %>
+<%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/themes/pepper-grinder/jquery-ui.css" %>
 <%= javascript_include_tag "fileuploader" %>
 
 <div id="upload_step_one">
@@ -17,8 +18,6 @@
       <tr>
         <td><%= label_tag :assessment_category_name, "Tüüp (arvutiriistvara vms)" %></td>
         <td><%= text_field_tag :assessment_category_name, "", :name => "assessment[category_name]" %></td>
-
-        <div class="autocomplete" id="category_list" style="display: none;"></div>
       </tr>
 
       <tr>
@@ -57,5 +56,9 @@
     showMessage: function(message) {
       alert(message);
     }
+  });
+
+  loadScript("http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js", function() {
+    $("#assessment_category_name").autocomplete({source: categoriesList});
   });
 </script>
