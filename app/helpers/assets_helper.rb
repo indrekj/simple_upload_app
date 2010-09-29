@@ -3,7 +3,7 @@ module AssetsHelper
     st = small_thumbnail(asset)
     return st if st
 
-    "ico_#{asset.type}.gif"
+    "ico_#{asset.type}.png"
   end
   
   def small_thumbnail(asset)

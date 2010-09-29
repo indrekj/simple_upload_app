@@ -7,15 +7,15 @@
 
 <table id="assets">
   <% @assets.each do |asset| %>
-    <tr>
-      <td><%= image_tag improved_small_thumbnail(asset) %></td>
+    <tr data-id="<%= asset.id %>">
+      <td><%= image_tag improved_small_thumbnail(asset), :class => "thumb" %></td>
       <td>
-        <strong><%= asset.title %></strong><br/>
+        <h3><%= link_to asset.title, "#" %></h3>
 
         <% case asset.type %>
         <% when "note" %>
           <% if asset.type == "note" %>
-            <%= truncate strip_tags(contents(asset)), :length => 400 %>
+            <%= truncate strip_tags(contents(asset)), :length => 350 %>
           <% end %>
         <% when "audio" %>
           <%= duration(asset) %>
@@ -24,3 +24,14 @@
     </tr>
   <% end %>
 </table>
+
+<script type="text/javascript">
+  $.each($("#assets h3 a, #assets img.thumb"), function(i, link) {
+    var el = $(link).closest("tr");
+    $(link).fancybox({
+      href: "/assets/" + el.attr("data-id"),
+      title: el.find("td:last-child h3 a").html(),
+      titlePosition: "outside"
+    });
+  });
+</script>

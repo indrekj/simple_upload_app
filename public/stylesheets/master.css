@@ -104,6 +104,21 @@ img { border: 0;}
   margin-right: auto;
   padding-bottom: 20px;
 }
+
+#assets img.thumb {
+  cursor: pointer;
+}
+#assets h3 {
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  font-size: 12px;
+  color: black;
+}
+#assets h3 a {
+  color: black;
+}
+
 #assessments .odd, #links .odd {
   background-color: #DEDEDE;
 }
@@ -239,17 +254,6 @@ div.autocomplete ul li {
 #upload_step_two {
   padding: 10px;
 }
-#new_assessment_button {
-  background: url(/images/new_assessment.png) no-repeat;
-  width: 281px;
-  height: 88px;
-  margin: 50px auto 0 auto;
-  cursor: pointer;
-}
-/* Not working. Can't use #new_assessment_button:hover because ajaxUpload puts its own layer over that.
-/*.new_assessment_hover {
-  background: url(/images/new_assessment_hover.png) no-repeat;
-}*/
 #new_assessment_done_button {
   background: url(/images/new_assessment_done.png) no-repeat;
   width: 129px;
