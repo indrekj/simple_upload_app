@@ -25,6 +25,12 @@ module AssetsHelper
     end
   end
 
+  def preview_url(asset)
+    role = get_role(asset, "web_preview")
+    location = role && role["locations"].first
+    location && location["file_url"]
+  end
+
   def contents(asset)
     if role = get_role(asset, "original_content")
       role["contents"].to_s

@@ -18,13 +18,21 @@
             <%= truncate strip_tags(contents(asset)), :length => 350 %>
           <% end %>
         <% when "audio" %>
-          <%= duration(asset) %>
+          <% if prev_url = preview_url(asset) %>
+            <p id="audioplayer_<%= asset.id %>" 
+               class="audioplayer" data-preview="<%= prev_url %>"></p><br/>
+          <% end %>
+
+          <% if duration = duration(asset) %> 
+            <%= duration %> minutit
+          <% end %>
         <% end %>
       </td>
     </tr>
   <% end %>
 </table>
 
+<%= javascript_include_tag "audio-player" %>
 <script type="text/javascript">
   $.each($("#assets h3 a, #assets img.thumb"), function(i, link) {
     var el = $(link).closest("tr");
@@ -32,6 +40,13 @@
       href: "/assets/" + el.attr("data-id"),
       title: el.find("td:last-child h3 a").html(),
       titlePosition: "outside"
+    });
+  });
+
+  AudioPlayer.setup("/flash/audio-player.swf", {width: 290});
+  $.each($(".audioplayer"), function(i, el) {
+    AudioPlayer.embed($(el).attr("id"), {
+      soundFile: $(el).attr("data-preview")
     });
   });
 </script>
