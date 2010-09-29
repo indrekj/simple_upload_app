@@ -46,7 +46,8 @@
   AudioPlayer.setup("/flash/audio-player.swf", {width: 290});
   $.each($(".audioplayer"), function(i, el) {
     AudioPlayer.embed($(el).attr("id"), {
-      soundFile: $(el).attr("data-preview")
+      soundFile: $(el).attr("data-preview"),
+      titles: $(el).closest("td").find("h3 a").html()
     });
   });
 </script>
