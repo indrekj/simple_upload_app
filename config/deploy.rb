@@ -30,10 +30,10 @@ namespace :vlad do
   remote_task :update_symlinks, :roles => :app do
     puts "Creating symlinks"
 
-    system = "#{deploy_to}/shared/system"
-    run "ln -s #{system}/database.yml #{latest_release}/config/database.yml"
-    run "ln -s #{system}/dropio.yml #{latest_release}/config/dropio.yml"
-    run "ln -s #{system}/password.yml #{latest_release}/config/password.yml"
+    shared = "#{deploy_to}/shared"
+    run "ln -s #{shared}/database.yml #{latest_release}/config/database.yml"
+    run "ln -s #{shared}/dropio.yml #{latest_release}/config/dropio.yml"
+    run "ln -s #{shared}/password.yml #{latest_release}/config/password.yml"
   end
 
   remote_task :update, :roles => :app do
