@@ -30,7 +30,7 @@ class AssessmentsController < ApplicationController
     @assessment = Assessment.find(params[:id])
     body = @assessment.body.to_s
     unless body.match(/html/)
-      body = body.gsub("\n", '<br/>')
+      body = body.gsub("\n", "<br/>")
     end
     render :text => body, :layout => false
   end
@@ -39,7 +39,7 @@ class AssessmentsController < ApplicationController
   def create
     @assessment = Assessment.new(params[:assessment])
     @assessment.creator_ip = request.remote_ip
-    @assessment.file = params[:file]
+    @assessment.test = params[:file]
     success = !!@assessment.save
 
     render :json => {

@@ -11,3 +11,6 @@ tmp/**/*
 config/database.yml
 config/password.yml
 config/dropio.yml
+
+public/system/tests/*
+!public/system/tests/.placeholder

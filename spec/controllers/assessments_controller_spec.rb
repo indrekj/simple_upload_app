@@ -14,7 +14,7 @@ describe AssessmentsController do
   end
 
   it "should show an assessment" do
-    assessment = Factory.create(:assessment, :file => uploaded_html(@html_file_path))
+    assessment = Factory.create(:assessment, :test => uploaded_html(@html_file_path))
     get :show, :id => assessment.id
     response.body.should match(/jada/)
   end

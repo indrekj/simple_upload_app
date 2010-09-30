@@ -14,16 +14,18 @@ ActiveRecord::Schema.define(:version => 20100930150000) do
 
   create_table "assessments", :force => true do |t|
     t.string   "title"
-    t.string   "author",                     :default => "itimees"
+    t.string   "author",                          :default => "itimees"
     t.integer  "year"
-    t.text     "body"
-    t.string   "content_type"
+    t.string   "test_file_name"
+    t.string   "test_content_type"
+    t.integer  "test_file_size"
+    t.datetime "test_updated_at"
     t.string   "creator_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "source",       :limit => 20, :default => "unknown"
+    t.string   "source",            :limit => 20, :default => "unknown"
     t.integer  "category_id"
-    t.boolean  "confirmed",                  :default => false
+    t.boolean  "confirmed",                       :default => false
   end
 
   create_table "categories", :force => true do |t|
