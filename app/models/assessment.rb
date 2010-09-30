@@ -49,7 +49,7 @@ class Assessment < ActiveRecord::Base
   end
 
   def file=(f)
-    @file = f
+    return unless @file = f
     write_attribute(:body, f.read)
     write_attribute(:content_type, f.content_type)
   end

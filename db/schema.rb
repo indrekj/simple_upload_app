@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100928201251) do
+ActiveRecord::Schema.define(:version => 20100929113033) do
 
   create_table "assessments", :force => true do |t|
     t.string   "title"
@@ -37,13 +37,6 @@ ActiveRecord::Schema.define(:version => 20100928201251) do
     t.string   "url"
     t.string   "description"
     t.string   "creator_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "messages", :force => true do |t|
-    t.string   "body"
-    t.string   "author"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

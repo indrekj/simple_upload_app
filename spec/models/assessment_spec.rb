@@ -66,7 +66,7 @@ describe Assessment do
     describe "from moodle" do
       before(:all) do
         @assessment = Assessment.new
-        @assessment.body = File.read(RAILS_ROOT + "/spec/files/moodle.htm")
+        @assessment.body = File.read(Rails.root.to_s + "/spec/files/moodle.htm")
         @assessment.determine_source!
         @assessment.source.should == Assessment::Sources::MOODLE
         

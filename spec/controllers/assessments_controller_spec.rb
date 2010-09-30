@@ -19,32 +19,25 @@ describe AssessmentsController do
     response.body.should match(/jada/)
   end
 
-=begin
-  TODO: New upload system changed much. Fix these later.
   it "should upload a file" do
     lambda {
-      post :create, :assessment => {:file => uploaded_html(@html_file_path), :title => 'title', :category_name => 'category'}
+      post :create, :file => uploaded_html(@html_file_path)
     }.should change(Assessment, :count).by(1)
-    response.should be_redirect
-    flash[:notice].should_not be_blank
 
-    Assessment.last.body.should match(/jada/)
+    assessment = Assessment.order("id ASC").last
+    assessment.body.should match(/jada/)
+    assessment.confirmed.should be_false
   end
 
   it "should not allow to upload image files" do
     lambda {
-      post :create, :assessment => {:file => uploaded_jpeg(@jpeg_file_path), :title => 'title', :category => 'category'}
+      post :create, :file => uploaded_jpeg(@jpeg_file_path)
     }.should_not change(Assessment, :count)
-    response.should be_success
-    flash[:error].should_not be_blank
   end
 
   it "should not upload when file is not specified" do
     lambda {
-      post :create, :assessment => {:title => 'title', :category => 'category'}
+      post :create
     }.should_not change(Assessment, :count)
-    response.should be_success
-    flash[:error].should_not be_blank
   end
-=end
 end
