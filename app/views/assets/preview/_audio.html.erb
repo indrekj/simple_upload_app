@@ -1,0 +1,8 @@
+<% if prev_url = preview_url(audio) %>
+  <p id="audioplayer_<%= audio.id %>" 
+     class="audioplayer" data-preview="<%= prev_url %>"></p><br/>
+<% end %>
+
+<% if duration = duration(audio) %> 
+  <%= duration %> minutit
+<% end %>

@@ -1,0 +1,6 @@
+<% if preview_url = preview_url(document) %>
+  <iframe style="width:850px; height:470px;" 
+    frameborder="0" 
+    src="http://docs.google.com/viewer?embedded=true&url=<%= preview_url %>">
+  </iframe>
+<% end %>

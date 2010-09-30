@@ -12,21 +12,7 @@
       <td>
         <h3><%= link_to asset.title, "#" %></h3>
 
-        <% case asset.type %>
-        <% when "note" %>
-          <% if asset.type == "note" %>
-            <%= truncate strip_tags(contents(asset)), :length => 350 %>
-          <% end %>
-        <% when "audio" %>
-          <% if prev_url = preview_url(asset) %>
-            <p id="audioplayer_<%= asset.id %>" 
-               class="audioplayer" data-preview="<%= prev_url %>"></p><br/>
-          <% end %>
-
-          <% if duration = duration(asset) %> 
-            <%= duration %> minutit
-          <% end %>
-        <% end %>
+        <%= render "assets/preview/#{asset.type}", asset.type.to_sym => asset rescue nil %>
       </td>
     </tr>
   <% end %>
