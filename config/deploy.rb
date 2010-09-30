@@ -1,8 +1,8 @@
 # Deploy conf
 #
-# rake environment vlad:deploy
+# rake vlad:deploy
 #
-# Run "rake environment vlad:setup" on the first time.
+# Run "rake vlad:setup" on the first time.
 #
 
 require "hoe"
@@ -16,7 +16,7 @@ namespace :vlad do
   desc "Full deployment cycle"
   task :deploy => [
     "vlad:update",
-    #"vlad:migrate",
+    "vlad:migrate",
     "vlad:start_app",
     "vlad:cleanup"
   ]
@@ -31,7 +31,9 @@ namespace :vlad do
     puts "Creating symlinks"
 
     system = "#{deploy_to}/shared/system"
-    run "ln -s #{system}/production.sqlite3 #{latest_release}/db/production.sqlite3"
+    run "ln -s #{system}/database.yml #{latest_release}/config/database.yml"
+    run "ln -s #{system}/dropio.yml #{latest_release}/config/dropio.yml"
+    run "ln -s #{system}/password.yml #{latest_release}/config/password.yml"
   end
 
   remote_task :update, :roles => :app do
