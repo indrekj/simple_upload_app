@@ -7,6 +7,9 @@ gem "hpricot", :require => false
 gem "rack"
 gem "dropio", ">= 3.0.0.pre"
 
+# Postgresql
+gem "pg"
+
 # for deployment
 group :deployment do
   gem "hoe"
