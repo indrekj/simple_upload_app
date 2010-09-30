@@ -16,7 +16,7 @@ namespace :vlad do
   desc "Full deployment cycle"
   task :deploy => [
     "vlad:update",
-    "vlad:update_symlinks",
+    "vlad:create_symlinks",
     "vlad:install_gems",
     "vlad:migrate",
     "vlad:start_app",
@@ -28,8 +28,8 @@ namespace :vlad do
     run "touch #{latest_release}/tmp/restart.txt"
   end
 
-  Rake.clear_tasks("vlad:update_symlinks")
-  remote_task :update_symlinks, :roles => :app do
+  desc "Creates our custom symlinks"
+  remote_task :create_symlinks, :roles => :app do
     puts "Creating symlinks"
 
     shared = "#{deploy_to}/shared"
@@ -38,6 +38,7 @@ namespace :vlad do
     run "ln -s #{shared}/password.yml #{latest_release}/config/password.yml"
   end
  
+  desc "Installs gems using bundler"
   remote_task :install_gems, :roles => :app do
     puts "Installing gems"
     run "cd #{latest_release}; bundle install --without development test deployment --deployment"
