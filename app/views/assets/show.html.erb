@@ -1,2 +1,14 @@
-TODO, Lorem, lorem, lorem, lorem, lorem, lorem, lorem, lorem, lorem<br/>
-, lorem, lorem, lorem, lorem, lorem, lorem, lorem, lorem, lorem<br/>
+<% case @asset.type %>
+<% when "document" %>
+  <% if preview_url = preview_url(@asset) %>
+    <iframe style="width:850px; height:500px" 
+      frameborder="0" 
+      src="http://docs.google.com/viewer?embedded=true&url=<%= preview_url %>">
+    </iframe>
+  <% end %>
+<% when "note" %>
+  <%=raw contents(@asset) %>
+<% else %>
+  TODO, Lorem, lorem, lorem, lorem, lorem, lorem, lorem, lorem, lorem<br/>
+  , lorem, lorem, lorem, lorem, lorem, lorem, lorem, lorem, lorem<br/>
+<% end %>
