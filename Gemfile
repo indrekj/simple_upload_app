@@ -7,6 +7,13 @@ gem "hpricot", :require => false
 gem "rack"
 gem "dropio", ">= 3.0.0.pre"
 
+# for deployment
+group :deployment do
+  gem "hoe"
+  gem "vlad", "2.0"
+  gem "vlad-git", "2.1.0"
+end
+
 # for test env
 group :test do
   gem "rspec-rails", ">= 2.0.0.beta.22", :require => false
