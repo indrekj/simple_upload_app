@@ -16,6 +16,8 @@ namespace :vlad do
   desc "Full deployment cycle"
   task :deploy => [
     "vlad:update",
+    "vlad:update_symlinks",
+    "vlad:install_gems",
     "vlad:migrate",
     "vlad:start_app",
     "vlad:cleanup"
@@ -34,10 +36,6 @@ namespace :vlad do
     run "ln -s #{shared}/database.yml #{latest_release}/config/database.yml"
     run "ln -s #{shared}/dropio.yml #{latest_release}/config/dropio.yml"
     run "ln -s #{shared}/password.yml #{latest_release}/config/password.yml"
-  end
-
-  remote_task :update, :roles => :app do
-    Rake::Task["vlad:install_gems"].invoke
   end
  
   remote_task :install_gems, :roles => :app do
