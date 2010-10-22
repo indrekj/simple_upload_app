@@ -64,7 +64,7 @@ GEM
     mime-types (1.16)
     multipart-post (1.0.1)
     open4 (0.9.6)
-    paperclip (2.3.4)
+    paperclip (2.3.3)
       activerecord
       activesupport
     pg (0.9.0)
@@ -121,7 +121,7 @@ DEPENDENCIES
   faker
   hoe
   hpricot
-  paperclip
+  paperclip (= 2.3.3)
   pg
   rack
   rails (= 3.0.0)

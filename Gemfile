@@ -6,7 +6,7 @@ gem "sqlite3-ruby", :require => "sqlite3"
 gem "hpricot", :require => false
 gem "rack"
 gem "dropio", :git => "git://github.com/dropio/dropio.git", :branch => "version-3-0"
-gem "paperclip"
+gem "paperclip", "2.3.3"
 
 # Postgresql
 gem "pg"
