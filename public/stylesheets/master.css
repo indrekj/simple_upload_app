@@ -140,9 +140,8 @@ img { border: 0;}
 }
 
 #howto {
-  float: right;
-  margin-top: -20px;
-  margin-right: 10px;
+  position: absolute;
+  right: 5px;
   padding: 10px;
   border: 1px solid black;
   background-color: #DCE4F2;
