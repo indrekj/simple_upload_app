@@ -1,4 +1,5 @@
 class AssessmentsController < ApplicationController
+  protect_from_forgery :except => [:create, :update]
   before_filter :admin?, :only => [:destroy]
 
   # GET /assessments
