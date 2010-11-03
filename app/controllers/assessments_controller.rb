@@ -20,6 +20,19 @@ class AssessmentsController < ApplicationController
     end
   end
 
+  # GET /assessments/exists
+  def exists
+    source = params[:source]
+    id = params[:attempt_id]
+    assessment = Assessment.select("id").where(:source => source, :attempt_id => id)
+
+    if assessment.exists?
+      render :json => {:exists => true}
+    else
+      render :json => {:exists => false}
+    end
+  end
+
   # GET /assessments/new
   def new
     @assessment = Assessment.new

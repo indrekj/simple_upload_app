@@ -6,6 +6,12 @@ Factory.define :assessment do |a|
   a.association :category
 end
 
+Factory.define :assessment_with_test, :parent => :assessment do |a|
+  a.test_content_type "text/html"
+  a.test_file_name "somefile.html"
+  a.test_file_size 100
+end
+
 Factory.define :category do |c|
   c.name { Faker::Lorem.words(1).to_s }
 end

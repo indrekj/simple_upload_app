@@ -26,8 +26,9 @@ class Assessment < ActiveRecord::Base
   belongs_to :category, :counter_cache => true
 
   # Validations
-  validates_presence_of :title, :on => :update
-  validates_presence_of :category_name, :if => Proc.new {|a| a[:category].blank?}, :on => :update
+  validates :title, :presence => true, :on => :update
+  validates :category_name, :presence => true, :if => Proc.new {|a| a[:category].blank?}, :on => :update
+  validates :attempt_id, :uniqueness => {:scope => :source}, :allow_blank => true
   
   validates_attachment_presence :test
   validates_attachment_content_type :test, :content_type => [/application/, /plain/, /htm/]

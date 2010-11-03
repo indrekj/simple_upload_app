@@ -40,4 +40,17 @@ describe AssessmentsController do
       post :create
     }.should_not change(Assessment, :count)
   end
+
+  it "should check if assessment exists" do
+    get :exists, :source => Assessment::Sources::MOODLE, :attempt_id => 4
+    res = JSON.parse(response.body).symbolize_keys
+    res[:exists].should be_false
+
+    Factory.create(:assessment_with_test, 
+      :source => Assessment::Sources::MOODLE, :attempt_id => 5
+    )
+    get :exists, :source => Assessment::Sources::MOODLE, :attempt_id => 5
+    res = JSON.parse(response.body).symbolize_keys
+    res[:exists].should be_true
+  end
 end
