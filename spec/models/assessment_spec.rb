@@ -2,10 +2,19 @@ require "spec_helper"
 
 describe Assessment do
   describe "attempt_id validation" do
+    before(:each) do
+      Assessment.delete_all
+    end
+
     it "should allow blank" do
       3.times do
         Factory.create(:assessment_with_test, 
           :source => Assessment::Sources::MOODLE, :attempt_id => nil
+        )
+      end
+      3.times do
+        Factory.create(:assessment_with_test, 
+          :source => Assessment::Sources::MOODLE, :attempt_id => ""
         )
       end
     end
