@@ -99,7 +99,7 @@ img { border: 0;}
 }
 
 #assets, #assessments, #links, #calendars, #assessments_spinner {
-  width: 60%;
+  min-width: 400px;
   margin-left: auto;
   margin-right: auto;
   padding-bottom: 20px;
@@ -119,13 +119,21 @@ img { border: 0;}
   color: black;
 }
 
+#assessments {
+  border-spacing: 0;
+}
 #assessments .odd, #links .odd {
   background-color: #DEDEDE;
 }
 #assessments thead td, #links thead td {
   font-weight: bold;
-  text-align: center;
 }
+#assessments caption { font-weight: bold; font-size: 15px; }
+#assessments .col2 { width: 45px; }
+#assessments .col3 { width: 65px; }
+#assessments td { text-align: center; }
+#assessments tr td:first-child { text-align: left; padding-left: 5px; }
+#assessments thead tr td:first-child { padding-left: 15px; }
 
 .message {
   border: 1px solid black;
@@ -199,7 +207,7 @@ img { border: 0;}
  * CATEGORIES CLOUD *
  ********************/
 #categories {
-  width: 50%;
+  width: 45%;
   margin-left: auto;
   margin-right: auto;
   padding: 5px;

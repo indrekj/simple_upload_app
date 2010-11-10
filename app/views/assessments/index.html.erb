@@ -23,8 +23,7 @@
   <ul>
     <li><%= link_to "teachers.ee NÜÜD AVATUD", "http://teachers.ee" %></li>
     <li>
-      Mõte: teha firefoxile plugin tööde <br/>uploadimiseks. Kellel vaba aega ja huvi <br/>
-      võtku <%= link_to "ühendust", "http://github.com/indrekj/ut-urgas-eu-firefox-uploader" %>
+      Firefoxi extension alpha (<%= link_to "download", "https://addons.mozilla.org/en-US/firefox/addon/249373/" %>, <%= link_to "source", "http://github.com/indrekj/ut-urgas-eu-firefox-uploader" %>)
     </li>
   </ul>
 </div>
@@ -44,13 +43,19 @@
 <br style="clear: both;"/>
 
 <table id="assessments" style="display: none;">
+  <caption>title</caption>
+
+  <colgroup>
+    <col class="col1"/>
+    <col class="col2"/>
+    <col class="col3"/>
+  </colgroup>
+
   <thead class="odd">
     <tr>
       <td>Tiitel</td>
-      <td>Tüüp</td>
       <td>Aasta</td>
       <td>Autor</td>
-      <td>Fail</td>
     </tr>
   </thead>
 
@@ -58,15 +63,3 @@
   </tbody>
 </table>
 <div id="assessments_spinner" style="display: none;"><%= image_tag "spinner.gif" %></div>
-
-<%# In place text editors for title and category columns %>
-<%# TODO: kasuta unobtrusive js-i %>
-<% if admin? -%>
-  <script type="text/javascript">
-    <% @assessments.each do |assessment| -%>
-      in_place_editor($('<%= dom_id(assessment) %>'), 'title', '<%= assessment_path(assessment, :format => "json") %>');
-      in_place_editor($('<%= dom_id(assessment) %>'), 'category', '<%= assessment_path(assessment, :format => "json") %>');
-    <% end -%>
-  </script>
-<% end -%>
-

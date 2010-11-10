@@ -139,6 +139,7 @@ function changeCategory(category) {
     // data => category (String), assessments (array)
     $.each(data.assessments, function(i, assessment) {
       assessment = assessment.assessment;
+      $("#assessments caption").html($(category).html());
 
       Assessments.loadAssessment({
         id: assessment.id, 
@@ -193,11 +194,10 @@ var Assessments = {
     var i = 0;
     $.each(Assessments.objects, function(i, assessment) {
       var parity = i % 2 == 0 ? "even" : "odd";
-      var el = "<tr class=" + parity + "><td>" + assessment["title"] + "</td>";
-      el += "<td>" + assessment["category"] + "</td>";
+      var el = "<tr class=" + parity + "><td><a href=" + assessment["url"] + ">" + assessment["title"] + "</a></td>";
       el += "<td>" + assessment["year"] + "</td>";
       el += "<td>" + assessment["author"] + "</td>";
-      el += "<td><a href=" + assessment["url"] + ">Vaata</a></td></tr>";
+      el += "</tr>";
 
       $("#assessments tbody").append(el);
       i++;
