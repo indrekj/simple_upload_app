@@ -130,10 +130,11 @@ img { border: 0;}
 }
 #assessments caption { font-weight: bold; font-size: 15px; }
 #assessments .col2 { width: 45px; }
-#assessments .col3 { width: 65px; }
+#assessments .col3 { min-width: 65px; }
 #assessments td { text-align: center; }
 #assessments tr td:first-child { text-align: left; padding-left: 5px; }
 #assessments thead tr td:first-child { padding-left: 15px; }
+#assessments tbody tr td:first-child a { color: #00098C; }
 
 .message {
   border: 1px solid black;
