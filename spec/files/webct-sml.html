@@ -1,0 +1,2392 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!-- assessment/submission/GradeAttempt.jsp -->
+<!-- applicationframework/CommonHeader.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- applicationframework/contextPath.jspi -->
+
+
+
+
+
+
+
+
+
+<html>
+<head>
+
+<title>View Attempt</title>
+<!-- applicationframework/HeaderCSS.jspi -->
+
+
+<script language="javascript" type="text/javascript" src="/webct/libraryjs.dowebct?locale=en_US"></script>
+<script type="text/javascript">
+function navJump(){
+var appFrame = getApplicationFrame();
+if(appFrame){
+if(appFrame.TOOLFRAME.LEFTTOOLFRAME){
+if(appFrame.TOOLFRAME.LEFTTOOLFRAME.document.getElementById("cthomepage")) appFrame.TOOLFRAME.LEFTTOOLFRAME.focus();
+else appFrame.TOOLFRAME.focus();
+}else if(appFrame.TOOLFRAME.EXPLORER_LEFT){
+appFrame.TOOLFRAME.EXPLORER_LEFT.focus();
+}else appFrame.TOPAPPFRAME.focus();
+}
+}
+function contentJump(){
+var appFrame = getApplicationFrame();
+if(appFrame){
+if(appFrame.TOOLFRAME.RIGHTTOOLFRAME) appFrame.TOOLFRAME.RIGHTTOOLFRAME.focus();
+else if(appFrame.TOOLFRAME.EXPLORER_RIGHT) appFrame.TOOLFRAME.EXPLORER_RIGHT.focus();
+else appFrame.TOOLFRAME.focus();
+}
+}
+function hideLinks(){
+var appFrame = getApplicationFrame();
+if(appFrame){
+if(window.name=="LEFTTOOLFRAME" || window.name=="EXPLORER_LEFT")document.getElementById("jumpLinks").removeChild(document.getElementById("navijump"));
+if(window.name=="RIGHTTOOLFRAME" || window.name=="EXPLORER_RIGHT")document.getElementById("jumpLinks").removeChild(document.getElementById("contjump"));
+}
+else{
+document.getElementById("jumpLinks").removeChild(document.getElementById("navijump"))
+document.getElementById("jumpLinks").removeChild(document.getElementById("contjump"))
+}
+}
+</script>
+<link rel="stylesheet" href="/webct/css/styles.jsp?locale=en_US&Id=25766817002&colorSetId=D&fontSize=.8em&fontType=Verdana,Arial,Helvetica,sans-serif" type="text/css" />
+<div id="jumpLinks">
+<a href="Javascript:navJump()" id="navijump" accesskey="1" title="Jump to Navigation Frame" class="hideoff">Jump to Navigation Frame</a>
+<a href="Javascript:contentJump()" id="contjump" accesskey="2" title="Jump to Content Frame" class="hideoff">Jump to Content Frame</a>
+</div>
+<script type="text/javascript">hideLinks()</script>
+
+<script language="javascript" type="text/javascript" src="/webct/libraryjs.dowebct?locale=en_US"></script>
+<script language="JavaScript" type="text/javascript">
+function openNewWindow(mypage, myname, w, h)
+{
+win = openBox( mypage, myname, w, h);
+}
+</script>
+
+
+
+
+
+<script language="JavaScript" type="text/javascript">
+function refreshOpener() {
+
+}
+</script>
+</head>
+<!-- tool=assessment screenId=548 -->
+
+<body class="taskpage" onLoad="javascript:refreshOpener(); highlightct('ctassessment');" onUnLoad="unhighlightct('ctassessment');">
+
+<!-- action/breadcrumbs.jspi -->
+
+<script language="javascript">
+function isTargetValid(frame, triesleft, target) {
+if (frame == null) {
+return false;
+}
+if (triesleft < 1) {
+return false;
+}
+if (triesleft == null || triesleft == '') {
+triesleft = 6;
+}
+if (frame != null && frame.name == target ) {
+return true;
+} else {
+return isTargetValid(frame.parent, triesleft -1, target);
+}
+}
+</script>
+
+<div name="breadcrumbDiv" id="breadcrumbDiv" class="breadcrumbs" style="display:none">
+<iframe id="breadcrumb" frameborder="0"  src="/webct/blank.html" style="position:absolute; top:0px; left:0px; display:none;"
+width="0"  height="0" name="breadcrumb"
+marginwidth="0"></iframe>
+
+
+
+
+
+
+<a href="viewScoreStudent.dowebct" id="backId" title="Back" class="inline" target="RIGHTTOOLFRAME"><img src="/webct/images/small_back.gif" width="16" height="16" alt="Back"></a> <img id="divider" src="/webct/images/dot_divide2.gif" alt="">
+<script language="javascript">
+var backLink = document.getElementById('backId');
+if (isTargetValid(this.window,6,backLink.target) == false) {
+backLink.target = this.window.name;
+}
+</script>
+
+
+<span>Your location: </span>
+
+
+<a href="studentAssessmentManagerView.dowebct" id="breadcrumb0" target="RIGHTTOOLFRAME">Assessments</a> &#8250;
+<script language="javascript">
+var bcLink = document.getElementById('breadcrumb0');
+if (isTargetValid(this.window,6,bcLink.target) == false) {
+bcLink.target = this.window.name;
+}
+</script>
+
+
+
+
+<a href="viewScoreStudent.dowebct" id="breadcrumb1" target="RIGHTTOOLFRAME">View All Submissions</a> &#8250;
+<script language="javascript">
+var bcLink = document.getElementById('breadcrumb1');
+if (isTargetValid(this.window,6,bcLink.target) == false) {
+bcLink.target = this.window.name;
+}
+</script>
+
+
+
+
+View Attempt
+
+</div>
+
+
+<script language="javascript">
+var br = document.getElementById('breadcrumb');
+var brDiv = document.getElementById('breadcrumbDiv');
+// HIDE the breadcrumbs if in a pop up (i.e.  No parent is RIGHTTOOLFRAME or TOOLFRAME)
+if (isInRightToolFrame(this.window)) {
+br.height=0;
+br.src="/webct/urw/lc25766800002.tp25766817002/breadcrumbIFrame.dowebct?popup=false";
+brDiv.style.display = "block";
+}else{
+br.height=0;
+br.src="/webct/urw/lc25766800002.tp25766817002/breadcrumbIFrame.dowebct?popup=true";
+brDiv.height=0;
+brDiv.style.display = "none";
+}
+</script>
+
+
+
+<div class="taskpagetitlediv">
+<h1>
+View Attempt 1 of unlimited
+</h1>
+</div>
+<div class="controlset">
+<table cellspacing="0" class="simpletable" summary="">
+<tr>
+<td nowrap="nowrap">Title:</td>
+<td class="boldme">SML10-7. Predikaatloogika semantika</td>
+</tr>
+
+<tr>
+<td nowrap="nowrap">Started:</td>
+<td>Sunday  14  November 2010    22:45</td>
+</tr>
+<tr>
+<td nowrap="nowrap">Submitted:</td>
+<td>Sunday  14  November 2010    22:59</td>
+</tr>
+<tr>
+<td nowrap="nowrap">Time spent:</td>
+<td>
+
+<a href="javascript:openNewWindow('viewAttemptEventsLog.dowebct?assmtAttemptId=256898940001','ViewAccessLog','500','500')" title="View Access Log in a new window">
+00:13:28
+</a>
+
+
+</td>
+</tr>
+
+
+
+
+
+<tr>
+<td nowrap="nowrap" width="10%"><b>Total score:</b></td>
+<td>
+<b>16/20 = 80%</b>
+
+
+
+<img align="absmiddle" alt="" border="0" src="/webct/images/dot_divide.gif"/>
+Total score adjusted by 0.0
+<img align="absmiddle" alt="" border="0" src="/webct/images/dot_divide.gif"/>
+Maximum possible score: 20
+
+</td>
+</tr>
+
+
+
+
+</table>
+</div>
+ 
+
+
+
+<div class="taskbuttondiv">
+<input type="button" class="task" onClick="document.location='/webct/urw/lc25766800002.tp25766817002/displayAssessmentScore.dowebct?assessment=255604261001'" value="Done">
+
+</div>
+
+
+<table cellspacing="0" summary="" width="100%" style="margin-top:12px;">
+
+
+
+<tr class="questionrow">
+<td><h2>1.</h2></td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<table cellspacing="0" cellpadding="3" width="98%" summary="">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!-- assessment/questiondb/GradedInclude_mc.jsp -->
+<!-- applicationframework/CommonHeader.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- applicationframework/contextPath.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+<tr valign="top">
+<td colspan="2">
+
+Olgu M = <b>N</b>  ja
+tähistagu
+
+<center>
+
+<table>
+<tr><td align="right">P(x)</td><td>predikaati  ,,x jagub 2-ga''</td></tr>
+<tr><td align="right">Q(x)</td><td>predikaati  ,,x jagub 3-ga''
+</td></tr></table>
+
+</center>
+Märkida sellises interpretatsioonis tõesed valemid.
+
+</td>
+</tr>
+
+
+
+<tr>
+<td colspan="2"><!-- assessment/questiondb/GradedInclude_Image.jspi -->
+
+
+
+</td>
+</tr>
+
+<tr valign="top">
+<td colspan="2">
+<table class="tablebody">
+
+<thead>
+<tr>
+
+<td width="3%">&nbsp;</td>
+<th scope="col">Student Response</th>
+
+
+
+
+
+</tr>
+</thead>
+<tbody>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans1">A.</label>
+</td>
+<td>∀xP(x)&∀xQ(x)</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+<img src="/webct/images/small_answered.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+
+
+
+<label for="ans2">B.</label>
+</td>
+<td>∀xP(x)&rarr;∀xQ(x)</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+<img src="/webct/images/small_answered.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+
+
+
+<label for="ans3">C.</label>
+</td>
+<td>∀xP(x)&harr;∀xQ(x)</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans4">D.</label>
+</td>
+<td>∀xP(x)v∀xQ(x)</td>
+
+
+
+</tr>
+
+
+</tbody>
+
+</table>
+</td>
+</tr>
+
+
+
+
+<tr>
+<td width="10%">Score:</td>
+<td>
+
+2/2
+
+
+
+</td>
+</tr>
+
+
+
+
+
+<tr>
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+
+
+
+<tr class="questionrow">
+<td><h2>2.</h2></td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<table cellspacing="0" cellpadding="3" width="98%" summary="">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!-- assessment/questiondb/GradedInclude_mc.jsp -->
+<!-- applicationframework/CommonHeader.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- applicationframework/contextPath.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+<tr valign="top">
+<td colspan="2">
+
+Olgu M = <b>N</b>  ja
+tähistagu
+
+<center>
+
+<table>
+<tr><td align="right">P(x)</td><td>predikaati  ,,x jagub 2-ga''</td></tr>
+<tr><td align="right">Q(x)</td><td>predikaati  ,,x jagub 3-ga''
+</td></tr></table>
+
+</center>
+Märkida sellises interpretatsioonis tõesed valemid.
+
+</td>
+</tr>
+
+
+
+<tr>
+<td colspan="2"><!-- assessment/questiondb/GradedInclude_Image.jspi -->
+
+
+
+</td>
+</tr>
+
+<tr valign="top">
+<td colspan="2">
+<table class="tablebody">
+
+<thead>
+<tr>
+
+<td width="3%">&nbsp;</td>
+<th scope="col">Student Response</th>
+
+
+
+
+
+</tr>
+</thead>
+<tbody>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans1">A.</label>
+</td>
+<td>∀x(P(x)&Q(x))</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans2">B.</label>
+</td>
+<td>∀x(P(x)vQ(x))</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+<img src="/webct/images/small_answered.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+
+
+
+<label for="ans3">C.</label>
+</td>
+<td>∀x(P(x)&rarr;Q(x))</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+<img src="/webct/images/small_answered.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+
+
+
+<label for="ans4">D.</label>
+</td>
+<td>∀x(P(x)&harr;Q(x))</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans5">E.</label>
+</td>
+<td>∀xP(x)&rarr;∀xQ(x)</td>
+
+
+
+</tr>
+
+
+</tbody>
+
+</table>
+</td>
+</tr>
+
+
+
+
+<tr>
+<td width="10%">Score:</td>
+<td>
+
+0/2
+
+
+
+</td>
+</tr>
+
+
+
+
+
+<tr>
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+
+
+
+<tr class="questionrow">
+<td><h2>3.</h2></td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<table cellspacing="0" cellpadding="3" width="98%" summary="">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!-- assessment/questiondb/GradedInclude_mc.jsp -->
+<!-- applicationframework/CommonHeader.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- applicationframework/contextPath.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+<tr valign="top">
+<td colspan="2">
+
+Olgu  M = <b>N</b>  ning tähistagu
+
+<center>
+
+<table>
+<tr><td align="right">P</td><td>väidet   ,,<b>N</b> on lõpmatu hulk''</td></tr>
+<tr><td align="right">Q(x)</td><td>predikaati   ,,x on paarisarv''
+</td></tr></table>
+
+</center>
+Märkida tõesed valemid.
+
+</td>
+</tr>
+
+
+
+<tr>
+<td colspan="2"><!-- assessment/questiondb/GradedInclude_Image.jspi -->
+
+
+
+</td>
+</tr>
+
+<tr valign="top">
+<td colspan="2">
+<table class="tablebody">
+
+<thead>
+<tr>
+
+<td width="3%">&nbsp;</td>
+<th scope="col">Student Response</th>
+
+
+
+
+
+</tr>
+</thead>
+<tbody>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans1">A.</label>
+</td>
+<td>P&rarr;∀xQ(x)</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans2">B.</label>
+</td>
+<td>P&rarr;∃xQ(x)</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+<img src="/webct/images/small_answered.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+
+
+
+<label for="ans3">C.</label>
+</td>
+<td>∀xQ(x)&rarr;P</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+<img src="/webct/images/small_answered.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+
+
+
+<label for="ans4">D.</label>
+</td>
+<td>P&∃xQ(x)</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans5">E.</label>
+</td>
+<td>∃xQ(x)&harr;P</td>
+
+
+
+</tr>
+
+
+</tbody>
+
+</table>
+</td>
+</tr>
+
+
+
+
+<tr>
+<td width="10%">Score:</td>
+<td>
+
+1/2
+
+
+
+</td>
+</tr>
+
+
+
+
+
+<tr>
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+
+
+
+<tr class="questionrow">
+<td><h2>4.</h2></td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<table cellspacing="0" cellpadding="3" width="98%" summary="">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!-- assessment/questiondb/GradedInclude_mc.jsp -->
+<!-- applicationframework/CommonHeader.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- applicationframework/contextPath.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+<tr valign="top">
+<td colspan="2">
+
+Märkida kõik viisid, kuidas saab valemi abil kirja panna väidet ,,predikaat P on põhihulga iga elemendi korral väär''.
+
+</td>
+</tr>
+
+
+
+<tr>
+<td colspan="2"><!-- assessment/questiondb/GradedInclude_Image.jspi -->
+
+
+
+</td>
+</tr>
+
+<tr valign="top">
+<td colspan="2">
+<table class="tablebody">
+
+<thead>
+<tr>
+
+<td width="3%">&nbsp;</td>
+<th scope="col">Student Response</th>
+
+
+
+
+
+</tr>
+</thead>
+<tbody>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+<img src="/webct/images/small_answered.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+
+
+
+<label for="ans1">A.</label>
+</td>
+<td>∀x¬P(x) = 1</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+<img src="/webct/images/small_answered.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+
+
+
+<label for="ans2">B.</label>
+</td>
+<td>∀xP(x) = 0</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans3">C.</label>
+</td>
+<td>∀x¬P(x) = 0</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans4">D.</label>
+</td>
+<td>¬∃xP(x) = 0
+
+</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+<img src="/webct/images/small_answered.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+
+
+
+<label for="ans5">E.</label>
+</td>
+<td>¬∃xP(x) = 1</td>
+
+
+
+</tr>
+
+
+</tbody>
+
+</table>
+</td>
+</tr>
+
+
+
+
+<tr>
+<td width="10%">Score:</td>
+<td>
+
+1/2
+
+
+
+</td>
+</tr>
+
+
+
+
+
+<tr>
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+
+
+
+<tr class="questionrow">
+<td><h2>5.</h2></td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<table cellspacing="0" cellpadding="3" width="98%" summary="">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!-- assessment/questiondb/GradedInclude_mc.jsp -->
+<!-- applicationframework/CommonHeader.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- applicationframework/contextPath.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+<tr valign="top">
+<td colspan="2">
+
+Märkida tõesed valemid, kui R(x,y) tähistab kõikjal väära
+predikaati
+R(x,y)=0
+naturaalarvude hulgal.
+
+</td>
+</tr>
+
+
+
+<tr>
+<td colspan="2"><!-- assessment/questiondb/GradedInclude_Image.jspi -->
+
+
+
+</td>
+</tr>
+
+<tr valign="top">
+<td colspan="2">
+<table class="tablebody">
+
+<thead>
+<tr>
+
+<td width="3%">&nbsp;</td>
+<th scope="col">Student Response</th>
+
+
+
+
+
+</tr>
+</thead>
+<tbody>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans1">A.</label>
+</td>
+<td>∀x∀y[R(x,y)vR(y,x)vx=y]</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+<img src="/webct/images/small_answered.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+
+
+
+<label for="ans2">B.</label>
+</td>
+<td>Transitiivsus: ∀x∀y∀z[R(x,y)&R(y,z)&rarr;R(x,z)]</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans3">C.</label>
+</td>
+<td>∀x∃yR(y,x)</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+<img src="/webct/images/small_answered.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+
+
+
+<label for="ans4">D.</label>
+</td>
+<td>Antisümmeetria: ∀x∀y[R(x,y)&R(y,x)→x=y]</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans5">E.</label>
+</td>
+<td>∀x∃yR(x,y)</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans6">F.</label>
+</td>
+<td>Refleksiivsus: ∀xR(x,x)</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+<img src="/webct/images/small_answered.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+
+
+
+<label for="ans7">G.</label>
+</td>
+<td>Irrefleksiivsus: ∀x¬R(x,x)</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+<img src="/webct/images/small_answered.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+
+
+
+<label for="ans8">H.</label>
+</td>
+<td>∀x∀y[R(x,y)→∃z[R(x,z)&R(z,y)]]</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+<img src="/webct/images/small_answered.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+
+
+
+<label for="ans9">I.</label>
+</td>
+<td>Sümmeetria: ∀x∀y[R(x,y)→R(y,x)]</td>
+
+
+
+</tr>
+
+
+</tbody>
+
+</table>
+</td>
+</tr>
+
+
+
+
+<tr>
+<td width="10%">Score:</td>
+<td>
+
+2/2
+
+
+
+</td>
+</tr>
+
+
+
+
+
+<tr>
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+
+
+
+<tr class="questionrow">
+<td><h2>6.</h2></td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<table cellspacing="0" cellpadding="3" width="98%" summary="">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!-- assessment/questiondb/GradedInclude_mc.jsp -->
+<!-- applicationframework/CommonHeader.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- applicationframework/contextPath.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+<tr valign="top">
+<td colspan="2">
+
+Märkida tõesed valemid, kui R(x,y) tähistab predikaati
+x&ne;y
+naturaalarvude hulgal.
+
+</td>
+</tr>
+
+
+
+<tr>
+<td colspan="2"><!-- assessment/questiondb/GradedInclude_Image.jspi -->
+
+
+
+</td>
+</tr>
+
+<tr valign="top">
+<td colspan="2">
+<table class="tablebody">
+
+<thead>
+<tr>
+
+<td width="3%">&nbsp;</td>
+<th scope="col">Student Response</th>
+
+
+
+
+
+</tr>
+</thead>
+<tbody>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+<img src="/webct/images/small_answered.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+
+
+
+<label for="ans1">A.</label>
+</td>
+<td>∀x∃yR(x,y)</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+<img src="/webct/images/small_answered.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+
+
+
+<label for="ans2">B.</label>
+</td>
+<td>Irrefleksiivsus: ∀x¬R(x,x)</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+<img src="/webct/images/small_answered.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+
+
+
+<label for="ans3">C.</label>
+</td>
+<td>Sümmeetria: ∀x∀y[R(x,y)&rarr;R(y,x)]</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+<img src="/webct/images/small_answered.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+
+
+
+<label for="ans4">D.</label>
+</td>
+<td>∀x∀y[R(x,y)&rarr;∃z[R(x,z)&R(z,y)]]</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans5">E.</label>
+</td>
+<td>Antisümmeetria: ∀x∀y[R(x,y)&R(y,x)&rarr;x=y]</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+<img src="/webct/images/small_answered.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+
+
+
+<label for="ans6">F.</label>
+</td>
+<td>∀x∃yR(y,x)</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+<img src="/webct/images/small_answered.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+
+
+
+<label for="ans7">G.</label>
+</td>
+<td>∀x∀y[R(x,y)vR(y,x)vx=y]</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans8">H.</label>
+</td>
+<td>Transitiivsus: ∀x∀y∀z[R(x,y)&R(y,z)&rarr;R(x,z)]</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans9">I.</label>
+</td>
+<td>Refleksiivsus: ∀xR(x,x)</td>
+
+
+
+</tr>
+
+
+</tbody>
+
+</table>
+</td>
+</tr>
+
+
+
+
+<tr>
+<td width="10%">Score:</td>
+<td>
+
+2/2
+
+
+
+</td>
+</tr>
+
+
+
+
+
+<tr>
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+
+
+
+<tr class="questionrow">
+<td><h2>7.</h2></td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<table cellspacing="0" cellpadding="3" width="98%" summary="">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!-- assessment/questiondb/GradedInclude_mc.jsp -->
+<!-- applicationframework/CommonHeader.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- applicationframework/contextPath.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+<tr valign="top">
+<td colspan="2">
+
+Olgu põhihulgaks naturaalarvude hulk
+<b>N</b> = {0, 1, 2, ...}.
+Märkida operatsioonid, mis võivad vastavalt interpretatsiooni definitsioonile
+olla signatuuri (kahekohalise) funktsionaalsümboli interpretatsiooniks.
+
+</td>
+</tr>
+
+
+
+<tr>
+<td colspan="2"><!-- assessment/questiondb/GradedInclude_Image.jspi -->
+
+
+
+</td>
+</tr>
+
+<tr valign="top">
+<td colspan="2">
+<table class="tablebody">
+
+<thead>
+<tr>
+
+<td width="3%">&nbsp;</td>
+<th scope="col">Student Response</th>
+
+
+
+
+
+</tr>
+</thead>
+<tbody>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+<img src="/webct/images/small_answered.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+
+
+
+<label for="ans1">A.</label>
+</td>
+<td>Liitmine</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans2">B.</label>
+</td>
+<td>Lahutamine</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+<img src="/webct/images/small_answered.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+
+
+
+<label for="ans3">C.</label>
+</td>
+<td>Korrutamine</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans4">D.</label>
+</td>
+<td>Jagamine</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+<img src="/webct/images/small_answered.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+
+
+
+<label for="ans5">E.</label>
+</td>
+<td>Astendamine (kui lugeda, et 0 astmes 0 on 1)</td>
+
+
+
+</tr>
+
+
+</tbody>
+
+</table>
+</td>
+</tr>
+
+
+
+
+<tr>
+<td width="10%">Score:</td>
+<td>
+
+2/2
+
+
+
+</td>
+</tr>
+
+
+
+
+
+<tr>
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+
+
+
+<tr class="questionrow">
+<td><h2>8.</h2></td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<table cellspacing="0" cellpadding="3" width="98%" summary="">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!-- assessment/questiondb/GradedInclude_mc.jsp -->
+<!-- applicationframework/CommonHeader.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- applicationframework/contextPath.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+<tr valign="top">
+<td colspan="2">
+
+Olgu põhihulgaks täisarvude hulk  <b>Z</b>.
+Märkida operatsioonid, mis võivad vastavalt interpretatsiooni definitsioonile
+olla signatuuri (kahekohalise) funktsionaalsümboli interpretatsiooniks.
+
+</td>
+</tr>
+
+
+
+<tr>
+<td colspan="2"><!-- assessment/questiondb/GradedInclude_Image.jspi -->
+
+
+
+</td>
+</tr>
+
+<tr valign="top">
+<td colspan="2">
+<table class="tablebody">
+
+<thead>
+<tr>
+
+<td width="3%">&nbsp;</td>
+<th scope="col">Student Response</th>
+
+
+
+
+
+</tr>
+</thead>
+<tbody>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+<img src="/webct/images/small_answered.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+
+
+
+<label for="ans1">A.</label>
+</td>
+<td>Liitmine</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+<img src="/webct/images/small_answered.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+
+
+
+<label for="ans2">B.</label>
+</td>
+<td>Lahutamine</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+<img src="/webct/images/small_answered.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+
+
+
+<label for="ans3">C.</label>
+</td>
+<td>Korrutamine</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans4">D.</label>
+</td>
+<td>Jagamine</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans5">E.</label>
+</td>
+<td>Astendamine (kui lugeda, et 0 astmes 0 on 1)</td>
+
+
+
+</tr>
+
+
+</tbody>
+
+</table>
+</td>
+</tr>
+
+
+
+
+<tr>
+<td width="10%">Score:</td>
+<td>
+
+2/2
+
+
+
+</td>
+</tr>
+
+
+
+
+
+<tr>
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+
+
+
+<tr class="questionrow">
+<td><h2>9.</h2></td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<table cellspacing="0" cellpadding="3" width="98%" summary="">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!-- assessment/questiondb/GradedInclude_mc.jsp -->
+<!-- applicationframework/CommonHeader.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- applicationframework/contextPath.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+<tr valign="top">
+<td colspan="2">
+
+Märkida hulgad, millel sümboleid standardselt interpreteerides
+on valem
+
+<br clear="all" /><table border="0" width="100%"><tr><td>
+<table align="center"><tr><td nowrap="nowrap" align="center">
+&forall;x&forall;y[&not;(x=0) &rarr; &exist;z[x&#183;z=y]]</td></tr></table>
+</td></tr></table>
+
+
+tõene.
+
+</td>
+</tr>
+
+
+
+<tr>
+<td colspan="2"><!-- assessment/questiondb/GradedInclude_Image.jspi -->
+
+
+
+</td>
+</tr>
+
+<tr valign="top">
+<td colspan="2">
+<table class="tablebody">
+
+<thead>
+<tr>
+
+<td width="3%">&nbsp;</td>
+<th scope="col">Student Response</th>
+
+
+
+
+
+</tr>
+</thead>
+<tbody>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+<img src="/webct/images/small_answered.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+
+
+
+<label for="ans1">A.</label>
+</td>
+<td>{0, 1}</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+<img src="/webct/images/small_answered.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+
+
+
+<label for="ans2">B.</label>
+</td>
+<td><b>Q</b> (ratsionaalarvude hulk)</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans3">C.</label>
+</td>
+<td><b>N</b> (naturaalarvude hulk)</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+<img src="/webct/images/small_answered.gif" alt="Student Response"
+title="Student Response" border="0" align="absmiddle" />
+
+
+
+<label for="ans4">D.</label>
+</td>
+<td><b>R</b> (reaalarvude hulk)</td>
+
+
+
+</tr>
+
+
+
+<tr valign="top">
+<td scope="row" nowrap="nowrap" align="right">
+
+
+
+
+<label for="ans5">E.</label>
+</td>
+<td><b>Z</b> (täisarvude hulk)</td>
+
+
+
+</tr>
+
+
+</tbody>
+
+</table>
+</td>
+</tr>
+
+
+
+
+<tr>
+<td width="10%">Score:</td>
+<td>
+
+2/2
+
+
+
+</td>
+</tr>
+
+
+
+
+
+<tr>
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+
+
+
+<tr class="questionrow">
+<td><h2>10.</h2></td>
+<td>
+
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<table cellspacing="0" cellpadding="3" width="98%" summary="">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!-- assessment/questiondb/GradedInclude_matching.jsp -->
+<!-- applicationframework/CommonHeader.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- applicationframework/contextPath.jspi -->
+
+
+
+
+
+
+
+
+
+
+
+<tr valign="top">
+<td colspan="2">
+
+Olgu signatuur  <0, 1; +, &#183;; = >.
+Vaatleme standardset interpretatsiooni  hulgal <b>N</b> = {0, 1, 2, ...}.
+Hinnata, kas valemid väljendavad predikaate.
+
+</td>
+</tr>
+
+<tr>
+<td colspan="2"><!-- assessment/questiondb/GradedInclude_Image.jspi -->
+
+
+
+</td>
+</tr>
+
+
+
+<tr valign="top">
+<td colspan="2">
+<table class="tablebody">
+<thead>
+<tr>
+<th scope="col">Statement</th>
+<th scope="col">Response</th>
+
+
+</tr>
+</thead>
+<tbody>
+
+
+<tr valign="top">
+<td>
+
+Predikaat: x/y=z, valem: x=y&#183;z
+
+
+</td>
+
+<td>on võimalik, et valem=1, predikaat=0</td>
+
+
+</tr>
+
+<tr valign="top">
+<td>
+
+Predikaat: x &lt; y, valem: &exist;z(x+z=y)
+
+
+</td>
+
+<td>on võimalik, et valem=1, predikaat=0</td>
+
+
+</tr>
+
+<tr valign="top">
+<td>
+
+Predikaat: x on paarisarv, valem: x=2&#183;n
+
+
+</td>
+
+<td>vabad muutujad ei sobi</td>
+
+
+</tr>
+
+<tr valign="top">
+<td>
+
+Predikaat: x jagub y-ga, valem: y=0v&exist;z(x=y&#183;z) 
+
+
+</td>
+
+<td>on võimalik, et valem=1, predikaat=0</td>
+
+
+</tr>
+
+<tr valign="top">
+<td>
+
+Predikaat: x-y=z, valem: x=y+z
+
+
+</td>
+
+<td>valem väljendab predikaati</td>
+
+
+</tr>
+
+</tbody>
+
+</table>
+</td>
+</tr>
+
+
+
+
+
+<tr>
+<td width="10%">Score:</td>
+<td>
+
+2/2
+
+
+
+</td>
+</tr>
+
+
+
+
+
+<tr>
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+
+</tbody>
+</table>
+
+
+
+
+
+
+<div class="taskbuttondiv">
+<input type="button" class="task" onClick="document.location='/webct/urw/lc25766800002.tp25766817002/displayAssessmentScore.dowebct?assessment=255604261001'" value="Done">&nbsp;
+
+</div>
+
+
+</body>
+</html>

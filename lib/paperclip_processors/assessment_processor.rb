@@ -1,3 +1,5 @@
+require "hpricot"
+
 class AssessmentProcessor < Paperclip::Processor
   def initialize(file, options = {}, attachment = nil)
     super
@@ -10,7 +12,7 @@ class AssessmentProcessor < Paperclip::Processor
     @assessment.source = self.class.determine_source(@body)
 
     # Title, category
-    @assessment.title, @assessment.category_name = 
+    @assessment.title, @assessment.category_name =
       self.class.determine_title_and_type(@assessment.source, @body)
 
     # Clean body
