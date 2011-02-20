@@ -23,9 +23,6 @@ $(document).ready(function() {
     var pageTracker = _gat._getTracker("UA-3366869-2");
     pageTracker._trackPageview();
   });
-
-  // DropIO Chat
-  //loadScript("http://drop.io/it_inf/remote_chat_bar.js?chat_password=", function() {});
 });
 
 function loadScript(src, callback) {
@@ -43,24 +40,6 @@ function loadScript(src, callback) {
     }
   }
   head.appendChild(script);
-}
-
-function initializeAjaxUploader() {
-  $("#upload_step_one").show();
-  $("#upload_step_two").hide();
-
-  if (categoriesList)
-    new Autocompleter.Local("assessment_category_name", "category_list", categoriesList);
-
-  new AjaxUpload("new_assessment_button", {
-    action: "/assessments?format=js&callback=uploadStepTwo",
-    autoSubmit: true,
-    name: "assessment[file]",
-    responseType: "json",
-    onSubmit: function(file, extension) {
-      $("#new_assessment_button").hide();
-    }
-  });
 }
 
 function uploadStepTwo(response) {

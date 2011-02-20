@@ -1,11 +1,12 @@
 source "http://rubygems.org"
 
-gem "rails", "3.0.0"
+gem "rails", "3.0.4"
 
 gem "sqlite3-ruby", :require => "sqlite3"
 gem "hpricot", :require => false
 gem "rack"
-gem "paperclip", "2.3.3"
+gem "paperclip", "2.3.8"
+gem "rack-raw-upload", :require => "rack/raw_upload"
 
 # Postgresql
 gem "pg"

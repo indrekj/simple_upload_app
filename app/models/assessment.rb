@@ -8,7 +8,7 @@ class Assessment < ActiveRecord::Base
     UNKNOWN = "unknown"
   end
  
-  has_attached_file :test, :processors => [:assessment_processor], :styles => {:clean => true}
+  has_attached_file :test, :processors => [:assessment_processor], :styles => {:clean => {}}
 
   # Callbacks
   before_validation(:on => :create) do

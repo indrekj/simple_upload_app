@@ -3,6 +3,27 @@
 <%= javascript_include_tag "fileuploader" %>
 
 <div id="upload_step_one">
+  <div id="howto">
+    <h2>HowTo</h2>
+    <p>Vastuseid saab salvestada kasutades firefoxi extensionit või siis käsitsi:</p>
+    <strong>WebCT</strong>
+    <ol>
+      <li>Ava assasments ning vali töö</li>
+      <li>Edasi "View Submission"</li>
+      <li>Nüüd ava <strong>uues</strong> aknas vastav Attempt</li>
+      <li>Right click ja Save Page As... (html only)</li>
+    </ol>
+
+    <br/>
+    <strong>Moodle</strong>
+    <ol>
+      <li>Ava töö tulemused (kõik ühel lehel)</li>
+      <li>File ja Save Page As... (html only)</li>
+    </ol>
+  </div>
+
+  <div class="uploader">
+  </div>
 </div>
 
 <div style="display: none" id="upload_step_two">
@@ -47,7 +68,7 @@
 
 <script type="text/javascript">
   var uploader = new qq.FileUploader({
-    element: $('#upload_step_one')[0],
+    element: $('#upload_step_one > .uploader')[0],
     action: '/assessments.json',
     onSubmit: function(id, fileName) {},
     onComplete: function(id, fileName, responseJSON) {
