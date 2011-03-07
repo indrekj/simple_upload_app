@@ -234,8 +234,12 @@ function titlelize(str) {
   var title = str.split(" ");
   var output = new Array();
 
-  $.each(title, function(i, w) {
-    w = w[0, 0].toUpperCase() + w.substring(1);
+  $.each(title, function() {
+    if (!this || this == "") {
+      return true;
+    }
+
+    var w = this[0, 0].toUpperCase() + this.substring(1);
 
     if (w.match(/^[ivx]*$/i)) {
       w = w.toUpperCase();
