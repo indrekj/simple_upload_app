@@ -11,38 +11,28 @@
   </ul>
 </div>
 
-<script type="text/javascript">
-  var categoriesList = <%=raw @categories.map(&:name).to_json %>;
-</script>
-
 <div id="new_file_div">
   <%= link_to "lisa uus fail", "#", :id => "new_file_link" %><br/>
 </div>
 
 <br/>
 
-<%= render :partial => "categories" %>
+<div id="categories">
+  <h2>
+    Kategooriate pilv
+    <span><a onclick="displayCategoriesCloud();" href="#">(näita / peida)</a></span>
+  </h2>
+
+  <ul id="categories_cloud">
+    <%- category_cloud(@categories, %w(c1 c2 c3 c4 c5)) do |cat, css_class| -%>
+      <li><%= link_to title(cat.name), category_assessments_path(cat, :format => "html"), :remote => true, :class => "category #{css_class}" %></li>
+    <%- end -%>
+  </ul>
+  <br style="clear: both;"/>
+</div>
 
 <br style="clear: both;"/>
 
-<table id="assessments" style="display: none;">
-  <caption>title</caption>
-
-  <colgroup>
-    <col class="col1"/>
-    <col class="col2"/>
-    <col class="col3"/>
-  </colgroup>
-
-  <thead class="odd">
-    <tr>
-      <td>Tiitel</td>
-      <td>Aasta</td>
-      <td>Autor</td>
-    </tr>
-  </thead>
-
-  <tbody>
-  </tbody>
-</table>
+<div id="assessments">
+</div>
 <div id="assessments_spinner" style="display: none;"><%= image_tag "spinner.gif" %></div>

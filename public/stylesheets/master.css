@@ -72,57 +72,18 @@ form.new_assessment, form.new_link {
   color: #2A2556;
 }
 
-#progress {
-  margin-left: auto;
-  margin-right: auto;
-  width: 200px;
-}
-#progress_bar {
-  text-align: center;
-  padding: 20px;
-  font-size: 16px;
-}
-#progress_percentage {
-  font-size: 28px;
-}
-
 img { border: 0;}
-#dropio_logo {
-  position: absolute;
-  right: 10px;
-}
-#dropio_logo div {
-  margin: 0l
-  padding: 0;
-  float: left;
-  margin-top: 18px;
-}
 
-#assets, #assessments, #links, #calendars, #assessments_spinner {
+table {
   min-width: 400px;
   margin-left: auto;
   margin-right: auto;
   padding-bottom: 20px;
 }
-
-#assets img.thumb {
-  cursor: pointer;
-}
-#assets h3 {
-  margin: 0;
-  padding: 0;
-  font-weight: bold;
-  font-size: 12px;
-  color: black;
-}
-#assets h3 a {
-  color: black;
-}
-
-#assessments {
+#assessments table {
   border-spacing: 0;
 }
-#assessments .odd, #links .odd {
+#assessments table .odd, #links table .odd {
   background-color: #DEDEDE;
 }
 #assessments thead td, #links thead td {
@@ -238,8 +199,8 @@ img { border: 0;}
  * AUTOCOMPLETE *
  ****************/
 div.autocomplete {
-  margin: 0;  
-  padding: 0;  
+  margin: 0;
+  padding: 0;
   width: 250px;
   background: #fff;
   border: 1px solid #888;
@@ -252,7 +213,7 @@ div.autocomplete ul {
   list-style-type: none;
 }
 
-div.autocomplete ul li.selected { 
+div.autocomplete ul li.selected {
   background-color: #ffb;
 }
 

@@ -1,0 +1,27 @@
+<table>
+  <caption><%= title(@category.name) %></caption>
+
+  <colgroup>
+    <col class="col1"/>
+    <col class="col2"/>
+    <col class="col3"/>
+  </colgroup>
+
+  <thead class="odd">
+    <tr>
+      <td>Tiitel</td>
+      <td>Aasta</td>
+      <td>Autor</td>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @assessments.each do |assessment| %>
+      <tr id="<%= dom_id(assessment) %>" class="assessment <%= cycle('even', 'odd') %>">
+        <td><%= link_to title(assessment.title), assessment_url(assessment) %></td>
+        <td><%= assessment.year %></td>
+        <td><%= assessment.author %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

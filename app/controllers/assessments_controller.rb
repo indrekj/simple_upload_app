@@ -3,20 +3,16 @@ class AssessmentsController < ApplicationController
   before_filter :admin?, :only => [:destroy]
 
   # GET /assessments
+  # GET /categories/:id/assessments
   def index
-    respond_to do |format|
-      format.html do
-        @categories = Category.all
-      end
-
-      format.json do
-        @category = Category.find(params[:category_id])
-        @assessments = @category.assessments.confirmed.
-          select("id, title, author, year").
-          order("LOWER(title) ASC, year DESC").all
-        @assessments.each {|a| a[:assessment_path] = assessment_url(a)}
-        render :json => {:category => @category.name, :assessments => @assessments}.to_json
-      end
+    if params[:category_id]
+      @category = Category.find(params[:category_id])
+      @assessments = @category.assessments.confirmed.
+        select("id, title, author, year").
+        order("LOWER(title) ASC, year DESC").all
+      render :partial => "list"
+    else
+      @categories = Category.all
     end
   end
 

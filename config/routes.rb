@@ -1,4 +1,8 @@
 SimpleUploadApp::Application.routes.draw do
+  resources :categories, :only => [] do
+    resources :assessments, :only => [:index]
+  end
+
   resources :assessments do
     collection do
       get :exists
@@ -6,8 +10,6 @@ SimpleUploadApp::Application.routes.draw do
   end
 
   resources :links
-
-  match "assessments/category/:name" => "assessments#category", :as => :category
 
   root :to => "assessments#index"
 end
