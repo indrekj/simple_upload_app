@@ -14,8 +14,13 @@ $(document).ready(function() {
   }
 
   $("#categories_cloud a.category")
+    .bind("ajax:beforeSend", function() {
+      $("#assessments_spinner").show();
+      $("#assessments").html("");
+    })
     .bind("ajax:success", function(event, data) {
       $("#assessments").html(data);
+      $("#assessments_spinner").hide();
     })
     .bind("ajax:error", function() {
       alert("some error happened");
