@@ -40,6 +40,7 @@ module SimpleUploadApp
     config.filter_parameters += [:password, :pw]
 
     # Middlewares
-    config.middleware.use "Rack::RawUpload"
+    require File.join(Rails.root, "lib", "my_rack_upload")
+    config.middleware.use "Rack::MyRackUpload"
   end
 end
