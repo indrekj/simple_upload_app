@@ -1,5 +1,5 @@
 <table>
-  <caption><%= title(@category.name) %></caption>
+  <caption><%= title(category.name) %></caption>
 
   <colgroup>
     <col class="col1"/>
@@ -16,7 +16,7 @@
   </thead>
 
   <tbody>
-    <% @assessments.each do |assessment| %>
+    <% assessments.each do |assessment| %>
       <tr id="<%= dom_id(assessment) %>" class="assessment <%= cycle('even', 'odd') %>">
         <td><%= link_to title(assessment.title), assessment_url(assessment) %></td>
         <td><%= assessment.year %></td>

@@ -2,16 +2,13 @@ class AssessmentsController < ApplicationController
   protect_from_forgery :except => [:create, :update]
 
   # GET /assessments
-  # GET /categories/:id/assessments
+  # GET /categories/:category_id/assessments
   def index
     if params[:category_id]
       @category = Category.find(params[:category_id])
       @assessments = @category.assessments.confirmed.
         select("id, title, author, year").
         order("LOWER(title) ASC, year DESC").all
-      render :partial => "list"
-    else
-      @categories = Category.all
     end
   end
 
@@ -52,13 +49,13 @@ class AssessmentsController < ApplicationController
     success = !!@assessment.save
 
     render :json => {
-      :success => success, 
+      :success => success,
       :assessment => {
         :id => @assessment.id,
         :title => @assessment.title,
         :category_name => @assessment.category_name
       }
-    }.to_json, :status => (success ? 200 : 409 ) 
+    }.to_json, :status => (success ? 200 : 409 )
   end
 
   # PUT /assessments/:id
@@ -70,15 +67,7 @@ class AssessmentsController < ApplicationController
 
     cookies[:author] = @assessment.author
 
-    render :json => {:success => success}.to_json, 
-      :status => (success ? 200 : 409 ) 
-  end
-
-  def category
-    index
-    render :action => 'index'
-    # TODO
-    #@categories = @categories.select {|c| c == params[:name].downcase}
-    #render :action => 'index'
+    render :json => {:success => success}.to_json,
+      :status => (success ? 200 : 409 )
   end
 end
