@@ -1,6 +1,5 @@
 class AssessmentsController < ApplicationController
   protect_from_forgery :except => [:create, :update]
-  before_filter :admin?, :only => [:destroy]
 
   # GET /assessments
   # GET /categories/:id/assessments
@@ -73,17 +72,6 @@ class AssessmentsController < ApplicationController
 
     render :json => {:success => success}.to_json, 
       :status => (success ? 200 : 409 ) 
-  end
-
-  # DELETE /assessments/:id
-  def destroy
-    @assessment = Assessment.find(params[:id])
-    
-    if @assessment.destroy
-      render :json => {:success => true}
-    else
-      render :json => {:success => false}
-    end
   end
 
   def category
