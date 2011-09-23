@@ -29,7 +29,7 @@ class Assessment < ActiveRecord::Base
   validates :title, :presence => true, :on => :update
   validates :category_name, :presence => true, :if => Proc.new {|a| a[:category].blank?}, :on => :update
   validates :attempt_id, :uniqueness => {:scope => :source}, :allow_blank => true
-  
+
   validates_attachment_presence :test
   validates_attachment_content_type :test, :content_type => [/application/, /plain/, /htm/]
   validates_attachment_size :test, :less_than => 300.kilobytes

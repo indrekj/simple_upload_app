@@ -1,27 +1,25 @@
-require "factory_girl"
-require "faker"
+FactoryGirl.define do
+  sequence :category_name do |n|
+    "Category ##{n}"
+  end
 
-Factory.define :assessment do |a|
-  a.title { Faker::Lorem.words(1).to_s }
-  a.association :category
-end
+  factory :assessment do
+    title { "A title" }
+    association :category
+  end
 
-Factory.define :assessment_with_test, :parent => :assessment do |a|
-  a.test_content_type "text/html"
-  a.test_file_name "somefile.html"
-  a.test_file_size 100
-end
+  factory :assessment_with_test, :parent => :assessment do
+    test_content_type "text/html"
+    test_file_name "somefile.html"
+    test_file_size 100
+  end
 
-Factory.define :category do |c|
-  c.name { Faker::Lorem.words(1).to_s }
-end
+  factory :category do
+    name { Factory.next(:category_name) }
+  end
 
-Factory.define :link do |l|
-  l.url "http://google.com"
-  l.description "this is google"
-end
-
-Factory.define :message do |m|
-  m.author { Faker::Name.name }
-  m.body { Faker::Lorem.paragraph[0, 30] }
+  factory :link do
+    url "http://google.com"
+    description "this is google"
+  end
 end

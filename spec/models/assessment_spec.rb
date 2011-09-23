@@ -8,19 +8,19 @@ describe Assessment do
 
     it "should allow blank" do
       3.times do
-        Factory.create(:assessment_with_test, 
+        Factory.create(:assessment_with_test,
           :source => Assessment::Sources::MOODLE, :attempt_id => nil
         )
       end
       3.times do
-        Factory.create(:assessment_with_test, 
+        Factory.create(:assessment_with_test,
           :source => Assessment::Sources::MOODLE, :attempt_id => ""
         )
       end
     end
 
     it "should allow same attempt id if the source is different" do
-      Factory.create(:assessment_with_test, 
+      Factory.create(:assessment_with_test,
         :source => Assessment::Sources::MOODLE, :attempt_id => 1
       )
       Factory.create(:assessment_with_test,
@@ -29,12 +29,12 @@ describe Assessment do
     end
 
     it "should not allow same attempt id twice when source is same" do
-      Factory.create(:assessment_with_test, 
+      Factory.create(:assessment_with_test,
         :source => Assessment::Sources::MOODLE, :attempt_id => 10
       )
 
       lambda {
-        Factory.create(:assessment_with_test, 
+        Factory.create(:assessment_with_test,
           :source => Assessment::Sources::MOODLE, :attempt_id => 10
         )
       }.should raise_error(ActiveRecord::RecordInvalid)
