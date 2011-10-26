@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-gem "rails", "3.0.10"
+gem "rails", "3.1.1"
 
 gem "hpricot", :require => false
 gem "rack"
@@ -11,13 +11,13 @@ gem "json"
 group :deployment do
   gem "mongrel"
   gem "hoe"
-  gem "vlad", "2.0"
-  gem "vlad-git", "2.1.0"
+  gem "vlad"
+  gem "vlad-git"
 end
 
 # for test env
 group :test do
-  gem "rspec-rails", ">= 2.0.0.beta.22", :require => false
+  gem "rspec-rails", ">= 2.0.0", :require => false
   gem "factory_girl_rails"
 end
 
