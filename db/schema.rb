@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101107223129) do
+ActiveRecord::Schema.define(:version => 20111026170519) do
 
   create_table "assessments", :force => true do |t|
     t.string   "title"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(:version => 20101107223129) do
   end
 
   create_table "categories", :force => true do |t|
-    t.string   "name",              :limit => 50
+    t.string   "name",              :limit => 80
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "assessments_count",               :default => 0
