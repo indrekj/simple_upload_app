@@ -6,6 +6,7 @@
 #
 
 require "hoe"
+require "bundler/vlad"
 
 set :user, "ut"
 set :repository, "git://github.com/indrekj/simple_upload_app.git"
@@ -17,7 +18,7 @@ namespace :vlad do
   task :deploy => [
     "vlad:update",
     "vlad:create_symlinks",
-    "vlad:install_gems",
+    "vlad:bundle:install",
     "vlad:migrate",
     "vlad:start_app",
     "vlad:cleanup"
@@ -36,11 +37,5 @@ namespace :vlad do
     run "ln -s #{shared}/database.yml #{latest_release}/config/database.yml"
     run "ln -s #{shared}/dropio.yml #{latest_release}/config/dropio.yml"
     run "ln -s #{shared}/password.yml #{latest_release}/config/password.yml"
-  end
- 
-  desc "Installs gems using bundler"
-  remote_task :install_gems, :roles => :app do
-    puts "Installing gems"
-    run "cd #{latest_release}; bundle install --without development test deployment --deployment"
   end
 end

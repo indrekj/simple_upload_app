@@ -9,7 +9,6 @@ gem "json"
 
 # for deployment
 group :deployment do
-  gem "mongrel"
   gem "hoe"
   gem "vlad"
   gem "vlad-git"
