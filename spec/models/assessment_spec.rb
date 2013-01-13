@@ -3,6 +3,7 @@ require "spec_helper"
 describe Assessment do
   describe "attempt_id validation" do
     before(:each) do
+      Category.delete_all
       Assessment.delete_all
     end
 

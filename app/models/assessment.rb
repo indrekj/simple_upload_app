@@ -7,8 +7,12 @@ class Assessment < ActiveRecord::Base
     MOODLE = "moodle"
     UNKNOWN = "unknown"
   end
- 
-  has_attached_file :test, :processors => [:assessment_processor], :styles => {:clean => {}}
+
+  has_attached_file :test,
+    :processors => [:assessment_processor],
+    :styles => {:clean => {}},
+    :path => ":rails_root/public/system/:attachment/:id/:style/:filename",
+    :url => "/system/:attachment/:id/:style/:filename"
 
   # Callbacks
   before_validation(:on => :create) do

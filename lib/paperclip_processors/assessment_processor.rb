@@ -16,7 +16,7 @@ class AssessmentProcessor < Paperclip::Processor
     # Clean body
     body = self.class.remove_delicate_info(@assessment.source, @body)
 
-    tmp = Tempfile.new(".tmp.assessment-processor")
+    tmp = Tempfile.new(".tmp.assessment-processor", :encoding => "ascii-8bit")
     tmp.puts(body)
     tmp
   end

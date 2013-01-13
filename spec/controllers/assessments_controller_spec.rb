@@ -3,7 +3,7 @@ require "spec_helper"
 describe AssessmentsController do
   render_views
 
-  before(:all) do
+  before(:each) do
     @html_file_path = File.dirname(__FILE__) + '/../files/jada.html'
     @jpeg_file_path = File.dirname(__FILE__) + '/../files/pic.jpg'
   end
@@ -20,9 +20,9 @@ describe AssessmentsController do
   end
 
   it "should upload a file" do
-    lambda {
+    expect {
       post :create, :file => uploaded_html(@html_file_path)
-    }.should change(Assessment, :count).by(1)
+    }.to change(Assessment, :count).by(1)
 
     assessment = Assessment.order("id ASC").last
     assessment.body.should match(/jada/)

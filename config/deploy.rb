@@ -35,7 +35,6 @@ namespace :vlad do
 
     shared = "#{deploy_to}/shared"
     run "ln -s #{shared}/database.yml #{latest_release}/config/database.yml"
-    run "ln -s #{shared}/dropio.yml #{latest_release}/config/dropio.yml"
     run "ln -s #{shared}/password.yml #{latest_release}/config/password.yml"
   end
 end

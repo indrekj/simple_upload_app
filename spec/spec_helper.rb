@@ -9,31 +9,16 @@ require File.dirname(__FILE__) + "/factories" unless defined?(Factory)
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
 Rspec.configure do |config|
-  # == Mock Framework
-  #
-  # config.mock_with :mocha
   config.mock_with :rspec
-
-  # get us an object that represents an uploaded file
-  def uploaded_file(path, content_type = 'application/octet-stream', filename = nil)
-    filename ||= File.basename(path)
-    t = Tempfile.new(filename)
-    FileUtils.copy_file(path, t.path)
-    (class << t; self; end;).class_eval do
-      alias local_path path
-      define_method(:original_filename) { filename }
-      define_method(:content_type) { content_type }
-    end
-    t
-  end
+  config.use_transactional_fixtures = true
 
   # a HTML helper
-  def uploaded_html(path, filename = nil)
-    uploaded_file(path, 'text/html', filename)
+  def uploaded_html(path)
+    fixture_file_upload(path, 'text/html')
   end
 
   # a JPEG helper
-  def uploaded_jpeg(path, filename = nil)
-    uploaded_file(path, 'image/jpeg', filename)
+  def uploaded_jpeg(path)
+    fixture_file_upload(path, 'image/jpeg')
   end
 end

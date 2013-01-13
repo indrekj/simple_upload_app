@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Link < ActiveRecord::Base
   validates_uniqueness_of :url, :message => 'Sellise aadressiga link on juba lisatud'  
   validates_presence_of :url, :message => 'Link peab olema lisatud'

@@ -1,11 +1,12 @@
 source "http://rubygems.org"
 
-gem "rails", "3.1.1"
+gem "rails", "~> 3.1.1"
 
 gem "hpricot", :require => false
 gem "rack"
-gem "paperclip", "2.3.8"
+gem "paperclip", "~> 3.4.0"
 gem "json"
+gem "tork"
 
 # for deployment
 group :deployment do
