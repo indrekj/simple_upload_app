@@ -10,7 +10,7 @@ class AssessmentProcessor < Paperclip::Processor
     @assessment.source = self.class.determine_source(@body)
 
     # Title, category
-    @assessment.title, @assessment.category_name = 
+    @assessment.title, @assessment.category_name =
       self.class.determine_title_and_type(@assessment.source, @body)
 
     # Clean body
@@ -36,8 +36,8 @@ class AssessmentProcessor < Paperclip::Processor
     case source
     when Assessment::Sources::MOODLE
       doc = Hpricot.parse(body)
-      title = doc.search("tr/td/div[3]/div/ul/li[4]/a").innerHTML.strip
-      category_name = doc.search("tr/td/div/h1").innerHTML.strip
+      title = doc.search("title").innerHTML.strip
+      category_name = doc.search("h1.headermain").innerHTML.strip
     when Assessment::Sources::WEBCT
       doc = Hpricot.parse(body)
       title = doc.search(".controlset/table/tr[1]/td[2]").innerHTML.strip
@@ -48,20 +48,22 @@ class AssessmentProcessor < Paperclip::Processor
   end
 
   def self.remove_delicate_info(source, body)
-    content = body.dup
+    return body if source != Assessment::Sources::MOODLE
 
-    case source
-    when Assessment::Sources::MOODLE
-      # No need for header (including user real name)
-      content.gsub!(/<div id="header" .*?(<div id="content")/m, '\1')
+    doc = Hpricot.parse(body)
 
-      # No need for submit forms
-      content.gsub!(/<form.*?<\/form>/m, "")
+    # No need for header (including user real name)
+    doc.search(".headermenu").remove
 
-      # Hacking attempts? No need for these either.
-      content.gsub!(/sesskey=.{10}/, "")
-    end
+    # Hacking attempts? No need for these either.
+    doc.search("//input[@name=sesskey]").remove
 
-    content
+    html = doc.to_html
+
+    # Hacking attempts? No need for these either.
+    html.gsub!(/sesskey=.{10}/, "")
+    html.gsub!(/\"sesskey\":\".{10}\",/, "")
+
+    html
   end
 end

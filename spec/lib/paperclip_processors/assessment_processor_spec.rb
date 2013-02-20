@@ -11,7 +11,7 @@ describe AssessmentProcessor do
       <script type="text/javascript" src="/webct/libraryjs.dowebct></script>
       ...
       !
-      AssessmentProcessor.determine_source(body).should == 
+      AssessmentProcessor.determine_source(body).should ==
         Assessment::Sources::WEBCT
     end
 
@@ -22,7 +22,7 @@ describe AssessmentProcessor do
         <link type="text/css" href="https://moodle.ut.ee/theme/standard/styles.php" />
         ...
       !
-      AssessmentProcessor.determine_source(body).should == 
+      AssessmentProcessor.determine_source(body).should ==
         Assessment::Sources::MOODLE
     end
 
@@ -52,10 +52,21 @@ describe AssessmentProcessor do
       it "should remove session keys" do
         @body.should_not include("sesskey")
       end
+    end
 
-      it "should remove all form elements" do
-        @body.should_not include("<form")
-        @body.should_not include("</form>")
+    describe "from moodle2" do
+      before(:each) do
+        source = Assessment::Sources::MOODLE
+        body = File.read(Rails.root.to_s + "/spec/files/moodle2.htm")
+        @body = AssessmentProcessor.remove_delicate_info(source, body)
+      end
+
+      it "should remove name" do
+        @body.should_not include("John Doe")
+      end
+
+      it "should remove session keys" do
+        @body.should_not include("sesskey")
       end
     end
   end
@@ -65,12 +76,12 @@ describe AssessmentProcessor do
       before(:all) do
         body = File.read(Rails.root.to_s + "/spec/files/moodle.htm")
         source = Assessment::Sources::MOODLE
-        
+
         @title, @type = AssessmentProcessor.determine_title_and_type(source, body)
       end
 
       it "should detect the title" do
-        @title.should == "Harjutustest 1"
+        @title.should == "FPM: Harjutustest 1"
       end
 
       it "should detect the category" do
@@ -78,11 +89,28 @@ describe AssessmentProcessor do
       end
     end
 
+    describe "from moodle2" do
+      before(:all) do
+        body = File.read(Rails.root.to_s + "/spec/files/moodle2.htm")
+        source = Assessment::Sources::MOODLE
+
+        @title, @type = AssessmentProcessor.determine_title_and_type(source, body)
+      end
+
+      it "should detect the title" do
+        @title.should == "Harjutus 10. Algustähe õigekiri"
+      end
+
+      it "should detect the category" do
+        @type.should == "Eestikeelne kommunikatsioon arvutiteaduses (MTAT.06.041)"
+      end
+    end
+
     describe "from webct" do
       before(:all) do
         body = File.read(Rails.root.to_s + "/spec/files/jada.html")
         source = Assessment::Sources::WEBCT
-        
+
         @title, @type = AssessmentProcessor.determine_title_and_type(source, body)
       end
 
