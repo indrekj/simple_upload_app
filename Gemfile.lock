@@ -125,7 +125,7 @@ GEM
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
-    tzinfo (0.3.37)
+    tzinfo (0.3.61)
     vlad (2.3.1)
       rake (>= 0.8, < 11.0)
       rake-remote_task (~> 2.1)
